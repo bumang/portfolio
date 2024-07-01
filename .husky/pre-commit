@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+echo 'Commit in progress.....'
+
+npx lint-staged
+
+
+
+echo 'You won this match  ✅✅✅✅'
+
+
+
