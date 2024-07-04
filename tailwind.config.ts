@@ -318,6 +318,8 @@ const config: Config = {
         shadow6: '0px 2px 27px -5px rgba(35, 38, 40, 0.32)',
         shadow7: '0px 3px 15px -1px rgba(35, 38, 40, 0.07)',
         shadow8: '0px -2px 15px 0px rgba(35, 38, 40, 0.17)',
+        'shadow-star':
+          '0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1)',
       },
       backgroundSize: ({ theme }) => ({
         auto: 'auto',
@@ -329,7 +331,8 @@ const config: Config = {
         ...theme('colors'),
       }),
       backgroundImage: {
-        'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/background.png')`,
+        'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
+        moon: "url('/moon.png')",
       },
       borderRadius: {
         none: '0',
@@ -343,10 +346,42 @@ const config: Config = {
         circle: '50%',
         DEFAULT: '2px',
       },
-      animation: {},
+      animation: {
+        'infinite-slider': 'infiniteSlider 200s linear infinite',
+        'infinite-vertical-slider': 'infiniteVerticalSlider 2s linear infinite',
+        'shooting-star':
+          'shootingStar var(--animation-duration, 5s) linear var(--animation-delay, 0s) var(--animation-count,infinite)',
+        'underline-text': 'textUnderline 400ms',
+      },
       keyframes: {
         textUnderline: {
           '100%': { opacity: '1', transform: 'translate3d(-100%, 0, 0)' },
+        },
+        infiniteSlider: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': {
+            transform: 'translateX(calc(-100%))',
+          },
+        },
+        infiniteVerticalSlider: {
+          '0%': { backgroundPositionY: '0' },
+          '100%': {
+            backgroundPositionY: '-105%',
+          },
+        },
+        shootingStar: {
+          '0%': {
+            transform: 'rotate(var(--rotate-start, 315deg)) translateX(var(--translate-start, 0))',
+            opacity: '1',
+          },
+          '70%': {
+            opacity: '1',
+          },
+          '100%': {
+            transform:
+              'rotate(var(--rotate-end, 315deg)) translateX(var(--translate-end, -1200px))',
+            opacity: '0',
+          },
         },
       },
     },
