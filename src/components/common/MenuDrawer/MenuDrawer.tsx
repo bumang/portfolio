@@ -115,43 +115,7 @@ export const MenuDrawer = ({ menu }: MenuDrawerProps) => {
   }, [menu]);
 
   const handleExitAnimation = (routes: string) => {
-    const exitAnimation = gsap.timeline();
-
-    exitAnimation.to(
-      '.moon',
-      {
-        autoAlpha: 0,
-        duration: 0.5,
-      },
-      '-=0.5'
-    );
-    exitAnimation.to(
-      '.items',
-      {
-        autoAlpha: 1,
-        transform: 'translate(0px, 100%)',
-        duration: 0.8,
-      },
-      '-=0.1'
-    );
-    exitAnimation.to(
-      '.line',
-      {
-        transform: 'translate(100%, 0px)',
-        duration: 0.5,
-        onComplete: () => {
-          router.push(routes);
-        },
-      },
-      '-=0.5'
-    );
-
-    exitAnimation.to('.menu-container', {
-      transform: 'translateY(-100%)',
-      visibility: 'visible',
-      duration: 1.5,
-      ease: 'power4.inOut',
-    });
+    router.push(routes);
   };
 
   return (

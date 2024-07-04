@@ -7,7 +7,7 @@ import Logo from '../../../assests/icons/logo.svg';
 
 export const TopHeader = () => (
   <div className="flex min-h-full w-full items-center justify-between px-s40">
-    <Link href="/">
+    <Link href="/" scroll={false}>
       <div className="flex gap-s8 p-s12">
         <div className="hover:cursor-pointer">
           <Logo />
