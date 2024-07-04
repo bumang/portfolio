@@ -6,7 +6,7 @@ interface AboutLayoutProps {
 }
 
 export const AboutPageLayout = ({ children }: AboutLayoutProps) => {
-  const { menuIsOpen } = useMyContext();
+  const { menuIsOpen, setMenuIsOpen } = useMyContext();
   return (
     <div className="min-w-screen relative min-h-screen overflow-hidden bg-background-about">
       <div className="relative h-screen justify-center overflow-x-hidden pt-s88">
@@ -15,7 +15,7 @@ export const AboutPageLayout = ({ children }: AboutLayoutProps) => {
         </div>
         {children}
       </div>
-      <MenuDrawer menu={menuIsOpen} />
+      <MenuDrawer menu={menuIsOpen} setMenu={setMenuIsOpen} />
     </div>
   );
 };
