@@ -17,30 +17,32 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
   const router = useRouter();
 
   useGSAP(() => {
-    const menuDrawerAnimation = gsap.timeline();
+    const menuDrawerOpenAnimation = gsap.timeline();
+    const menuDrawerCloseAnimation = gsap.timeline();
+
     if (!isInitialLoad) {
       if (menu) {
-        menuDrawerAnimation.set('.menu-container', {
+        menuDrawerOpenAnimation.set('.menu-container', {
           transform: 'translateY(-100%)',
           visibility: 'hidden',
         });
-        menuDrawerAnimation.set('.moon', {
+        menuDrawerOpenAnimation.set('.moon', {
           autoAlpha: 0,
         });
-        menuDrawerAnimation.set('.items', {
+        menuDrawerOpenAnimation.set('.items', {
           transform: 'translate(0px, 100%)',
         });
-        menuDrawerAnimation.set('.line', {
+        menuDrawerOpenAnimation.set('.line', {
           transform: 'translate(100%, 0px)',
         });
 
-        menuDrawerAnimation.to('.menu-container', {
+        menuDrawerOpenAnimation.to('.menu-container', {
           transform: 'translateY(0%)',
           visibility: 'visible',
           duration: 1.5,
           ease: 'power4.inOut',
         });
-        menuDrawerAnimation.to(
+        menuDrawerOpenAnimation.to(
           '.moon',
           {
             autoAlpha: 1,
@@ -48,7 +50,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           },
           '-=0.05'
         );
-        menuDrawerAnimation.to(
+        menuDrawerOpenAnimation.to(
           '.items',
           {
             autoAlpha: 1,
@@ -57,7 +59,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           },
           '-=0.1'
         );
-        menuDrawerAnimation.to(
+        menuDrawerOpenAnimation.to(
           '.line',
           {
             transform: 'translate(0%, 0px)',
@@ -66,7 +68,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           '-=0.5'
         );
       } else {
-        menuDrawerAnimation.to(
+        menuDrawerCloseAnimation.to(
           '.moon',
           {
             autoAlpha: 0,
@@ -74,7 +76,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           },
           '-=0.5'
         );
-        menuDrawerAnimation.to(
+        menuDrawerCloseAnimation.to(
           '.items',
           {
             autoAlpha: 1,
@@ -83,7 +85,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           },
           '-=0.1'
         );
-        menuDrawerAnimation.to(
+        menuDrawerCloseAnimation.to(
           '.line',
           {
             transform: 'translate(100%, 0px)',
@@ -92,7 +94,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           '-=0.5'
         );
 
-        menuDrawerAnimation.to('.menu-container', {
+        menuDrawerCloseAnimation.to('.menu-container', {
           transform: 'translateY(-100%)',
           visibility: 'visible',
           duration: 1.5,
@@ -105,7 +107,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
 
   const handleExitAnimation = (routes: string) => {
     router.push(routes);
-    setMenu?.(!menu);
+    setMenu?.(false);
   };
 
   return (
