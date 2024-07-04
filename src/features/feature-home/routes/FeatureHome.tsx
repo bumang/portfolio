@@ -10,7 +10,7 @@ import PageFooter from '../components/PageFooter';
 export const FeatureHome = () => {
   const router = useRouter();
   const { timeline } = useTransitionContext();
-  const container = useRef<HTMLDivElement>(null);
+  const homeContainer = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -42,7 +42,7 @@ export const FeatureHome = () => {
         })
       );
     },
-    { scope: container }
+    { scope: homeContainer }
   );
 
   const handleNavigation = () => {
@@ -52,7 +52,7 @@ export const FeatureHome = () => {
   return (
     <div className="relative flex h-[calc(100vh-88px)] min-w-full flex-col">
       <div
-        ref={container}
+        ref={homeContainer}
         className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]"
       >
         <div className="relative h-fit overflow-y-hidden">

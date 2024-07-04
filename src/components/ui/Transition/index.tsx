@@ -26,11 +26,18 @@ const Transition = ({ children }: TransitionProps) => {
 
   // exit animation
   useGSAP(() => {
-    if (
-      (children as ReactElement)?.props?.children?.key !==
-      (displayChildren as ReactElement)?.props?.children?.key
-    ) {
-      timeline.play().then(() => {
+    const executeAnimations = async () => {
+      // Check if children have changed
+      if (
+        (children as ReactElement)?.props?.children?.key !==
+        (displayChildren as ReactElement)?.props?.children?.key
+      ) {
+        // Play the initial timeline and wait for it to complete
+        await timeline.play().then(() => {
+          timeline.pause().clear();
+        });
+
+        // Define the firstPageTransTimeline animation
         firstPageTransTimeline.to(
           slideOut.current,
           {
@@ -51,15 +58,19 @@ const Transition = ({ children }: TransitionProps) => {
           },
           '-=0.8'
         );
-        firstPageTransTimeline.play().then(() => {
-          setDisplayChildren(children);
+
+        // Play the firstPageTransTimeline and wait for it to complete
+        await firstPageTransTimeline.play().then(() => {
           firstPageTransTimeline.pause().clear();
+          setDisplayChildren(children);
         });
+
+        // Define the secondPageTransTimeline animation
         secondPageTransTimeline.to(slideOutSecond.current, {
           transform: 'translateY(-200%)',
           visibility: 'visible',
           duration: 1,
-          delay: 1,
+          delay: 0.5,
           ease: 'power4.inOut',
         });
         secondPageTransTimeline.to(
@@ -68,7 +79,7 @@ const Transition = ({ children }: TransitionProps) => {
             transform: 'translateY(-200%)',
             visibility: 'visible',
             duration: 1,
-            delay: 0.2,
+            delay: 0.1,
             ease: 'power4.inOut',
           },
           '-=0.8'
@@ -81,16 +92,22 @@ const Transition = ({ children }: TransitionProps) => {
           transform: 'translateY(200%)',
           visibility: 'hidden',
         });
-        secondPageTransTimeline.play().then(() => {
+
+        // Play the secondPageTransTimeline and wait for it to complete
+        await secondPageTransTimeline.play().then(() => {
           secondPageTransTimeline.pause().clear();
         });
+      }
+    };
 
-        return () => {
-          timeline.pause().clear();
-        };
-      });
-    }
-  }, [children, displayChildren]);
+    executeAnimations();
+
+    return () => {
+      timeline.pause().clear();
+      firstPageTransTimeline.pause().clear();
+      secondPageTransTimeline.pause().clear();
+    };
+  }, [children]);
 
   // entry animation
   // useGSAP(() => {
