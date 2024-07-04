@@ -61,8 +61,8 @@ const Transition = ({ children }: TransitionProps) => {
 
         // Play the firstPageTransTimeline and wait for it to complete
         await firstPageTransTimeline.play().then(() => {
-          firstPageTransTimeline.pause().clear();
           setDisplayChildren(children);
+          firstPageTransTimeline.pause().clear();
         });
 
         // Define the secondPageTransTimeline animation

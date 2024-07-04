@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -9,9 +9,10 @@ import { MenuList } from './component';
 
 interface MenuDrawerProps {
   menu?: boolean;
+  setMenu?: Dispatch<SetStateAction<boolean>>;
 }
 
-export const MenuDrawer = ({ menu }: MenuDrawerProps) => {
+export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const router = useRouter();
 
@@ -104,6 +105,7 @@ export const MenuDrawer = ({ menu }: MenuDrawerProps) => {
 
   const handleExitAnimation = (routes: string) => {
     router.push(routes);
+    setMenu?.(!menu);
   };
 
   return (

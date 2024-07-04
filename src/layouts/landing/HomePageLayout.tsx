@@ -20,7 +20,7 @@ const generateRandomStars = (numStars: number) => {
 
 export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
   const numStars = Math.floor(Math.random() * 0.09) + 3;
-  const { menuIsOpen } = useMyContext();
+  const { menuIsOpen, setMenuIsOpen } = useMyContext();
 
   return (
     <div className="min-w-screen relative min-h-screen overflow-hidden bg-landing-background">
@@ -36,7 +36,7 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
         </div>
         {children}
       </div>
-      <MenuDrawer menu={menuIsOpen} />
+      <MenuDrawer menu={menuIsOpen} setMenu={setMenuIsOpen} />
     </div>
   );
 };
