@@ -13,7 +13,7 @@ export const FeatureAbout = () => {
 
   useGSAP(
     () => {
-      gsap.set('.word', {
+      gsap.set('.aboutWord', {
         transform: 'translate(0px, 100%)',
         visibility: 'hidden',
       });
@@ -23,7 +23,7 @@ export const FeatureAbout = () => {
       });
 
       gsap
-        .to('.word', {
+        .to('.aboutWord', {
           autoAlpha: 1,
           visibility: 'visible',
           transform: 'translate(0px, 0%)',
@@ -45,7 +45,7 @@ export const FeatureAbout = () => {
         });
 
       timeline.add(
-        gsap.to('.word', {
+        gsap.to('.aboutWord', {
           autoAlpha: 1,
           visibility: 'visible',
           transform: 'translate(0px, 100%)',
@@ -59,26 +59,23 @@ export const FeatureAbout = () => {
     { scope: aboutContainer }
   );
   return (
-    <div className="flex h-[calc(100vh-88px)] min-w-full flex-col">
-      <div
-        ref={aboutContainer}
-        className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]"
-      >
+    <div ref={aboutContainer} className="flex h-[calc(100vh-88px)] min-w-full flex-col">
+      <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
         <div className="relative flex h-fit gap-s64 overflow-y-hidden">
-          <div className="word invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
+          <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
             UMANGA
           </div>
-          <div className="word invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
+          <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
             -
           </div>
-          <div className="word invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
+          <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
             24
           </div>
         </div>
 
         <div className="flex gap-s28">
           <div className="relative h-full overflow-y-hidden">
-            <div className="word invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
+            <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
               {' '}
               BHATTARAI
             </div>
