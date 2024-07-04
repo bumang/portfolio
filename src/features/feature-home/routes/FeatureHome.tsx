@@ -56,26 +56,26 @@ export const FeatureHome = () => {
         className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]"
       >
         <div className="relative h-fit overflow-y-hidden">
-          <div className="word font-trial text-h1 font-heavy text-secondary-lightBlue">
+          <div className="word invisible font-trial text-h1 font-heavy text-secondary-lightBlue">
             SOFTWARE DEV.
           </div>
         </div>
 
         <div className="flex gap-s28">
           <div className="relative h-full overflow-y-hidden">
-            <div className="word font-trial text-h1 font-heavy text-secondary-lightBlue">
+            <div className="word invisible font-trial text-h1 font-heavy text-secondary-lightBlue">
               {' '}
               LIVING IN
             </div>
           </div>
           <div className="mt-s8 flex flex-col items-start justify-start pt-s6 leading-bold">
             <div className="relative h-fit overflow-y-hidden">
-              <div className="word font-trial text-h2 font-heavy text-secondary-lightBlue">
+              <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue">
                 KATHMANDU
               </div>
             </div>
             <div className="relative h-fit overflow-y-hidden">
-              <div className="word font-trial text-h2 font-heavy text-secondary-lightBlue">
+              <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue">
                 NEPAL
               </div>
             </div>
