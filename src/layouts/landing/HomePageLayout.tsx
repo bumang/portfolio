@@ -25,7 +25,7 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
   return (
     <div className="min-w-screen relative min-h-screen overflow-hidden bg-landing-background">
       <InfiniteSlider
-        src={`${process.env.NEXT_PUBLIC_PATH_PREFIX}/back-drop.png`}
+        src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/back-drop.png`}
         alt="back-drop"
         fill
       />
