@@ -110,7 +110,11 @@ export const MenuDrawer = ({ menu }: MenuDrawerProps) => {
     <div className="menu-container invisible fixed inset-0 z-[60] bg-black">
       <section className="absolute left-0 top-[0] h-full w-full">
         <article className="relative flex h-full">
-          <InfiniteVerticalSlider src="/moon.png" alt="moon" fill />
+          <InfiniteVerticalSlider
+            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.png`}
+            alt="moon"
+            fill
+          />
           <MenuList handleOnClick={handleExitAnimation} />
         </article>
       </section>
