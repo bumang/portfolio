@@ -11,7 +11,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   output: isProd ? 'export' : 'standalone',
-  basePath: isProd ? '/concept-ecomm' : '',
+  basePath: isProd ? '/portfolio' : '',
   images: {
     unoptimized: true,
   },

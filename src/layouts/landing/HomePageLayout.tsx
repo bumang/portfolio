@@ -24,7 +24,11 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
 
   return (
     <div className="min-w-screen relative min-h-screen overflow-hidden bg-landing-background">
-      <InfiniteSlider src="/back-drop.png" alt="back-drop" fill />
+      <InfiniteSlider
+        src={`${process.env.NEXT_PUBLIC_PATH_PREFIX}/back-drop.png`}
+        alt="back-drop"
+        fill
+      />
       {generateRandomStars(numStars)}
       <div className="relative h-screen justify-center overflow-x-hidden pt-s88">
         <div className="fixed top-0 z-[70] h-s88 w-full">

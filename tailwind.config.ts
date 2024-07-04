@@ -332,7 +332,7 @@ const config: Config = {
       }),
       backgroundImage: {
         'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
-        moon: "url('/moon.png')",
+        moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.png')`,
       },
       borderRadius: {
         none: '0',
