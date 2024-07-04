@@ -107,7 +107,7 @@ const Transition = ({ children }: TransitionProps) => {
       firstPageTransTimeline.pause().clear();
       secondPageTransTimeline.pause().clear();
     };
-  }, [children]);
+  }, [children, displayChildren, timeline]);
 
   // entry animation
   // useGSAP(() => {
