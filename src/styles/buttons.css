@@ -1,0 +1,51 @@
+.btn {
+  @apply border-2  font-bold text-white hover:bg-secondary-blueHover;
+  @apply px-4 py-2;
+  @apply rounded;
+  @apply transition-colors;
+}
+
+.btn-outline {
+  @apply border-2 border-primary-blue bg-secondary-yellow text-text-default;
+  &:hover,
+  &:focus {
+    @apply bg-opacity-10;
+  }
+}
+
+.btn-ghost {
+  @apply border-2 border-transparent bg-secondary-red text-text-default;
+  &:hover,
+  &:focus {
+    @apply border-white;
+  }
+}
+
+.btn-unstyled {
+  @apply border-0 text-text-default;
+  &:hover,
+  &:focus {
+    @apply bg-opacity-0;
+  }
+}
+
+.ham-bgr-btn b {
+  position: absolute;
+  width: 40px; /* @bar-w */
+  height: 3px; /* @bar-h */
+  left: 0;
+  background-color: #e8e7cb; /* @bar-color */
+  transition: all 0.3s ease;
+}
+
+.ham-bgr-btn b:nth-child(1) {
+  top: calc(0% + 3px);
+}
+
+.ham-bgr-btn b:nth-child(2) {
+  top: 50%;
+}
+
+.ham-bgr-btn b:nth-child(3) {
+  top: calc(100% - 3px);
+}
