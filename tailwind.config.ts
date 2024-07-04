@@ -24,6 +24,7 @@ const config: Config = {
         default: '#FEFEFE',
         preLoader: '#637174',
         white: '#FFFFFF',
+        about: '#91A2A6',
       },
       transparent: 'transparent',
       primary: {
@@ -305,6 +306,7 @@ const config: Config = {
       }),
       lineHeight: {
         bold: '107px',
+        'semi-bold': '230px',
         heavy: '244.4px',
         normal: '24px',
       },
