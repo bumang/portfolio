@@ -85,10 +85,12 @@ const Transition = ({ children }: TransitionProps) => {
           secondPageTransTimeline.pause().clear();
         });
 
-        timeline.pause().clear();
+        return () => {
+          timeline.pause().clear();
+        };
       });
     }
-  }, [children]);
+  }, [children, displayChildren]);
 
   // entry animation
   // useGSAP(() => {
@@ -108,6 +110,9 @@ const Transition = ({ children }: TransitionProps) => {
         ref={slideOutSecond}
         className="invisible absolute left-0 top-[100vh] z-[70] h-full w-full bg-background-preLoader"
       />
+      {/* <div className="preloader z-[100] bg-transparent">
+        <HomePreLoader onExitAnimation={() => setExitAnimation(true)} />
+      </div> */}
     </div>
   );
 };

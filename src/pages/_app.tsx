@@ -29,9 +29,6 @@ const App = ({ Component, pageProps, router }: AppPropsWithLayout) => {
         <MyContextProvider>
           <Transition>{getLayout(<Component key={router.route} {...pageProps} />)}</Transition>
         </MyContextProvider>
-        {/* <div className="preloader z-50 bg-transparent">
-              <HomePreLoader onExitAnimation={() => setExitAnimation(true)} />
-            </div> */}
       </TransitionProvider>
     </main>
   );
