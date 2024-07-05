@@ -22,6 +22,7 @@ const Transition = ({ children }: TransitionProps) => {
   });
   const secondPageTransTimeline = gsap.timeline({
     paused: true,
+    smoothChildTiming: true,
   });
 
   // exit animation
@@ -107,7 +108,7 @@ const Transition = ({ children }: TransitionProps) => {
       firstPageTransTimeline.pause().clear();
       secondPageTransTimeline.pause().clear();
     };
-  }, [children, displayChildren, timeline]);
+  }, [children]);
 
   // entry animation
   // useGSAP(() => {
