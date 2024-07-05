@@ -25,11 +25,11 @@ const App = ({ Component, pageProps, router }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <main className={`${drukTrail.variable} relative h-screen w-screen overflow-y-hidden`}>
-      <TransitionProvider>
-        <MyContextProvider>
+      <MyContextProvider>
+        <TransitionProvider>
           <Transition>{getLayout(<Component key={router.route} {...pageProps} />)}</Transition>
-        </MyContextProvider>
-      </TransitionProvider>
+        </TransitionProvider>
+      </MyContextProvider>
     </main>
   );
 };

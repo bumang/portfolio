@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 import InfiniteVerticalSlider from '@/components/ui/InfiniteVerticalSlider';
+import { useTransitionContext } from '@/context';
 
 import { MenuList } from './component';
 
@@ -15,6 +16,7 @@ interface MenuDrawerProps {
 export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const router = useRouter();
+  const { timeline } = useTransitionContext();
 
   useGSAP(() => {
     const menuDrawerOpenAnimation = gsap.timeline();
@@ -105,21 +107,9 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
     setIsInitialLoad(false);
   }, [menu]);
 
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      // Ensure menu is closed before navigating
-      setMenu?.(false);
-    };
-
-    router.events.on('routeChangeStart', handleRouteChangeStart);
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChangeStart);
-    };
-  }, [router.events, setMenu]);
-
   const handleExitAnimation = (routes: string) => {
-    router.push(routes);
+    router.push({ pathname: routes });
+    timeline.seek(timeline.duration(), false);
     setMenu?.(false);
   };
 
