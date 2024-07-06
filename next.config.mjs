@@ -10,12 +10,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: isProd ? 'export' : 'standalone',
+  output: 'export',
   assetPrefix: isProd ? '/portfolio' : '',
   basePath: isProd ? '/portfolio' : '',
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
