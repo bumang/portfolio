@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-import { useTransitionContext } from '@/context';
+import { useMyContext, useTransitionContext } from '@/context';
 
 gsap.registerPlugin(useGSAP);
 
@@ -15,6 +15,7 @@ const Transition = ({ children }: TransitionProps) => {
   const container = useRef<HTMLDivElement>(null);
   const slideOut = useRef(null);
   const slideOutSecond = useRef(null);
+  const { routeFromMenu, setRouteFromMenu } = useMyContext();
 
   const { timeline } = useTransitionContext();
   const firstPageTransTimeline = gsap.timeline({
@@ -34,9 +35,11 @@ const Transition = ({ children }: TransitionProps) => {
         (displayChildren as ReactElement)?.props?.children?.key
       ) {
         // Play the initial timeline and wait for it to complete
-        await timeline.play().then(() => {
-          timeline.pause().clear();
-        });
+        if (routeFromMenu) {
+          await timeline.play().then(() => {
+            timeline.pause().clear();
+          });
+        }
 
         // Define the firstPageTransTimeline animation
         firstPageTransTimeline.to(
@@ -105,6 +108,7 @@ const Transition = ({ children }: TransitionProps) => {
 
     return () => {
       timeline.pause().clear();
+      setRouteFromMenu(false);
       firstPageTransTimeline.pause().clear();
       secondPageTransTimeline.pause().clear();
     };

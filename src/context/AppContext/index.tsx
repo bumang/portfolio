@@ -11,14 +11,20 @@ import {
 interface MyContextProps {
   menuIsOpen: boolean;
   setMenuIsOpen: Dispatch<SetStateAction<boolean>>;
+  routeFromMenu: boolean;
+  setRouteFromMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
 
 export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [routeFromMenu, setRouteFromMenu] = useState(false);
 
-  const contextValue = useMemo(() => ({ menuIsOpen, setMenuIsOpen }), [menuIsOpen, setMenuIsOpen]);
+  const contextValue = useMemo(
+    () => ({ menuIsOpen, setMenuIsOpen, routeFromMenu, setRouteFromMenu }),
+    [menuIsOpen, setMenuIsOpen, routeFromMenu, setRouteFromMenu]
+  );
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
 };

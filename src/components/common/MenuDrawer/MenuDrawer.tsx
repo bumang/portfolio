@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 import InfiniteVerticalSlider from '@/components/ui/InfiniteVerticalSlider';
-import { useTransitionContext } from '@/context';
+import { useMyContext } from '@/context';
 
 import { MenuList } from './component';
 
@@ -16,7 +16,7 @@ interface MenuDrawerProps {
 export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const router = useRouter();
-  const { timeline } = useTransitionContext();
+  const { setRouteFromMenu } = useMyContext();
 
   useGSAP(() => {
     const menuDrawerOpenAnimation = gsap.timeline();
@@ -109,7 +109,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
 
   const handleExitAnimation = (routes: string) => {
     router.push({ pathname: routes });
-    timeline.seek(timeline.duration(), false);
+    setRouteFromMenu?.(true);
     setMenu?.(false);
   };
 
