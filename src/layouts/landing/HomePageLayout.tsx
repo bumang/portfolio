@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuDrawer, TopHeader } from '@/components';
 import { useMyContext } from '@/context';
 import FallingStar from '@/features/feature-home/components/FallingStar';

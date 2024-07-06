@@ -11,6 +11,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   output: isProd ? 'export' : 'standalone',
+  assetPrefix: isProd ? '/portfolio' : '',
   basePath: isProd ? '/portfolio' : '',
   images: {
     unoptimized: true,

@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuDrawer, TopHeader } from '@/components';
 import { useMyContext } from '@/context';
 
