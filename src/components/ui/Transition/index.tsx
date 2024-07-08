@@ -35,7 +35,7 @@ const Transition = ({ children }: TransitionProps) => {
         (displayChildren as ReactElement)?.props?.children?.key
       ) {
         // Play the initial timeline and wait for it to complete
-        if (routeFromMenu) {
+        if (!routeFromMenu) {
           await timeline.play().then(() => {
             timeline.pause().clear();
           });
@@ -100,6 +100,7 @@ const Transition = ({ children }: TransitionProps) => {
         // Play the secondPageTransTimeline and wait for it to complete
         await secondPageTransTimeline.play().then(() => {
           secondPageTransTimeline.pause().clear();
+          setRouteFromMenu(false);
         });
       }
     };
@@ -108,7 +109,6 @@ const Transition = ({ children }: TransitionProps) => {
 
     return () => {
       timeline.pause().clear();
-      setRouteFromMenu(false);
       firstPageTransTimeline.pause().clear();
       secondPageTransTimeline.pause().clear();
     };
