@@ -14,5 +14,11 @@ export const FeatureProject = () => {
       })
     );
   }, {});
-  return <div className="hello">Project Page</div>;
+  return (
+    <div className="hello relative flex h-[170vh] w-[170vw]">
+      <div className="absolute left-[50%] top-[50%] w-full font-trial text-heavy font-heavy leading-bold text-text-off-white/10">
+        SELECT PROJECT
+      </div>
+    </div>
+  );
 };

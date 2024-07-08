@@ -49,6 +49,7 @@ const config: Config = {
       text: {
         default: '#E8E7CB',
         preLoader: '#637174',
+        'off-white': '#A6ADA0',
       },
 
       whiteAlpha: {
@@ -300,6 +301,7 @@ const config: Config = {
 
       fontSize: ({ theme }) => ({
         ...theme('spacing'),
+        heavy: '350px',
         h1: '260px',
         h2: '112px',
         h3: '64px',
@@ -333,6 +335,9 @@ const config: Config = {
         ...theme('colors'),
       }),
       backgroundImage: {
+        'project-background':
+          'radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 29, 0.92) 0%, #00000E 100%)',
+
         'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
         moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.png')`,
       },
