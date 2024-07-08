@@ -34,6 +34,8 @@ const Transition = ({ children }: TransitionProps) => {
         (children as ReactElement)?.props?.children?.key !==
         (displayChildren as ReactElement)?.props?.children?.key
       ) {
+        // eslint-disable-next-line no-console
+        console.log('children changed');
         // Play the initial timeline and wait for it to complete
         if (!routeFromMenu) {
           await timeline.play().then(() => {
