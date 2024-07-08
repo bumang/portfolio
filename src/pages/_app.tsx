@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 
 import Transition from '@/components/ui/Transition';
 import { MyContextProvider, TransitionProvider } from '@/context';

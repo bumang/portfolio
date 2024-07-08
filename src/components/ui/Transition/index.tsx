@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 
 import { useMyContext, useTransitionContext } from '@/context';
 

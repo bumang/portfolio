@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 
 import InfiniteVerticalSlider from '@/components/ui/InfiniteVerticalSlider';
 import { useMyContext } from '@/context';
