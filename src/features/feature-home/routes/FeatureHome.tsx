@@ -46,7 +46,7 @@ export const FeatureHome = () => {
   );
 
   const handleNavigation = () => {
-    router.push('/projects', undefined, { scroll: false });
+    router.push('/projects');
   };
 
   return (
