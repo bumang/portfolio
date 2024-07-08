@@ -36,14 +36,10 @@ const Transition = ({ children }: TransitionProps) => {
       ) {
         // Play the initial timeline and wait for it to complete
         if (!routeFromMenu) {
-          // eslint-disable-next-line no-console
-          console.log('children changed inside the timeline');
           await timeline.play().then(() => {
             timeline.pause().clear();
           });
         }
-        // eslint-disable-next-line no-console
-        console.log('children changed outside the timeline');
 
         // Define the firstPageTransTimeline animation
         firstPageTransTimeline.to(
