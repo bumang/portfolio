@@ -108,12 +108,6 @@ const Transition = ({ children }: TransitionProps) => {
     };
 
     executeAnimations();
-
-    return () => {
-      timeline.pause().clear();
-      firstPageTransTimeline.pause().clear();
-      secondPageTransTimeline.pause().clear();
-    };
   }, [children]);
 
   // entry animation
