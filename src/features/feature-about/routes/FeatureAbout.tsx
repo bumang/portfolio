@@ -11,7 +11,6 @@ export const FeatureAbout = () => {
       </div>
       <SectionScrollFirst />
       <div className="min-w-screen min-h-screen bg-red-500">Hello</div>
-      <div className="min-w-screen min-h-screen bg-red-500">World</div>
     </div>
   );
 };
