@@ -6,7 +6,9 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { useTransitionContext } from '@/context';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 export const SectionScrollFirst = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -16,6 +18,32 @@ export const SectionScrollFirst = () => {
   const avatarImage = useRef<HTMLImageElement>(null);
 
   const { timeline } = useTransitionContext();
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        sectionRef.current,
+        {
+          translateX: 0,
+          opacity: 1,
+        },
+        {
+          translateX: '-300vw',
+          ease: 'none',
+          duration: 1,
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: 'top top',
+            end: '+=3000',
+            scrub: 0.6,
+            pin: true,
+            markers: true,
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
 
   useGSAP(
     () => {
@@ -65,33 +93,8 @@ export const SectionScrollFirst = () => {
     { scope: heroContainer }
   );
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        sectionRef.current,
-        {
-          translateX: 0,
-        },
-        {
-          translateX: '-300vw',
-          ease: 'none',
-          duration: 1,
-          scrollTrigger: {
-            trigger: triggerRef.current,
-            start: 'top top',
-            end: '+=3000',
-            scrub: 0.6,
-            pin: true,
-            markers: true,
-          },
-        }
-      );
-    },
-    { scope: triggerRef }
-  );
-
   return (
-    <div className="scroll-section-outer overflow-hidden bg-background-about">
+    <div className="scroll-section-outer bg-background-about">
       <div ref={triggerRef}>
         <div
           ref={sectionRef}
