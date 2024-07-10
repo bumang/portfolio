@@ -9,8 +9,8 @@ export const FeatureAbout = () => {
       <div className="fixed top-0 z-[70] h-s88 w-full">
         <TopHeader />
       </div>
-      <div className="screen min-w-screen min-h-screen bg-red-500">Hello</div>
       <SectionScrollFirst />
+      <div className="screen min-w-screen min-h-screen bg-red-500">Hello</div>
     </div>
   );
 };

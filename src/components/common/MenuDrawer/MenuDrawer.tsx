@@ -118,7 +118,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
       <section className="absolute left-0 top-[0] h-full w-full">
         <article className="relative flex h-full">
           <InfiniteVerticalSlider
-            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.png`}
+            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg`}
             alt="moon"
             fill
           />

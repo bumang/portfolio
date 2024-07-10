@@ -63,7 +63,7 @@ export const SectionScrollFirst = () => {
           transform: 'translate(0px, 0%)',
           delay: 1.2,
           stagger: {
-            each: 0.15,
+            each: 0.05,
           },
           duration: 0.5,
         })
@@ -72,9 +72,9 @@ export const SectionScrollFirst = () => {
             visibility: 'visible',
             scale: 1,
             transformOrigin: 'center center',
-            duration: 1,
+            duration: 0.8,
             delay: -0.5,
-            ease: 'power4.inOut',
+            ease: 'power1.inOut',
           });
         });
 
@@ -82,12 +82,23 @@ export const SectionScrollFirst = () => {
         gsap.to('.aboutWord', {
           autoAlpha: 1,
           visibility: 'visible',
-          transform: 'translate(0px, 100%)',
+          transform: 'translate(0px, -100%)',
           stagger: {
-            each: 0.15,
+            each: 0.05,
           },
           duration: 0.5,
-        })
+        }),
+        0
+      );
+      timeline.add(
+        gsap.to(avatarImage.current, {
+          visibility: 'visible',
+          scale: 0,
+          transformOrigin: 'center center',
+          duration: 0.8,
+          ease: 'power1.inOut',
+        }),
+        0
       );
     },
     { scope: heroContainer }
