@@ -25,7 +25,7 @@ export const FeatureHome = () => {
         transform: 'translate(0px, 0%)',
         delay: 1.2,
         stagger: {
-          each: 0.15,
+          each: 0.05,
         },
         duration: 0.5,
       });
@@ -34,9 +34,9 @@ export const FeatureHome = () => {
         gsap.to('.word', {
           autoAlpha: 1,
           visibility: 'visible',
-          transform: 'translate(0px, 100%)',
+          transform: 'translate(0px, -100%)',
           stagger: {
-            each: 0.15,
+            each: 0.05,
           },
           duration: 0.5,
         })
@@ -46,7 +46,7 @@ export const FeatureHome = () => {
   );
 
   const handleNavigation = () => {
-    router.push('/projects');
+    router.push('/project');
   };
 
   return (

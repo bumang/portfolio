@@ -310,6 +310,7 @@ const config: Config = {
         bold: '107px',
         'semi-bold': '230px',
         heavy: '244.4px',
+        medium: '107px',
         normal: '24px',
       },
 
@@ -339,7 +340,7 @@ const config: Config = {
           'radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 29, 0.92) 0%, #00000E 100%)',
 
         'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
-        moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.png')`,
+        moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg')`,
       },
       borderRadius: {
         none: '0',
