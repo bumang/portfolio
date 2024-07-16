@@ -14,8 +14,8 @@ export const CustomCursor = () => {
           gsap.to(cursorRef.current, {
             duration: 0.3,
             ease: 'power3.out',
-            x: event.clientX,
-            y: event.clientY - 830,
+            x: event.clientX - 8,
+            y: event.clientY - 840,
             force3D: true, // Ensure 3D rendering
           });
         }
