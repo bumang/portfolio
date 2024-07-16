@@ -17,6 +17,7 @@ export const HamburgerMenuButton = () => {
       className={`flex h-[48px] items-start px-[8px] hover:bg-white/10 lg:h-[66px] ${menuIsOpen ? 'active' : ''} `}
       onClick={handleOnClick}
       datatype="hamburger-menu"
+      aria-label="Hamburger Menu"
     >
       <div className="ham-bgr-btn relative flex h-full w-[40px]">
         <b

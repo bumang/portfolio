@@ -69,6 +69,7 @@ const PageFooter = ({ handleClick }: PageFooterProps) => {
           size={62}
           type="submit"
           variant="unstyled"
+          aria-label="go to project page"
         >
           <RightArrow />
         </Button>
