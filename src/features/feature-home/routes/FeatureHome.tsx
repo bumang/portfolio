@@ -50,11 +50,8 @@ export const FeatureHome = () => {
   };
 
   return (
-    <div className="relative flex h-[calc(100vh-88px)] min-w-full flex-col">
-      <div
-        ref={homeContainer}
-        className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]"
-      >
+    <div ref={homeContainer} className="relative flex h-[calc(100vh-88px)] min-w-full flex-col">
+      <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
         <div className="relative h-fit overflow-y-hidden">
           <div className="word invisible font-trial text-h1 font-heavy text-secondary-lightBlue">
             SOFTWARE DEV.

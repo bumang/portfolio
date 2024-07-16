@@ -35,7 +35,7 @@ export const SectionScrollFirst = () => {
             trigger: triggerRef.current,
             start: 'top top',
             end: '+=3000',
-            scrub: 0.6,
+            scrub: true,
             pin: true,
             markers: true,
           },
@@ -105,7 +105,7 @@ export const SectionScrollFirst = () => {
   );
 
   return (
-    <div className="scroll-section-outer bg-background-about">
+    <div className="scroll-section-outer h-screen bg-background-about">
       <div ref={triggerRef}>
         <div
           ref={sectionRef}
