@@ -355,7 +355,7 @@ const config: Config = {
         DEFAULT: '2px',
       },
       animation: {
-        'infinite-slider': 'infiniteSlider 200s linear infinite',
+        'infinite-slider': 'infiniteSlider 80s linear infinite',
         'infinite-vertical-slider': 'infiniteVerticalSlider 2s linear infinite',
         'shooting-star':
           'shootingStar var(--animation-duration, 5s) linear var(--animation-delay, 0s) var(--animation-count,infinite)',

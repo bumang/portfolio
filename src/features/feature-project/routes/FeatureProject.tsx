@@ -72,6 +72,8 @@ export const FeatureProject = () => {
                 alt="rara-space"
                 width={500}
                 height={500}
+                priority
+                style={{ width: 'auto', height: 'auto' }}
                 src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/rara_space.svg`}
               />
             </div>
@@ -84,9 +86,11 @@ export const FeatureProject = () => {
           <div className="flex flex-col gap-s16">
             <div className="projectImageContainer cursor-pointer">
               <Image
-                alt="rara-space"
+                alt="tigg"
                 width={500}
                 height={500}
+                priority
+                style={{ width: 'auto', height: 'auto' }}
                 src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/tigg.svg`}
               />
             </div>
@@ -102,9 +106,11 @@ export const FeatureProject = () => {
           <div className="flex flex-col gap-s16">
             <div className="projectImageContainer cursor-pointer">
               <Image
-                alt="rara-space"
+                alt="r2px"
                 width={500}
                 height={500}
+                priority
+                style={{ width: 'auto', height: 'auto' }}
                 src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/r2px.svg`}
               />
             </div>

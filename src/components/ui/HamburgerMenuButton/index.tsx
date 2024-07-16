@@ -14,7 +14,7 @@ export const HamburgerMenuButton = () => {
   return (
     <Button
       variant="unstyled"
-      className={`flex h-[66px] items-start px-[8px] hover:bg-white/10 ${menuIsOpen ? 'active' : ''} `}
+      className={`flex h-[48px] items-start px-[8px] hover:bg-white/10 lg:h-[66px] ${menuIsOpen ? 'active' : ''} `}
       onClick={handleOnClick}
       datatype="hamburger-menu"
     >
