@@ -19,10 +19,34 @@ const nextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   webpack(config) {
-    config.module.rules.push({
+    config.module.rules.push(
+      {
+        type: 'asset',
+        resourceQuery: /url/, // *.svg?url
+      },
+      {
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      use: [{
+        loader: '@svgr/webpack',
+        options: {
+          svgo: true,
+          svgoConfig: {
+            plugins:[
+              {
+                name: 'preset-default',
+                params: {
+                  overrides: {
+                    cleanupIds: false,
+                    removeViewBox: false,
+                    convertShapeToPath: false
+                  }
+                }
+              },
+            ]
+          }
+        },
+      }],
     });
 
     config.resolve.modules.push(path.resolve('./'));

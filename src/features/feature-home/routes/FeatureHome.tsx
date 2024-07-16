@@ -50,32 +50,32 @@ export const FeatureHome = () => {
   };
 
   return (
-    <div className="relative flex h-[calc(100vh-88px)] min-w-full flex-col">
-      <div
-        ref={homeContainer}
-        className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]"
-      >
+    <div
+      ref={homeContainer}
+      className="relative flex h-full min-w-full flex-col md:h-[calc(100vh-88px)]"
+    >
+      <div className="relative mx-auto flex h-full w-fit flex-auto flex-col items-center justify-center text-center leading-[112px] sm:max-h-[55%] md:max-h-[80%] md:leading-heavy lg:mt-[4%] xl:max-h-[68%]">
         <div className="relative h-fit overflow-y-hidden">
-          <div className="word invisible font-trial text-h1 font-heavy text-secondary-lightBlue">
+          <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue md:text-h1">
             SOFTWARE DEV.
           </div>
         </div>
 
-        <div className="flex gap-s28">
+        <div className="flex flex-col text-center lg:flex-row lg:gap-s28">
           <div className="relative h-full overflow-y-hidden">
-            <div className="word invisible font-trial text-h1 font-heavy text-secondary-lightBlue">
+            <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue md:text-h1">
               {' '}
               LIVING IN
             </div>
           </div>
-          <div className="mt-s8 flex flex-col items-start justify-start pt-s6 leading-bold">
+          <div className="mt-s8 flex flex-col items-start justify-start md:leading-bold lg:pt-s6">
             <div className="relative h-fit overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue">
+              <div className="word invisible font-trial text-h2 font-heavy leading-[112px] text-secondary-lightBlue md:text-h2">
                 KATHMANDU
               </div>
             </div>
-            <div className="relative h-fit overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy text-secondary-lightBlue">
+            <div className="relative h-fit w-full overflow-y-hidden lg:w-fit">
+              <div className="word invisible font-trial text-h2 font-heavy leading-[112px] text-secondary-lightBlue md:text-h2">
                 NEPAL
               </div>
             </div>
@@ -83,7 +83,7 @@ export const FeatureHome = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 z-[60] h-s118 w-full">
+      <div className="absolute bottom-0 z-[60] w-full lg:h-s118">
         <PageFooter handleClick={handleNavigation} />
       </div>
     </div>

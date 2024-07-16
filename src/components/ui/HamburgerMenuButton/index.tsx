@@ -14,11 +14,11 @@ export const HamburgerMenuButton = () => {
   return (
     <Button
       variant="unstyled"
-      className={`h-[66px] w-[74px] hover:bg-white/10 ${menuIsOpen ? 'active' : ''} `}
+      className={`flex h-[48px] items-start px-[8px] hover:bg-white/10 lg:h-[66px] ${menuIsOpen ? 'active' : ''} `}
       onClick={handleOnClick}
       datatype="hamburger-menu"
     >
-      <div className="ham-bgr-btn relative flex h-full min-w-full items-center">
+      <div className="ham-bgr-btn relative flex h-full w-[40px]">
         <b
           style={{
             transform: menuIsOpen ? 'rotate(-45deg)' : 'none',
