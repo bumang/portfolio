@@ -1,5 +1,7 @@
 'use client';
 
+import Head from 'next/head';
+
 import { MenuDrawer, TopHeader } from '@/components';
 import { useMyContext } from '@/context';
 import FallingStar from '@/features/feature-home/components/FallingStar';
@@ -26,6 +28,25 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-landing-background">
+      <Head>
+        <title>Home | My Portfolio</title>
+        <meta
+          name="description"
+          content="Welcome to my portfolio. Discover my work, projects, and skills in web development, design, and programming. Get in touch to learn more about my professional journey."
+        />
+        <meta
+          name="keywords"
+          content="portfolio, home, web development, design, programming, projects, skills"
+        />
+        <meta name="author" content="Umanga Bhattarai" />
+        <meta property="og:title" content="Home | My Portfolio" />
+        <meta
+          property="og:description"
+          content="Welcome to my portfolio. Discover my work, projects, and skills in web development, design, and programming. Get in touch to learn more about my professional journey."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.yourwebsite.com/" />
+      </Head>
       <InfiniteSlider
         src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/back-drop.svg`}
         alt="back-drop"
