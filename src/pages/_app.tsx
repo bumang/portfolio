@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { gsap } from 'gsap';
 
+import { CustomCursor } from '@/components';
 import Transition from '@/components/ui/Transition';
 import { MyContextProvider, TransitionProvider } from '@/context';
 import { drukTrail } from '@/styles/fonts/DrukTrial';
@@ -28,6 +29,7 @@ const App = ({ Component, pageProps, router }: AppPropsWithLayout) => {
       <MyContextProvider>
         <TransitionProvider>
           <Transition>{getLayout(<Component key={router.route} {...pageProps} />)}</Transition>
+          <CustomCursor />
         </TransitionProvider>
       </MyContextProvider>
     </main>
