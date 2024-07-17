@@ -57,10 +57,10 @@ const Transition = ({ children }: TransitionProps) => {
           {
             transform: 'translateY(-100%)',
             visibility: 'visible',
-            duration: 1,
+            duration: 0.8,
             ease: 'power4.inOut',
           },
-          '-=0.8'
+          '-=0.7'
         );
 
         // Play the firstPageTransTimeline and wait for it to complete
@@ -70,23 +70,27 @@ const Transition = ({ children }: TransitionProps) => {
         });
 
         // Define the secondPageTransTimeline animation
-        secondPageTransTimeline.to(slideOutSecond.current, {
-          transform: 'translateY(-200%)',
-          visibility: 'visible',
-          duration: 1,
-          delay: 0.5,
-          ease: 'power4.inOut',
-        });
+        secondPageTransTimeline.to(
+          slideOutSecond.current,
+          {
+            transform: 'translateY(-200%)',
+            visibility: 'visible',
+            duration: 1,
+            delay: 0.5,
+            ease: 'power4.inOut',
+          },
+          '-=0.3'
+        );
         secondPageTransTimeline.to(
           slideOut.current,
           {
             transform: 'translateY(-200%)',
             visibility: 'visible',
-            duration: 1,
+            duration: 0.8,
             delay: 0.1,
             ease: 'power4.inOut',
           },
-          '-=0.8'
+          '-=0.7'
         );
         secondPageTransTimeline.set(slideOut.current, {
           transform: 'translateY(200%)',
