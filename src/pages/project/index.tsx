@@ -1,7 +1,9 @@
 import { FeatureProject } from '@/features';
-import { ProjectPageLayout } from '@/layouts';
+import { ProjectsPageLayout } from '@/layouts';
 
 const ProjectPage = () => <FeatureProject />;
 
-ProjectPage.getLayout = (page: React.ReactElement) => <ProjectPageLayout>{page}</ProjectPageLayout>;
+ProjectPage.getLayout = (page: React.ReactElement) => (
+  <ProjectsPageLayout>{page}</ProjectsPageLayout>
+);
 export default ProjectPage;

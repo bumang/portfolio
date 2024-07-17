@@ -7,15 +7,16 @@ import { useMyContext } from '@/context';
 
 interface ProjectPageLayoutProps {
   children: React.ReactNode;
+  page?: string;
 }
 
-export const ProjectPageLayout = ({ children }: ProjectPageLayoutProps) => {
+export const ProjectPageLayout = ({ children, page }: ProjectPageLayoutProps) => {
   const { menuIsOpen } = useMyContext();
 
   return (
-    <div className="no-scrollbar relative h-screen w-screen overflow-y-scroll bg-project-background">
+    <div className="no-scrollbar relative h-screen w-screen bg-project-background">
       <Head>
-        <title>Projects | My Portfolio</title>
+        <title>{page ?? 'Projects'} | My Portfolio</title>
         <meta
           name="description"
           content="Explore my portfolio projects showcasing my skills in web development, design, and programming. See the diverse range of projects I've worked on and learn about the technologies I use."
@@ -25,7 +26,7 @@ export const ProjectPageLayout = ({ children }: ProjectPageLayoutProps) => {
           content="portfolio, projects, web development, design, programming, technology, skills"
         />
         <meta name="author" content="Umanga Bhattarai" />
-        <meta property="og:title" content="Projects | My Portfolio" />
+        <meta property="og:title" content={`${page ?? 'Projects'} | My Portfolio`} />
         <meta
           property="og:description"
           content="Explore my portfolio projects showcasing my skills in web development, design, and programming. See the diverse range of projects I've worked on and learn about the technologies I use."

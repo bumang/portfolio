@@ -16,7 +16,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push(

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -12,7 +13,9 @@ if (typeof window !== 'undefined') {
 
 export const FeatureProject = () => {
   const { timeline } = useTransitionContext();
-  const { mousePosition } = useMyContext();
+  const { mousePosition, setFromProjectsPage } = useMyContext();
+
+  const router = useRouter();
 
   const projectPageRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +114,21 @@ export const FeatureProject = () => {
       <div className="flex h-[90%] min-w-[90%] flex-col justify-between">
         <div className="flex justify-between">
           <div className="flex flex-col gap-s16">
-            <div className="projectImageContainer cursor-pointer overflow-hidden">
+            <div
+              className="projectImageContainer cursor-pointer overflow-hidden"
+              tabIndex={0}
+              onClick={() => {
+                router.push('/project/rara-space');
+                setFromProjectsPage(true);
+              }}
+              role="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setFromProjectsPage(true);
+                  router.push('/project/rara-space');
+                }
+              }}
+            >
               <Image
                 alt="rara-space"
                 width={500}
@@ -128,7 +145,21 @@ export const FeatureProject = () => {
             </div>
           </div>
           <div className="flex flex-col gap-s16">
-            <div className="projectImageContainer cursor-pointer">
+            <div
+              tabIndex={0}
+              onClick={() => {
+                setFromProjectsPage(true);
+                router.push('/project/tigg');
+              }}
+              role="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setFromProjectsPage(true);
+                  router.push('/project/tigg');
+                }
+              }}
+              className="projectImageContainer cursor-pointer"
+            >
               <Image
                 alt="tigg"
                 width={500}
@@ -148,7 +179,21 @@ export const FeatureProject = () => {
         </div>
         <div className="flex justify-center">
           <div className="flex flex-col gap-s16">
-            <div className="projectImageContainer cursor-pointer">
+            <div
+              tabIndex={0}
+              onClick={() => {
+                setFromProjectsPage(true);
+                router.push('/project/r2px');
+              }}
+              role="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setFromProjectsPage(true);
+                  router.push('/project/r2px');
+                }
+              }}
+              className="projectImageContainer cursor-pointer"
+            >
               <Image
                 alt="r2px"
                 width={500}
