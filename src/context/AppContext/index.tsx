@@ -13,6 +13,8 @@ interface MyContextProps {
   setMenuIsOpen: Dispatch<SetStateAction<boolean>>;
   routeFromMenu: boolean;
   setRouteFromMenu: Dispatch<SetStateAction<boolean>>;
+  mousePosition: { x: number; y: number };
+  setMousePosition: Dispatch<SetStateAction<{ x: number; y: number }>>;
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
@@ -20,10 +22,18 @@ const MyContext = createContext<MyContextProps | undefined>(undefined);
 export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [routeFromMenu, setRouteFromMenu] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const contextValue = useMemo(
-    () => ({ menuIsOpen, setMenuIsOpen, routeFromMenu, setRouteFromMenu }),
-    [menuIsOpen, setMenuIsOpen, routeFromMenu, setRouteFromMenu]
+    () => ({
+      menuIsOpen,
+      setMenuIsOpen,
+      routeFromMenu,
+      setRouteFromMenu,
+      mousePosition,
+      setMousePosition,
+    }),
+    [menuIsOpen, setMenuIsOpen, routeFromMenu, setRouteFromMenu, mousePosition, setMousePosition]
   );
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;

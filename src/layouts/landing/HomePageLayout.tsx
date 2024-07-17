@@ -23,7 +23,6 @@ const generateRandomStars = (numStars: number) => {
 };
 
 export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
-  const numStars = Math.floor(Math.random() * 0.09) + 3;
   const { menuIsOpen, setMenuIsOpen } = useMyContext();
 
   return (
@@ -53,7 +52,7 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
         fill
       />
 
-      {generateRandomStars(numStars)}
+      {generateRandomStars(0.01)}
       <div className="relative h-screen justify-center overflow-x-hidden md:pt-s88">
         <div className="fixed top-0 z-[70] h-s88 w-full">
           <TopHeader />

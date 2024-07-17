@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
-import { gsap } from 'gsap';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-import { useTransitionContext } from '@/context';
+import { useMyContext, useTransitionContext } from '@/context';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 export const FeatureProject = () => {
   const { timeline } = useTransitionContext();
+  const { mousePosition } = useMyContext();
+
+  const projectPageRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.set('.word', {
@@ -59,8 +67,44 @@ export const FeatureProject = () => {
       0
     );
   }, {});
+
+  useEffect(() => {
+    const handleMouseMove = () => {
+      if (!projectPageRef.current) return;
+      const moveX = -mousePosition.x;
+      const moveY = -mousePosition.y;
+
+      const projectPageRect = projectPageRef.current.getBoundingClientRect();
+      const maxX = projectPageRect.width - window.innerWidth;
+      const maxY = projectPageRect.height - window.innerHeight;
+
+      const offsetY = 88; // Offset for vertical scroll range
+
+      gsap.to(projectPageRef.current, {
+        duration: 1,
+        x: Math.min(0, Math.max(-maxX, moveX)), // Limit horizontal scroll
+        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)), // Limit vertical scroll
+        // x: moveX,
+        // y: moveY,
+        ease: 'power2.out',
+        force3D: true,
+      });
+    };
+
+    // Add event listener when mounted
+    document.addEventListener('mousemove', handleMouseMove);
+
+    // Cleanup event listener when unmounted
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [mousePosition]);
+
   return (
-    <div className="hello relative flex h-[130vh] w-[130vw] items-center justify-center">
+    <div
+      ref={projectPageRef}
+      className="relative flex h-[130vh] w-[130vw] items-center justify-center"
+    >
       <div className="absolute left-[20%] top-[40%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
         SELECT PROJECT
       </div>
