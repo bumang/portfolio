@@ -15,7 +15,7 @@ const Transition = ({ children }: TransitionProps) => {
   const container = useRef<HTMLDivElement>(null);
   const slideOut = useRef(null);
   const slideOutSecond = useRef(null);
-  const { routeFromMenu, setRouteFromMenu } = useMyContext();
+  const { routeFromMenu, setRouteFromMenu, fromProjectsPage, setFromProjectsPage } = useMyContext();
 
   const { timeline } = useTransitionContext();
   const firstPageTransTimeline = gsap.timeline({
@@ -39,6 +39,13 @@ const Transition = ({ children }: TransitionProps) => {
           await timeline.play().then(() => {
             timeline.pause().clear();
           });
+        }
+
+        if (fromProjectsPage) {
+          setFromProjectsPage(false);
+          secondPageTransTimeline.pause().clear();
+          firstPageTransTimeline.pause().clear();
+          return;
         }
 
         // Define the firstPageTransTimeline animation
