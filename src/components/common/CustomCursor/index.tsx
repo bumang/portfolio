@@ -14,7 +14,7 @@ export const CustomCursor = () => {
     () => {
       const moveCursor = (event: MouseEvent) => {
         if (cursorRef.current) {
-          setMousePosition({ x: event.clientX - 8, y: event.clientY - 420 });
+          setMousePosition({ x: event.clientX - 8, y: event.clientY });
           gsap.to(cursorRef.current, {
             duration: 0.3,
             ease: 'power3.out',

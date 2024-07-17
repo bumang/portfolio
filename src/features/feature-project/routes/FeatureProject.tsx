@@ -74,10 +74,18 @@ export const FeatureProject = () => {
       const moveX = -mousePosition.x;
       const moveY = -mousePosition.y;
 
+      const projectPageRect = projectPageRef.current.getBoundingClientRect();
+      const maxX = projectPageRect.width - window.innerWidth;
+      const maxY = projectPageRect.height - window.innerHeight;
+
+      const offsetY = 88; // Offset for vertical scroll range
+
       gsap.to(projectPageRef.current, {
         duration: 1,
-        x: moveX,
-        y: moveY,
+        x: Math.min(0, Math.max(-maxX, moveX)), // Limit horizontal scroll
+        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)), // Limit vertical scroll
+        // x: moveX,
+        // y: moveY,
         ease: 'power2.out',
         force3D: true,
       });

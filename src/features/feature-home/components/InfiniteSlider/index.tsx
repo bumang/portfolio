@@ -11,8 +11,6 @@ const InfiniteSlider = ({ src, alt, width, height, fill }: InfiniteSliderProps) 
           src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.svg`}
           alt="mountain"
           loading="lazy"
-          // width={1}
-          // height={1}
           fill
         />
       </div>
@@ -21,8 +19,6 @@ const InfiniteSlider = ({ src, alt, width, height, fill }: InfiniteSliderProps) 
           src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.svg`}
           alt="mountain"
           loading="lazy"
-          // width={1}
-          // height={1}
           fill
         />
       </div>
