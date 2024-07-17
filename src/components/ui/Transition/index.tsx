@@ -43,6 +43,7 @@ const Transition = ({ children }: TransitionProps) => {
 
         if (fromProjectsPage) {
           setFromProjectsPage(false);
+          setDisplayChildren(children);
           secondPageTransTimeline.pause().clear();
           firstPageTransTimeline.pause().clear();
           return;
