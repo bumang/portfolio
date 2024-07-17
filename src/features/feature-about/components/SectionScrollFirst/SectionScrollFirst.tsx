@@ -37,7 +37,7 @@ export const SectionScrollFirst = () => {
             end: '+=3000',
             scrub: true,
             pin: true,
-            markers: true,
+            markers: false,
           },
         }
       );

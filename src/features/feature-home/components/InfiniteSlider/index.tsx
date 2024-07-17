@@ -8,7 +8,7 @@ const InfiniteSlider = ({ src, alt, width, height, fill }: InfiniteSliderProps) 
     <div className="lg:min-w-screen absolute left-0 flex h-[27vh] w-[200vw] xs:bottom-[-10%] md:bottom-[-5%] lg:bottom-[-4%] xl:bottom-[0]">
       <div className="flex-1 animate-infinite-slider-mountain">
         <Image
-          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.svg`}
+          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.png`}
           alt="mountain"
           fill
           priority
@@ -16,7 +16,7 @@ const InfiniteSlider = ({ src, alt, width, height, fill }: InfiniteSliderProps) 
       </div>
       <div className="flex-1 animate-infinite-slider-mountain">
         <Image
-          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.svg`}
+          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.png`}
           alt="mountain"
           fill
           priority
@@ -24,7 +24,7 @@ const InfiniteSlider = ({ src, alt, width, height, fill }: InfiniteSliderProps) 
       </div>
       <div className="flex-1 animate-infinite-slider-mountain">
         <Image
-          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.svg`}
+          src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/mountain.png`}
           alt="mountain"
           priority
           fill
