@@ -13,7 +13,12 @@ export const TopHeader = () => (
           <Logo />
         </div>
         <div className="relative cursor-pointer overflow-hidden text-s20 font-bold leading-normal text-secondary-lightBlue">
-          Umanga Bhattarai
+          <span className="inline-block transition duration-300 ease-out group-hover:-translate-y-[120%]">
+            Umanga Bhattarai
+          </span>
+          <span className="absolute left-0 inline-block translate-y-[180%] rotate-12 transition duration-300 ease-out group-hover:-translate-y-0 group-hover:rotate-0">
+            Umanga Bhattarai
+          </span>
           <div className="absolute bottom-0 h-s2 w-0 border-b-2 bg-background-preLoader transition-all duration-300 ease-out group-hover:w-full" />
         </div>
       </div>
