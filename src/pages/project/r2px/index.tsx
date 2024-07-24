@@ -1,9 +1,9 @@
 import { FeatureR2px } from '@/features';
 import { ProjectPageLayout } from '@/layouts/project/ProjectPageLayout';
 
-const ProjectPage = () => <FeatureR2px />;
+const R2pxPage = () => <FeatureR2px />;
 
-ProjectPage.getLayout = (page: React.ReactElement) => (
+R2pxPage.getLayout = (page: React.ReactElement) => (
   <ProjectPageLayout page="R2px">{page}</ProjectPageLayout>
 );
-export default ProjectPage;
+export default R2pxPage;

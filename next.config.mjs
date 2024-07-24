@@ -1,4 +1,6 @@
 import path from 'path';
+import nextTranspileModules from 'next-transpile-modules';
+
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -54,4 +56,5 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default nextTranspileModules(["gsap"])(nextConfig);
+

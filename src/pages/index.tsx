@@ -1,7 +1,7 @@
 import { FeatureHome } from '@/features/feature-home';
 import { HomePageLayout } from '@/layouts';
 
-const Home = () => <FeatureHome />;
+const HomePage = () => <FeatureHome />;
 
-Home.getLayout = (page: React.ReactElement) => <HomePageLayout>{page}</HomePageLayout>;
-export default Home;
+HomePage.getLayout = (page: React.ReactElement) => <HomePageLayout>{page}</HomePageLayout>;
+export default HomePage;

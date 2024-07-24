@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { useTransitionContext } from '@/context';
 
@@ -34,10 +34,10 @@ export const SectionScrollFirst = () => {
           scrollTrigger: {
             trigger: triggerRef.current,
             start: 'top top',
-            end: '+=3000',
+            end: '+=200vw',
             scrub: true,
             pin: true,
-            markers: false,
+            markers: true,
           },
         }
       );
@@ -105,11 +105,11 @@ export const SectionScrollFirst = () => {
   );
 
   return (
-    <div className="scroll-section-outer h-screen bg-background-about">
-      <div ref={triggerRef}>
+    <div className="scroll-section-outer max-h-screen w-screen bg-background-about">
+      <div ref={sectionRef}>
         <div
-          ref={sectionRef}
-          className="scroll-section-inner relative flex h-screen w-[400vw] bg-background-about"
+          ref={triggerRef}
+          className="scroll-section-inner relative flex h-screen w-[300vw] bg-background-about"
         >
           <div ref={heroContainer} className="scroll-section flex h-screen w-screen flex-col">
             <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
