@@ -41,8 +41,8 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
         menuDrawerOpenAnimation.to('.menu-container', {
           transform: 'translateY(0%)',
           visibility: 'visible',
-          duration: 1.5,
-          ease: 'power4.inOut',
+          duration: 0.8,
+          ease: 'power4.out',
         });
         menuDrawerOpenAnimation.to(
           '.moon',
@@ -99,8 +99,8 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
         menuDrawerCloseAnimation.to('.menu-container', {
           transform: 'translateY(-100%)',
           visibility: 'visible',
-          duration: 1.5,
-          ease: 'power4.inOut',
+          duration: 0.5,
+          ease: 'power4.in',
         });
       }
     }

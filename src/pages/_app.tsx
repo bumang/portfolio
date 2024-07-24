@@ -25,7 +25,7 @@ export const globalTimeline = gsap.timeline({
 const App = ({ Component, pageProps, router }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || ((page) => page);
   return (
-    <main className={`${drukTrail.variable} relative h-screen w-screen overflow-y-hidden`}>
+    <main className={`${drukTrail.variable} relative h-screen w-screen`}>
       <MyContextProvider>
         <TransitionProvider>
           <Transition>{getLayout(<Component key={router.route} {...pageProps} />)}</Transition>

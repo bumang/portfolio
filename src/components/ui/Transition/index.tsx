@@ -55,6 +55,7 @@ const Transition = ({ children }: TransitionProps) => {
           {
             transform: 'translateY(-100%)',
             visibility: 'visible',
+            display: 'block',
             duration: 1,
             ease: 'power4.inOut',
           },
@@ -65,6 +66,7 @@ const Transition = ({ children }: TransitionProps) => {
           {
             transform: 'translateY(-100%)',
             visibility: 'visible',
+            display: 'block',
             duration: 0.8,
             ease: 'power4.inOut',
           },
@@ -103,10 +105,12 @@ const Transition = ({ children }: TransitionProps) => {
         secondPageTransTimeline.set(slideOut.current, {
           transform: 'translateY(200%)',
           visibility: 'hidden',
+          display: 'none',
         });
         secondPageTransTimeline.set(slideOutSecond.current, {
           transform: 'translateY(200%)',
           visibility: 'hidden',
+          display: 'none',
         });
 
         // Play the secondPageTransTimeline and wait for it to complete
@@ -128,15 +132,15 @@ const Transition = ({ children }: TransitionProps) => {
   // });
 
   return (
-    <div className="min-h-full min-w-full" ref={container}>
+    <div className="relative h-screen w-screen" ref={container}>
       {displayChildren}
       <div
         ref={slideOut}
-        className="invisible absolute left-0 top-[100vh] z-[70] h-full w-full bg-primary-darkBlue"
+        className="invisible absolute left-0 top-[100vh] z-[70] hidden h-full w-full bg-primary-darkBlue"
       />
       <div
         ref={slideOutSecond}
-        className="invisible absolute left-0 top-[100vh] z-[70] h-full w-full bg-background-preLoader"
+        className="invisible absolute left-0 top-[100vh] z-[70] hidden h-full w-full bg-background-preLoader"
       />
       {/* <div className="preloader z-[100] bg-transparent">
         <HomePreLoader onExitAnimation={() => setExitAnimation(true)} />

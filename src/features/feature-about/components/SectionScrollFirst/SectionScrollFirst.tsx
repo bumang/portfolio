@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { useTransitionContext } from '@/context';
 
@@ -28,16 +28,16 @@ export const SectionScrollFirst = () => {
           opacity: 1,
         },
         {
-          translateX: '-300vw',
+          translateX: '-200vw',
           ease: 'none',
           duration: 1,
           scrollTrigger: {
             trigger: triggerRef.current,
-            start: 'top top',
-            end: '+=200vw',
-            scrub: true,
+            start: 'bottom bottom',
+            end: '+=200%',
+            scrub: 0.2,
             pin: true,
-            markers: true,
+            markers: false,
           },
         }
       );
@@ -105,11 +105,12 @@ export const SectionScrollFirst = () => {
   );
 
   return (
-    <div className="scroll-section-outer max-h-screen w-screen bg-background-about">
-      <div ref={sectionRef}>
+    <div className="scroll-section-outer h-screen w-screen bg-background-about">
+      {/* <div className="screen min-w-screen min-h-screen bg-green-500">cat</div> */}
+      <div ref={triggerRef}>
         <div
-          ref={triggerRef}
-          className="scroll-section-inner relative flex h-screen w-[300vw] bg-background-about"
+          ref={sectionRef}
+          className="scroll-section-inner no-scrollbar relative flex h-screen w-[300vw] bg-background-preLoader"
         >
           <div ref={heroContainer} className="scroll-section flex h-screen w-screen flex-col">
             <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
@@ -152,6 +153,7 @@ export const SectionScrollFirst = () => {
           </div>
         </div>
       </div>
+      <div className="screen min-w-screen min-h-screen bg-green-500">meowww</div>
     </div>
   );
 };

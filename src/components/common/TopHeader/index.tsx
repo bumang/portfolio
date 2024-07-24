@@ -17,9 +17,9 @@ export const TopHeader = () => (
             Umanga Bhattarai
           </span>
           <span className="absolute left-0 inline-block translate-y-[180%] rotate-12 transition duration-300 ease-out group-hover:-translate-y-0 group-hover:rotate-0">
-            Umanga Bhattarai
+            Home
           </span>
-          <div className="absolute bottom-0 h-s2 w-0 border-b-2 bg-background-preLoader transition-all duration-300 ease-out group-hover:w-full" />
+          <div className="absolute bottom-0 h-s2 w-0 border-b-2 bg-background-preLoader transition-all duration-300 ease-out group-hover:w-[32%]" />
         </div>
       </div>
     </Link>
