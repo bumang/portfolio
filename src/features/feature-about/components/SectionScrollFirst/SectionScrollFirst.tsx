@@ -156,7 +156,6 @@ export const SectionScrollFirst = () => {
 
   return (
     <div className="scroll-section-outer">
-      {/* <div className="screen min-w-screen min-h-screen bg-green-500">cat</div> */}
       <div ref={triggerRef}>
         <div
           ref={sectionRef}
@@ -218,12 +217,25 @@ export const SectionScrollFirst = () => {
               alt="about_image"
             />
           </div>
-          <div className="scroll-section flex h-full w-screen items-center justify-center">
-            More content
+          <div className="scroll-section flex h-full w-screen justify-between">
+            <div className="flex w-full max-w-[56.82%] pl-[80px] pt-s88 font-trial text-[200px] font-medium leading-[200px] text-text-default">
+              KNOW A LITTLE MORE ABOUT ME
+            </div>
+            <div className="flex w-full max-w-[38.79%] items-end pb-s44">
+              <div className="bg-background-black w-full max-w-[550px] border-t-[2px] border-text-default py-s40 font-inter text-[22px] font-medium leading-normal text-text-default">
+                My name is Umanga Bhattarai, a developer based in Kathmandu, Nepal, specializing in
+                React.js, Next.js, and Golang. I focus on creating seamless animations, intuitive
+                layouts, and engaging interactions for a delightful user experience. With a
+                dedication to robust application architecture and comprehensive testing, I build
+                scalable and maintainable solutions. Outside of work, I enjoy football, cycling, and
+                traveling, which inspire my creativity and drive for continuous improvement. My goal
+                is to blend technical excellence with user-centric design, crafting digital
+                experiences that stand the test of time.
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="h-screen w-screen bg-green-500">meowww</div>
     </div>
   );
 };

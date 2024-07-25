@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TopHeader } from '@/components';
-import { SectionScrollFirst } from '@/features/feature-about/components';
+import { SectionScrollFirst, SectionScrollSecond } from '@/features/feature-about/components';
 
 export const FeatureAbout = () => (
   <div className="flex h-screen w-screen flex-col bg-background-about">
@@ -9,5 +9,7 @@ export const FeatureAbout = () => (
       <TopHeader />
     </div>
     <SectionScrollFirst />
+
+    <SectionScrollSecond />
   </div>
 );
