@@ -87,7 +87,7 @@ export const SectionScrollFirst = () => {
             start: '150% top',
             end: '300% top',
             scrub: true,
-            markers: true,
+            markers: false,
           },
         });
       }
