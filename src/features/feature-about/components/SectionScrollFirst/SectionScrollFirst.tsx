@@ -156,7 +156,6 @@ export const SectionScrollFirst = () => {
 
   return (
     <div className="scroll-section-outer">
-      {/* <div className="screen min-w-screen min-h-screen bg-green-500">cat</div> */}
       <div ref={triggerRef}>
         <div
           ref={sectionRef}
@@ -237,7 +236,6 @@ export const SectionScrollFirst = () => {
           </div>
         </div>
       </div>
-      <div className="h-screen w-screen bg-green-500">meowww</div>
     </div>
   );
 };
