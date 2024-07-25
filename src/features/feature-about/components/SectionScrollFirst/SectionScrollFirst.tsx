@@ -18,6 +18,7 @@ export const SectionScrollFirst = () => {
   const heroContainer = useRef<HTMLDivElement>(null);
 
   const avatarImage = useRef<HTMLImageElement>(null);
+  const aboutImage = useRef<HTMLImageElement>(null);
 
   const { timeline } = useTransitionContext();
 
@@ -54,25 +55,45 @@ export const SectionScrollFirst = () => {
     { scope: sectionRef }
   );
 
-  useGSAP(() => {
-    const letters = gsap.utils.toArray('.letter:not(.space)');
+  useGSAP(
+    () => {
+      const letters = gsap.utils.toArray('.letter:not(.space)');
 
-    gsap.fromTo(
-      letters,
-      { y: (i) => (i % 2 === 0 ? '-80%' : '80%') },
-      {
-        y: 0,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: '10% top',
-          end: '300% bottom',
-          scrub: true,
-          markers: true,
-        },
+      gsap.fromTo(
+        letters,
+        { y: (i) => (i % 2 === 0 ? '-80%' : '80%') },
+        {
+          y: 0,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: '10% top',
+            end: '300% bottom',
+            scrub: true,
+            markers: false,
+          },
+        }
+      );
+
+      if (aboutImage.current) {
+        gsap.set(aboutImage.current, {
+          transform: 'scale3d(1.8, 1.8, 1)',
+        });
+
+        gsap.to(aboutImage.current, {
+          transform: 'scale3d(1, 1, 1)',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: '150% top',
+            end: '300% top',
+            scrub: true,
+            markers: false,
+          },
+        });
       }
-    );
-  }, []);
+    },
+    { scope: sectionRef }
+  );
 
   useGSAP(
     () => {
@@ -187,10 +208,17 @@ export const SectionScrollFirst = () => {
               })}{' '}
             </div>
           </div>
-          <div className="scroll-section flex h-full w-[50vw] items-center justify-center bg-green-500">
-            Photo
+          <div className="scroll-section flex h-full max-h-[100vh] w-full max-w-[50vw] items-center justify-center overflow-hidden bg-green-500">
+            <Image
+              ref={aboutImage}
+              src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/about.png`}
+              width={100}
+              height={100}
+              className="h-full w-full object-cover"
+              alt="about_image"
+            />
           </div>
-          <div className="scroll-section flex h-full w-screen items-center justify-center bg-yellow-500">
+          <div className="scroll-section flex h-full w-screen items-center justify-center">
             More content
           </div>
         </div>
