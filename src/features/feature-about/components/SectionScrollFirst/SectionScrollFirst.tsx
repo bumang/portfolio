@@ -33,11 +33,13 @@ export const SectionScrollFirst = () => {
           duration: 1,
           scrollTrigger: {
             trigger: triggerRef.current,
-            start: 'bottom bottom',
+            start: 'top top',
             end: '+=200%',
             scrub: 0.2,
             pin: true,
             markers: false,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
           },
         }
       );
@@ -105,14 +107,14 @@ export const SectionScrollFirst = () => {
   );
 
   return (
-    <div className="scroll-section-outer h-screen w-screen bg-background-about">
+    <div className="scroll-section-outer h-full w-full bg-background-about">
       {/* <div className="screen min-w-screen min-h-screen bg-green-500">cat</div> */}
-      <div ref={triggerRef}>
+      <div className="h-full w-full" ref={triggerRef}>
         <div
           ref={sectionRef}
-          className="scroll-section-inner no-scrollbar relative flex h-screen w-[300vw] bg-background-preLoader"
+          className="scroll-section-inner relative flex h-full w-[300vw] overflow-hidden bg-background-about"
         >
-          <div ref={heroContainer} className="scroll-section flex h-screen w-screen flex-col">
+          <div ref={heroContainer} className="scroll-section flex h-full w-screen flex-col">
             <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
               <div className="relative flex h-fit gap-s64 overflow-y-hidden">
                 <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
@@ -145,15 +147,15 @@ export const SectionScrollFirst = () => {
               </div>
             </div>
           </div>
-          <div className="scroll-section flex h-screen w-screen items-center justify-center bg-red-500">
+          <div className="scroll-section flex h-full w-screen items-center justify-center bg-red-500">
             Helllooo
           </div>
-          <div className="scroll-section flex h-screen w-screen items-center justify-center bg-yellow-500">
+          <div className="scroll-section flex h-full w-screen items-center justify-center bg-yellow-500">
             More content
           </div>
         </div>
       </div>
-      <div className="screen min-w-screen min-h-screen bg-green-500">meowww</div>
+      <div className="h-screen w-screen bg-green-500">meowww</div>
     </div>
   );
 };
