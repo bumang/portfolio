@@ -10,6 +10,8 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
+const TEXT = 'is a Software Developer.';
+
 export const SectionScrollFirst = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -21,31 +23,56 @@ export const SectionScrollFirst = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
+      const pin = gsap.fromTo(
         sectionRef.current,
         {
           translateX: 0,
-          opacity: 1,
         },
         {
-          translateX: '-200vw',
+          translateX: '-300vw',
           ease: 'none',
           duration: 1,
           scrollTrigger: {
             trigger: triggerRef.current,
             start: 'top top',
-            end: '+=200%',
-            scrub: 0.2,
+            end: '+=400% bottom',
+            scrub: true,
             pin: true,
             markers: false,
             invalidateOnRefresh: true,
             anticipatePin: 1,
+            scrollbars: {
+              visible: false,
+            },
           },
         }
       );
+      return () => {
+        pin.kill();
+      };
     },
     { scope: sectionRef }
   );
+
+  useGSAP(() => {
+    const letters = gsap.utils.toArray('.letter:not(.space)');
+
+    gsap.fromTo(
+      letters,
+      { y: (i) => (i % 2 === 0 ? '-80%' : '80%') },
+      {
+        y: 0,
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: '10% top',
+          end: '300% bottom',
+          scrub: true,
+          markers: true,
+        },
+      }
+    );
+  }, []);
 
   useGSAP(
     () => {
@@ -107,12 +134,12 @@ export const SectionScrollFirst = () => {
   );
 
   return (
-    <div className="scroll-section-outer h-full w-full bg-background-about">
+    <div className="scroll-section-outer">
       {/* <div className="screen min-w-screen min-h-screen bg-green-500">cat</div> */}
-      <div className="h-full w-full" ref={triggerRef}>
+      <div ref={triggerRef}>
         <div
           ref={sectionRef}
-          className="scroll-section-inner relative flex h-full w-[300vw] overflow-hidden bg-background-about"
+          className="scroll-section-inner no-scrollbar relative flex h-screen w-[400vw] flex-row bg-background-about"
         >
           <div ref={heroContainer} className="scroll-section flex h-full w-screen flex-col">
             <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
@@ -147,8 +174,21 @@ export const SectionScrollFirst = () => {
               </div>
             </div>
           </div>
-          <div className="scroll-section flex h-full w-screen items-center justify-center bg-red-500">
-            Helllooo
+          <div className="scroll-section flex h-full w-[150vw] items-center justify-center">
+            <div className="relative flex h-fit w-full justify-center font-trial text-h1 font-medium leading-semi-bold tracking-[24px] text-text-default">
+              {TEXT.split('').map((letter) => {
+                return letter === ' ' ? (
+                  <div className="letter space">&nbsp;</div>
+                ) : (
+                  <div className="letter" key={letter}>
+                    {letter}
+                  </div>
+                );
+              })}{' '}
+            </div>
+          </div>
+          <div className="scroll-section flex h-full w-[50vw] items-center justify-center bg-green-500">
+            Photo
           </div>
           <div className="scroll-section flex h-full w-screen items-center justify-center bg-yellow-500">
             More content
