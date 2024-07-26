@@ -61,8 +61,7 @@ export const SectionScrollSecond = () => {
   );
 
   return (
-    <div className="relative flex h-[500vw] max-w-[100vw] flex-col overflow-x-clip bg-background-about">
-      {/* <div className="min-h-screen w-full" /> */}
+    <div className="relative flex h-[500vw] w-full flex-col overflow-x-clip bg-background-about">
       <div ref={triggerRef} className="max-w-screen min-h-[400vh]">
         <div className="sticky top-[calc(50%-120px)] z-30 flex justify-center">
           <div className="z-40 text-center font-trial text-[120px] font-bold leading-[120px] text-background-about">

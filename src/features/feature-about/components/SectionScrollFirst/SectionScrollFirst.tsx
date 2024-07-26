@@ -40,11 +40,8 @@ export const SectionScrollFirst = () => {
             scrub: true,
             pin: true,
             markers: false,
-            invalidateOnRefresh: true,
+
             anticipatePin: 1,
-            scrollbars: {
-              visible: false,
-            },
           },
         }
       );
@@ -159,7 +156,7 @@ export const SectionScrollFirst = () => {
       <div ref={triggerRef}>
         <div
           ref={sectionRef}
-          className="scroll-section-inner no-scrollbar relative flex h-screen w-[400vw] flex-row bg-background-about"
+          className="scroll-section-inner relative flex h-screen w-[400vw] flex-row bg-background-about"
         >
           <div ref={heroContainer} className="scroll-section flex h-full w-screen flex-col">
             <div className="relative m-auto flex h-full w-fit flex-auto flex-col items-start justify-center leading-heavy sm:max-h-[55%] xl:max-h-[68%]">
@@ -207,7 +204,7 @@ export const SectionScrollFirst = () => {
               })}{' '}
             </div>
           </div>
-          <div className="scroll-section flex h-full max-h-[100vh] w-full max-w-[50vw] items-center justify-center overflow-hidden bg-green-500">
+          <div className="scroll-section flex h-full w-full max-w-[50vw] items-center justify-center overflow-hidden">
             <Image
               ref={aboutImage}
               src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/about.png`}

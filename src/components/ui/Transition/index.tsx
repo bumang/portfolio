@@ -132,7 +132,7 @@ const Transition = ({ children }: TransitionProps) => {
   // });
 
   return (
-    <div ref={container}>
+    <div ref={container} className="relative">
       {displayChildren}
       <div
         ref={slideOut}
