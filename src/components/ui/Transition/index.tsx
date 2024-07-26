@@ -136,11 +136,11 @@ const Transition = ({ children }: TransitionProps) => {
       {displayChildren}
       <div
         ref={slideOut}
-        className="invisible absolute left-0 top-[100vh] z-[70] hidden h-full w-full bg-primary-darkBlue"
+        className="invisible fixed left-0 top-[100vh] z-[70] hidden h-full w-full bg-primary-darkBlue"
       />
       <div
         ref={slideOutSecond}
-        className="invisible absolute left-0 top-[100vh] z-[70] hidden h-full w-full bg-background-preLoader"
+        className="invisible fixed left-0 top-[100vh] z-[70] hidden h-full w-full bg-background-preLoader"
       />
       {/* <div className="preloader z-[100] bg-transparent">
         <HomePreLoader onExitAnimation={() => setExitAnimation(true)} />
