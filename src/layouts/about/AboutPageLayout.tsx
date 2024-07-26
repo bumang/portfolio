@@ -12,7 +12,7 @@ interface AboutLayoutProps {
 export const AboutPageLayout = ({ children }: AboutLayoutProps) => {
   const { menuIsOpen, setMenuIsOpen } = useMyContext();
   return (
-    <div className="relative h-screen w-full max-w-[calc(100vw-15px)]">
+    <div className="relative h-screen w-screen">
       <Head>
         <title>About Me | My Portfolio</title>
         <meta

@@ -342,6 +342,14 @@ const config: Config = {
         'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
         moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg')`,
       },
+      '.no-scrollbar::-webkit-scrollbar': {
+        display: 'none',
+      },
+
+      '.no-scrollbar': {
+        '-ms-overflow-style': 'none',
+        'scrollbar-width': 'none',
+      },
       borderRadius: {
         none: '0',
         br1: '2px',
