@@ -19,7 +19,7 @@ export const CustomCursor = () => {
             duration: 0.3,
             ease: 'power3.out',
             x: event.clientX - 8,
-            y: event.clientY - 792,
+            y: event.clientY - 786,
             force3D: true, // Ensure 3D rendering
           });
         }
