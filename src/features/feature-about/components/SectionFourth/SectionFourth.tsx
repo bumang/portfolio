@@ -7,31 +7,31 @@ export const SectionFourth = () => {
         </div>
         <div className="flex h-full w-full flex-1 flex-col items-end justify-end text-black">
           <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
-            <div>Leapfrog.</div>
+            <div className="flex items-center">Skyleap Security</div>
             <div>
-              <div>Internship</div>
+              <div className="text-[14px]">Full time</div>
+              <div>Software Dev.</div>
+            </div>
+          </div>
+          <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
+            <div className="flex items-center">Freelancing</div>
+            <div>
+              <div className="text-[14px]">Part time</div>
               <div>Front-end Dev.</div>
             </div>
           </div>
           <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
-            <div>Rara Digital Labs.</div>
+            <div className="flex items-center">Rara Digital Labs.</div>
             <div>
-              <div>Full time</div>
-              <div>Front-end Dev.</div>
-            </div>
-          </div>
-          <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
-            <div>Freelancing</div>
-            <div>
-              <div>Part time</div>
+              <div className="text-[14px]">Full time</div>
               <div>Front-end Dev.</div>
             </div>
           </div>
           <div className="flex w-full justify-between border-y-[1px] border-black py-s18 font-inter text-s18">
-            <div>Skyleap Security</div>
+            <div className="flex items-center">Leapfrog Technology.</div>
             <div>
-              <div>Full time</div>
-              <div>Software Dev.</div>
+              <div className="text-[14px]">Internship</div>
+              <div>Front-end Dev.</div>
             </div>
           </div>
         </div>
