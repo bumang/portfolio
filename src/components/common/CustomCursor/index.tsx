@@ -19,7 +19,7 @@ export const CustomCursor = () => {
             duration: 0.3,
             ease: 'power3.out',
             x: event.clientX - 8,
-            y: event.clientY - 840,
+            y: event.clientY - 786,
             force3D: true, // Ensure 3D rendering
           });
         }
@@ -38,7 +38,7 @@ export const CustomCursor = () => {
 
   return (
     <div
-      className="cursor z-[99] h-s16 w-s16 rounded-full border-2 border-solid border-text-default bg-text-default"
+      className="cursor z-[99] h-s16 w-s16 rounded-full border-2 border-solid border-white bg-white"
       ref={cursorRef}
       style={{
         position: 'fixed',

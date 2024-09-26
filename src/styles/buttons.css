@@ -34,7 +34,7 @@
   width: 40px; /* @bar-w */
   height: 3px; /* @bar-h */
   left: 0;
-  background-color: #e8e7cb; /* @bar-color */
+  background-color: #ffffff; /* @bar-color */
   transition: all 0.3s ease;
 }
 

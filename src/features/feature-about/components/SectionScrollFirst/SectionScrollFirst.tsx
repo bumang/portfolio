@@ -193,11 +193,13 @@ export const SectionScrollFirst = () => {
           </div>
           <div className="scroll-section flex h-full w-[150vw] items-center justify-center">
             <div className="relative flex h-fit w-full justify-center font-trial text-h1 font-medium leading-semi-bold tracking-[24px] text-text-default">
-              {TEXT.split('').map((letter) => {
+              {TEXT.split('').map((letter, index) => {
                 return letter === ' ' ? (
-                  <div className="letter space">&nbsp;</div>
+                  <div key={`${index + 1} `} className="letter space">
+                    &nbsp;
+                  </div>
                 ) : (
-                  <div className="letter" key={letter}>
+                  <div className="letter" key={`${index + 1} `}>
                     {letter}
                   </div>
                 );
