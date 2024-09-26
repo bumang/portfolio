@@ -25,14 +25,14 @@ export const globalTimeline = gsap.timeline({
 const App = ({ Component, pageProps, router }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || ((page) => page);
   return (
-    <main className={`${drukTrail.variable} relative`}>
-      <MyContextProvider>
+    <MyContextProvider>
+      <CustomCursor />
+      <main className={`${drukTrail.variable} relative`}>
         <TransitionProvider>
           <Transition>{getLayout(<Component key={router.route} {...pageProps} />)}</Transition>
-          <CustomCursor />
         </TransitionProvider>
-      </MyContextProvider>
-    </main>
+      </main>
+    </MyContextProvider>
   );
 };
 
