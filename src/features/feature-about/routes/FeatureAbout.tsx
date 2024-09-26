@@ -3,6 +3,7 @@ import React from 'react';
 import { TopHeader } from '@/components';
 import { SectionScrollFirst, SectionScrollSecond } from '@/features/feature-about/components';
 
+import SectionFourth from '../components/SectionFourth/SectionFourth';
 import { SectionScrollThird } from '../components/SectionScrollThird';
 
 export const FeatureAbout = () => (
@@ -13,5 +14,6 @@ export const FeatureAbout = () => (
     <SectionScrollFirst />
     <SectionScrollSecond />
     <SectionScrollThird />
+    <SectionFourth />
   </div>
 );

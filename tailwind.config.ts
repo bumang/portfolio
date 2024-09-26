@@ -35,6 +35,7 @@ const config: Config = {
         blue: '#037096',
         darkGray: '#5C5E62',
         gray: '#A1A3A7',
+        lightBlue: '#8DAEB6',
         lightGray: '#FFFFFF',
       },
       secondary: {
