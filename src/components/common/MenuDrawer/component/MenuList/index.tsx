@@ -17,12 +17,12 @@ export const MenuList = ({ handleOnClick }: MenuListProps) => (
             <NavLink href={d?.routes} onClick={() => handleOnClick?.(d?.routes)} exact>
               <div className="flex cursor-pointer justify-between border-secondary-lightBlue px-s12 py-[120px]">
                 <div className="relative h-fit overflow-y-hidden">
-                  <div className="items font-trial text-h3 font-heavy leading-bold text-text-default disabled:cursor-not-allowed disabled:opacity-[0.8] group-hover:text-primary-lightGray">
+                  <div className="items font-trial text-[150px] font-heavy leading-[150px] text-text-default disabled:cursor-not-allowed disabled:opacity-[0.8] group-hover:text-primary-lightGray">
                     {d.itemName}
                   </div>
                 </div>
                 <div className="relative h-fit overflow-y-hidden">
-                  <div className="items font-trial text-h3 font-heavy leading-bold text-text-default disabled:cursor-not-allowed disabled:opacity-[0.8] group-hover:text-primary-lightGray">
+                  <div className="items font-trial text-[150px] font-heavy leading-[150px] text-text-default disabled:cursor-not-allowed disabled:opacity-[0.8] group-hover:text-primary-lightGray">
                     {d.index}
                   </div>
                 </div>
