@@ -1,4 +1,4 @@
-const SectionFourth = () => {
+export const SectionFourth = () => {
   return (
     <div className="min-h-screen w-screen bg-text-default">
       <div className="mx-auto my-0 flex h-full w-[90%] justify-between pb-20">
@@ -39,5 +39,3 @@ const SectionFourth = () => {
     </div>
   );
 };
-
-export default SectionFourth;
