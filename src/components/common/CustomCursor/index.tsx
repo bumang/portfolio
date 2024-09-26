@@ -14,13 +14,16 @@ export const CustomCursor = () => {
     () => {
       const moveCursor = (event: MouseEvent) => {
         if (cursorRef.current) {
-          setMousePosition({ x: event.clientX - 8, y: event.clientY });
+          const { clientX, clientY } = event;
+
+          setMousePosition({ x: clientX, y: clientY });
+
           gsap.to(cursorRef.current, {
             duration: 0.3,
             ease: 'power3.out',
-            x: event.clientX - 8,
-            y: event.clientY - 786,
-            force3D: true, // Ensure 3D rendering
+            x: clientX - cursorRef.current.offsetWidth / 2, // Center the cursor
+            y: clientY - cursorRef.current.offsetHeight / 2, // Center the cursor
+            force3D: true, // Better 3D rendering performance
           });
         }
       };
@@ -43,7 +46,7 @@ export const CustomCursor = () => {
       style={{
         position: 'fixed',
         pointerEvents: 'none',
-        transform: 'translate3d(mousePosition.x, mousePosition.y, 0)',
+        transform: 'translate3d(0, 0, 0)',
       }}
     />
   );
