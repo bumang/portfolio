@@ -38,7 +38,7 @@ export const CustomCursor = () => {
 
   return (
     <div
-      className="cursor z-[99] h-s16 w-s16 rounded-full border-2 border-solid border-text-default bg-text-default"
+      className="cursor z-[99] h-s16 w-s16 rounded-full border-2 border-solid border-white bg-white"
       ref={cursorRef}
       style={{
         position: 'fixed',

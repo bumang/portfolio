@@ -68,7 +68,7 @@ export const SectionScrollThird = () => {
                 bgColor="bg-secondary-green"
                 header="CSS"
                 headerIndex="01"
-                heroText="SCSS - Chakra UI - Tailwind CSS -"
+                heroText="SCSS - Chakra UI - Tailwind - GSAP - "
                 txtColor="text-background-default"
               />
             </div>
