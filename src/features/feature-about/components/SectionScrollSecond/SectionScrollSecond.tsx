@@ -22,7 +22,7 @@ export const SectionScrollSecond = () => {
             start: 'top top',
             end: '100% bottom',
             scrub: true,
-            markers: false,
+            markers: true,
           },
         }
       );

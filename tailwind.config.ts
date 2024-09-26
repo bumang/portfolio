@@ -25,6 +25,8 @@ const config: Config = {
         preLoader: '#637174',
         white: '#FFFFFF',
         about: '#91A2A6',
+        yellow: '#E7DF2A',
+        pink: '#c96e9d',
       },
       transparent: 'transparent',
       primary: {
@@ -363,6 +365,7 @@ const config: Config = {
         DEFAULT: '2px',
       },
       animation: {
+        loopL: 'loopTextLeft 5s linear infinite',
         'infinite-slider': 'infiniteSlider 20s linear infinite',
         'infinite-slider-mountain': 'infiniteSlider 100s linear infinite',
         'infinite-vertical-slider': 'infiniteVerticalSlider 2s linear infinite',
@@ -371,6 +374,10 @@ const config: Config = {
         'underline-text': 'textUnderline 400ms',
       },
       keyframes: {
+        loopTextLeft: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-102%)' },
+        },
         textUnderline: {
           '100%': { opacity: '1', transform: 'translate3d(-100%, 0, 0)' },
         },
