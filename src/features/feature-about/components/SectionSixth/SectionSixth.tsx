@@ -51,8 +51,8 @@ export const SectionSixth = () => {
       if (isMouseOverLetter) {
         // Animate the hovered letter
         gsap.to(letter, {
-          y: -maxYOffset,
           duration: 0.4,
+          transform: `translate3d(0px, -${maxYOffset}px, 0px)`,
           ease: 'power1.out',
         });
 
@@ -66,7 +66,7 @@ export const SectionSixth = () => {
           const yOffset = maxYOffset * (scale * (1 - Math.abs(neighborIndex - index) / 10));
 
           gsap.to(neighborLetter, {
-            y: -yOffset,
+            transform: `translate3d(0px, -${yOffset}px, 0px)`,
             duration: 0.4,
             ease: 'power1.out',
           });
@@ -80,7 +80,7 @@ export const SectionSixth = () => {
     if (!emailRef.current.length) return;
 
     gsap.to(emailRef.current, {
-      y: 0,
+      transform: 'translate3d(0px, 0px, 0px)',
       duration: 0.4,
       ease: 'power1.out',
     });
@@ -126,7 +126,7 @@ export const SectionSixth = () => {
                     }
                   }}
                   className="font-trial text-[175px] uppercase leading-[175.5px] text-primary-lightBlue"
-                  style={{ transform: 'translateY(0)' }}
+                  style={{ transform: 'translate3d(0px, 0px, 0px)' }}
                 >
                   {letter}
                 </div>
