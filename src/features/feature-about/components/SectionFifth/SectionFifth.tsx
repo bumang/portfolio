@@ -20,7 +20,7 @@ export const SectionFifth = () => {
   };
 
   const [lettersRef, setLettersRef] = useArrayRef();
-  const triggerTextRef = useRef<HTMLDivElement | null>(null); // Explicitly type the div ref
+  const triggerTextRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     const reveal = gsap.to(lettersRef.current, {
@@ -28,7 +28,7 @@ export const SectionFifth = () => {
         trigger: triggerTextRef.current,
         scrub: true,
         markers: false,
-        start: 'top 50%',
+        start: 'top 70%',
         end: 'bottom center',
       },
       color: '#8DAEB6',
@@ -42,10 +42,10 @@ export const SectionFifth = () => {
 
   return (
     <div className="flex min-h-screen w-screen items-center justify-center bg-text-default">
-      <div className="reveal flex h-full w-full max-w-[650px] items-center justify-center text-center font-trial text-[112px] font-heavy leading-[107px] text-background-about/10">
+      <div className="flex h-full w-full max-w-[650px] items-center justify-center text-center font-trial text-[112px] font-heavy leading-[107px] text-background-about/10">
         <div ref={triggerTextRef}>
           {text.split('').map((letter, index) => (
-            <span ref={setLettersRef} className="reveal-text" key={`${index + 1}`}>
+            <span ref={setLettersRef} key={`${index + 1}`}>
               {letter}
             </span>
           ))}
