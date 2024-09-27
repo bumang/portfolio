@@ -28,7 +28,7 @@ export const SectionFifth = () => {
         trigger: triggerTextRef.current,
         scrub: true,
         markers: false,
-        start: 'top 50%',
+        start: 'top 70%',
         end: 'bottom center',
       },
       color: '#8DAEB6',
