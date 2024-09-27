@@ -366,7 +366,8 @@ const config: Config = {
         DEFAULT: '2px',
       },
       animation: {
-        loopL: 'loopTextLeft 5s linear infinite',
+        loopL: 'loopTextLeft 4s linear infinite',
+        loopT: 'loopMenuTop 4s linear infinite',
         'infinite-slider': 'infiniteSlider 20s linear infinite',
         'infinite-slider-mountain': 'infiniteSlider 100s linear infinite',
         'infinite-vertical-slider': 'infiniteVerticalSlider 2s linear infinite',
@@ -378,6 +379,10 @@ const config: Config = {
         loopTextLeft: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-102%)' },
+        },
+        loopMenuTop: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-300%)' },
         },
         textUnderline: {
           '100%': { opacity: '1', transform: 'translate3d(-100%, 0, 0)' },
