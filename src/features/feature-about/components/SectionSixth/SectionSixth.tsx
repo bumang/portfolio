@@ -58,7 +58,7 @@ export const SectionSixth = () => {
         gsap.to(letter, {
           y: -maxYOffset,
           duration: 0.4,
-          ease: 'power1.inOut',
+          ease: 'power1.out',
         });
 
         // Adjust the range of letters to be animated, ensuring no overflow
@@ -73,8 +73,7 @@ export const SectionSixth = () => {
           gsap.to(neighborLetter, {
             y: -yOffset,
             duration: 0.4,
-            ease: 'power1.inOut',
-            stagger: 0.1,
+            ease: 'power1.out',
           });
         }
       }
@@ -88,8 +87,7 @@ export const SectionSixth = () => {
     gsap.to(emailRef.current, {
       y: 0,
       duration: 0.4,
-      ease: 'power1.inOut',
-      stagger: 0.03,
+      ease: 'power1.out',
     });
   }, []);
 
