@@ -117,7 +117,12 @@ export const SectionSixth = () => {
           <div className="text-center text-s20 font-light leading-[21.5px]">
             Click on my email below to contact me
           </div>
-          <Link className="cursor-pointer" href="/">
+          <Link
+            href={`mailto:${email}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer"
+          >
             <div ref={containerRef} className="relative flex h-[230.5px] flex-row">
               {email.split('').map((letter, index) => (
                 <div
