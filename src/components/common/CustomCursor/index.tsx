@@ -19,7 +19,7 @@ export const CustomCursor = () => {
           setMousePosition({ x: clientX, y: clientY });
 
           gsap.to(cursorRef.current, {
-            duration: 0.3,
+            duration: 0,
             ease: 'power3.out',
             x: clientX - cursorRef.current.offsetWidth / 2, // Center the cursor
             y: clientY - cursorRef.current.offsetHeight / 2, // Center the cursor
