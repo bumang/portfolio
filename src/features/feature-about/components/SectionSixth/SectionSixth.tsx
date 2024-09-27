@@ -1,13 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { useMyContext } from '@/context';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export const SectionSixth = () => {
   const { mousePosition } = useMyContext();
@@ -28,7 +23,7 @@ export const SectionSixth = () => {
         .map((letter) => letter?.getBoundingClientRect() || null)
         .filter(Boolean);
     }
-  }, []);
+  }, [emailRef.current.length]);
 
   // Animate letters based on the mouse position
   const handleMouseMove = useCallback(() => {
