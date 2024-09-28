@@ -27,6 +27,7 @@ const config: Config = {
         about: '#91A2A6',
         yellow: '#E7DF2A',
         pink: '#c96e9d',
+        lightBlue: '#AFD8EA',
       },
       transparent: 'transparent',
       primary: {
