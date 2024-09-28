@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
@@ -11,6 +11,12 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
+const projects = [
+  { name: 'rara-space', src: 'rara_space.svg' },
+  { name: 'tigg', src: 'tigg.svg' },
+  { name: 'r2px', src: 'r2px.svg' },
+];
+
 export const FeatureProject = () => {
   const { timeline } = useTransitionContext();
   const { mousePosition, setFromProjectsPage } = useMyContext();
@@ -18,6 +24,8 @@ export const FeatureProject = () => {
   const router = useRouter();
 
   const projectPageRef = useRef<HTMLDivElement>(null);
+
+  const [clickedProject, setClickedProject] = useState<string | null>(null);
 
   useGSAP(() => {
     gsap.set('.word', {
@@ -71,6 +79,21 @@ export const FeatureProject = () => {
     );
   }, {});
 
+  const handleProjectClick = (projectName: string) => {
+    setClickedProject(projectName);
+    setFromProjectsPage(true);
+
+    gsap.to(`.${projectName}Container`, {
+      width: '50vw',
+      height: '100vh',
+      duration: 1,
+      ease: 'power2.out',
+      onComplete: () => {
+        router.push(`/project/${projectName}`);
+      },
+    });
+  };
+
   useEffect(() => {
     const handleMouseMove = () => {
       if (!projectPageRef.current) return;
@@ -81,23 +104,17 @@ export const FeatureProject = () => {
       const maxX = projectPageRect.width - window.innerWidth;
       const maxY = projectPageRect.height - window.innerHeight;
 
-      const offsetY = 88; // Offset for vertical scroll range
-
+      const offsetY = 88;
       gsap.to(projectPageRef.current, {
         duration: 1,
-        x: Math.min(0, Math.max(-maxX, moveX)), // Limit horizontal scroll
-        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)), // Limit vertical scroll
-        // x: moveX,
-        // y: moveY,
+        x: Math.min(0, Math.max(-maxX, moveX)),
+        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)),
         ease: 'power2.out',
         force3D: true,
       });
     };
 
-    // Add event listener when mounted
     document.addEventListener('mousemove', handleMouseMove);
-
-    // Cleanup event listener when unmounted
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
@@ -113,101 +130,79 @@ export const FeatureProject = () => {
       </div>
       <div className="flex h-[90%] min-w-[90%] flex-col justify-between">
         <div className="flex justify-between">
-          <div className="flex flex-col gap-s16">
-            <div
-              className="projectImageContainer cursor-pointer overflow-hidden"
-              tabIndex={0}
-              onClick={() => {
-                router.push('/project/rara-space');
-                setFromProjectsPage(true);
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/rara-space');
-                }
-              }}
-            >
-              <Image
-                alt="rara-space"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/rara_space.svg`}
-              />
-            </div>
-            <div className="relative overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                RARA SPACE
+          {projects.slice(0, 2).map((project) => (
+            <div className="flex flex-col gap-s16" key={project.name}>
+              <div
+                className={`projectImageContainer ${
+                  clickedProject === project.name ? `${project.name}Container` : ''
+                } cursor-pointer overflow-hidden`}
+                tabIndex={0}
+                onClick={() => handleProjectClick(project.name)}
+                role="button"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleProjectClick(project.name);
+                  }
+                }}
+              >
+                <Image
+                  alt={project.name}
+                  width={500}
+                  height={500}
+                  priority
+                  style={{ width: 'auto', height: 'auto' }}
+                  src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                />
+              </div>
+              <div className="relative overflow-y-hidden">
+                <div
+                  className={`word ${
+                    clickedProject === project.name ? '' : 'invisible'
+                  } font-trial text-h2 font-heavy leading-medium text-text-default`}
+                >
+                  {project.name.toUpperCase().replace('-', ' ')}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-s16">
-            <div
-              tabIndex={0}
-              onClick={() => {
-                setFromProjectsPage(true);
-                router.push('/project/tigg');
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/tigg');
-                }
-              }}
-              className="projectImageContainer cursor-pointer"
-            >
-              <Image
-                alt="tigg"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/tigg.svg`}
-              />
-            </div>
-
-            <div className="relative h-full overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                TIGG
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="flex justify-center">
           <div className="flex flex-col gap-s16">
-            <div
-              tabIndex={0}
-              onClick={() => {
-                setFromProjectsPage(true);
-                router.push('/project/r2px');
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/r2px');
-                }
-              }}
-              className="projectImageContainer cursor-pointer"
-            >
-              <Image
-                alt="r2px"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/r2px.svg`}
-              />
-            </div>
-            <div className="relative h-full overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                R2PX
+            {projects.slice(2).map((project) => (
+              <div className="flex flex-col" key={project.name}>
+                <div
+                  tabIndex={0}
+                  onClick={() => handleProjectClick(project.name)}
+                  role="button"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleProjectClick(project.name);
+                    }
+                  }}
+                  className={`projectImageContainer ${
+                    clickedProject === project.name ? `${project.name}Container` : ''
+                  } cursor-pointer`}
+                >
+                  <Image
+                    alt={project.name}
+                    width={500}
+                    height={500}
+                    priority
+                    style={{ width: 'auto', height: 'auto' }}
+                    src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                  />
+                </div>
+                <div className="relative h-full overflow-y-hidden">
+                  <div
+                    className={`word ${
+                      clickedProject === project.name ? '' : 'invisible'
+                    } font-trial text-h2 font-heavy leading-medium text-text-default`}
+                  >
+                    {project.name.toUpperCase().replace('-', ' ')}
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
