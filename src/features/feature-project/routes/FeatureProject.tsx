@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
@@ -31,11 +31,11 @@ export const FeatureProject = () => {
     if (ref) projectRefs.current[index] = ref;
   };
 
-  const [clickedProject, setClickedProject] = useState<string | null>(null);
+  // const [clickedProject, setClickedProject] = useState<string | null>(null);
 
   // Initial animations on load
   useGSAP(() => {
-    gsap.set('.word', {
+    gsap.set('.project-name', {
       transform: 'translate(0px, 100%)',
       visibility: 'hidden',
     });
@@ -52,7 +52,7 @@ export const FeatureProject = () => {
       ease: 'power2.out',
     });
 
-    gsap.to('.word', {
+    gsap.to('.project-name', {
       autoAlpha: 1,
       visibility: 'visible',
       transform: 'translate(0px, 0%)',
@@ -69,11 +69,10 @@ export const FeatureProject = () => {
     const clickedIndex = projects.findIndex((project) => project.name === projectName);
     const selectedRef = projectRefs.current[clickedIndex];
 
-    setClickedProject(projectName);
     setFromProjectsPage(true);
 
     timeline.add(
-      gsap.to('.word', {
+      gsap.to('.project-name', {
         autoAlpha: 1,
         visibility: 'visible',
         transform: 'translate(0px, -100%)',
@@ -95,19 +94,19 @@ export const FeatureProject = () => {
             duration: 0.8,
             ease: 'power2.in',
           }),
-          0
+          0.2
         );
       }
     });
     timeline.add(
       gsap.to(selectedRef, {
-        width: '50vw', // Half the width of the viewport
-        height: '100vh', // Full height of the viewport
-        x: '0vw', // Moves to the left (left-aligned)
+        width: '50vw',
+        height: '100vh',
+        x: '0vw',
         duration: 1.2,
         ease: 'power2.out',
       }),
-      0
+      0.5
     );
 
     router.push(`/project/${projectName}`);
@@ -153,9 +152,7 @@ export const FeatureProject = () => {
           {projects.slice(0, 2).map((project, index) => (
             <div className="flex flex-col gap-s16" key={project.name}>
               <div
-                className={` ${
-                  clickedProject === project.name ? `${project.name}Container` : ''
-                } cursor-pointer overflow-hidden`}
+                className="cursor-pointer overflow-hidden"
                 tabIndex={0}
                 onClick={() => handleProjectClick(project.name)}
                 ref={(ref) => setProjectRef(ref, index)}
@@ -175,12 +172,8 @@ export const FeatureProject = () => {
                   src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
                 />
               </div>
-              <div className="relative overflow-y-hidden">
-                <div
-                  className={`word ${
-                    clickedProject === project.name ? '' : 'invisible'
-                  } font-trial text-h2 font-heavy leading-medium text-text-default`}
-                >
+              <div className="relative h-fit overflow-y-hidden">
+                <div className="project-name font-trial text-h2 font-heavy leading-medium text-text-default">
                   {project.name.toUpperCase().replace('-', ' ')}
                 </div>
               </div>
@@ -201,9 +194,7 @@ export const FeatureProject = () => {
                       handleProjectClick(project.name);
                     }
                   }}
-                  className={` ${
-                    clickedProject === project.name ? `${project.name}Container` : ''
-                  } cursor-pointer`}
+                  className="cursor-pointer overflow-hidden"
                 >
                   <Image
                     alt={project.name}
@@ -214,12 +205,8 @@ export const FeatureProject = () => {
                     src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
                   />
                 </div>
-                <div className="relative h-full overflow-y-hidden">
-                  <div
-                    className={`word ${
-                      clickedProject === project.name ? '' : 'invisible'
-                    } font-trial text-h2 font-heavy leading-medium text-text-default`}
-                  >
+                <div className="relative h-fit overflow-y-hidden">
+                  <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
                     {project.name.toUpperCase().replace('-', ' ')}
                   </div>
                 </div>
