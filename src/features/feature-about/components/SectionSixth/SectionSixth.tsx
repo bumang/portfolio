@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 
@@ -16,18 +16,65 @@ export const SectionSixth = () => {
   const scale = 1;
   const margin = 5;
 
-  // Capture letter positions on mount
-  useEffect(() => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Function to recalculate bounding boxes
+  const calculateBoundingRects = useCallback(() => {
     if (emailRef.current.length > 0) {
       originalRectsRef.current = emailRef.current
         .map((letter) => letter?.getBoundingClientRect() || null)
         .filter(Boolean);
     }
-  }, [emailRef.current.length]);
+  }, []);
+
+  // IntersectionObserver to detect when SectionSixth is visible in the viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            calculateBoundingRects();
+          } else {
+            setIsVisible(false);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, [calculateBoundingRects]);
+
+  // Recalculate bounding rects on window resize (to handle layout changes)
+  useEffect(() => {
+    const handleResize = () => {
+      calculateBoundingRects();
+    };
+    if (isVisible) {
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('scroll', calculateBoundingRects);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', calculateBoundingRects);
+    };
+  }, [isVisible, calculateBoundingRects]);
 
   // Animate letters based on the mouse position
   const handleMouseMove = useCallback(() => {
-    if (!mousePosition || originalRectsRef.current.length === 0) return;
+    if (!mousePosition || originalRectsRef.current.length === 0) {
+      return;
+    }
 
     const { x: mouseX, y: mouseY } = mousePosition;
 
@@ -35,7 +82,9 @@ export const SectionSixth = () => {
       const rect = originalRectsRef.current[index];
 
       // Ensure rect is valid
-      if (!rect) return;
+      if (!rect) {
+        return;
+      }
 
       // Calculate margins for detecting the mouse position
       const modifiedTop = rect.top - margin;
@@ -90,7 +139,7 @@ export const SectionSixth = () => {
   useEffect(() => {
     const container = containerRef.current;
 
-    if (container) {
+    if (container && isVisible) {
       container.addEventListener('mousemove', handleMouseMove);
       container.addEventListener('mouseleave', handleMouseLeave);
     }
@@ -101,7 +150,7 @@ export const SectionSixth = () => {
         container.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
-  }, [handleMouseMove, handleMouseLeave]);
+  }, [handleMouseMove, handleMouseLeave, isVisible]);
 
   return (
     <div className="min-h-screen w-screen bg-text-default">
