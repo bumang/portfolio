@@ -45,7 +45,6 @@ export const SectionScrollThird = () => {
       );
 
       gsap.set(panels, { scale: 0.8 });
-      // gsap.set(panels[0], { scale: 1 });
 
       panels.forEach((panel, i) => {
         let startValue = '';
@@ -77,14 +76,17 @@ export const SectionScrollThird = () => {
           .to(panel, {
             scale: 1,
             ease: 'power1.out',
+            duration: 1,
           })
           .to(panel, {
             scale: 1,
             ease: 'none',
+            duration: 1,
           })
           .to(panel, {
             scale: 0.8,
-            ease: 'power1.in',
+            ease: 'power1.out',
+            duration: 1,
           });
       });
 
