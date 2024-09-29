@@ -4,6 +4,8 @@ import { ProjectPageLayout } from '@/layouts/project/ProjectPageLayout';
 const TiggPage = () => <FeatureTigg />;
 
 TiggPage.getLayout = (page: React.ReactElement) => (
-  <ProjectPageLayout page="Tigg">{page}</ProjectPageLayout>
+  <ProjectPageLayout bgColor="bg-[#8483CE]" page="Tigg">
+    {page}
+  </ProjectPageLayout>
 );
 export default TiggPage;

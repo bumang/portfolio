@@ -11,6 +11,13 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
+const projects = [
+  { name: 'skyleap', src: 'skyleap.svg' },
+  { name: 'tigg', src: 'tigg.svg' },
+  { name: 'xuno', src: 'xuno.svg' },
+  { name: 'space', src: 'space.svg' },
+];
+
 export const FeatureProject = () => {
   const { timeline } = useTransitionContext();
   const { mousePosition, setFromProjectsPage } = useMyContext();
@@ -19,24 +26,32 @@ export const FeatureProject = () => {
 
   const projectPageRef = useRef<HTMLDivElement>(null);
 
+  const projectRefs = useRef<HTMLDivElement[]>([]);
+
+  const setProjectRef = (ref: HTMLDivElement | null, index: number) => {
+    if (ref) projectRefs.current[index] = ref;
+  };
+
+  // Initial animations on load
   useGSAP(() => {
-    gsap.set('.word', {
+    gsap.set('.project-name', {
       transform: 'translate(0px, 100%)',
       visibility: 'hidden',
     });
-    gsap.set('.projectImageContainer', {
+    gsap.set(projectRefs.current, {
       clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
       opacity: 0,
     });
 
-    gsap.to('.projectImageContainer', {
+    gsap.to(projectRefs.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
       opacity: 1,
       delay: 1.2,
       duration: 1,
       ease: 'power2.out',
     });
-    gsap.to('.word', {
+
+    gsap.to('.project-name', {
       autoAlpha: 1,
       visibility: 'visible',
       transform: 'translate(0px, 0%)',
@@ -46,19 +61,17 @@ export const FeatureProject = () => {
       },
       duration: 0.5,
     });
+  }, []);
+
+  // Handle project click for animation and routing
+  const handleProjectClick = (projectName: string) => {
+    const clickedIndex = projects.findIndex((project) => project.name === projectName);
+    const selectedRef = projectRefs.current[clickedIndex];
+
+    setFromProjectsPage(true);
 
     timeline.add(
-      gsap.to('.projectImageContainer', {
-        clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.in',
-      }),
-      0
-    );
-
-    timeline.add(
-      gsap.to('.word', {
+      gsap.to('.project-name', {
         autoAlpha: 1,
         visibility: 'visible',
         transform: 'translate(0px, -100%)',
@@ -69,8 +82,36 @@ export const FeatureProject = () => {
       }),
       0
     );
-  }, {});
 
+    // Non-selected projects fade out
+    projectRefs.current.forEach((projectRef, index) => {
+      if (index !== clickedIndex) {
+        timeline.add(
+          gsap.to(projectRef, {
+            clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.in',
+          }),
+          0.2
+        );
+      }
+    });
+    timeline.add(
+      gsap.to(selectedRef, {
+        width: '50vw',
+        height: '100vh',
+        x: '0vw',
+        duration: 1.2,
+        ease: 'power2.out',
+      }),
+      0.6
+    );
+
+    router.push(`/project/${projectName}`);
+  };
+
+  // Handle mouse move effect for the project container
   useEffect(() => {
     const handleMouseMove = () => {
       if (!projectPageRef.current) return;
@@ -81,23 +122,17 @@ export const FeatureProject = () => {
       const maxX = projectPageRect.width - window.innerWidth;
       const maxY = projectPageRect.height - window.innerHeight;
 
-      const offsetY = 88; // Offset for vertical scroll range
-
+      const offsetY = 88;
       gsap.to(projectPageRef.current, {
         duration: 1,
-        x: Math.min(0, Math.max(-maxX, moveX)), // Limit horizontal scroll
-        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)), // Limit vertical scroll
-        // x: moveX,
-        // y: moveY,
+        x: Math.min(0, Math.max(-maxX, moveX)),
+        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)),
         ease: 'power2.out',
         force3D: true,
       });
     };
 
-    // Add event listener when mounted
     document.addEventListener('mousemove', handleMouseMove);
-
-    // Cleanup event listener when unmounted
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
@@ -106,108 +141,79 @@ export const FeatureProject = () => {
   return (
     <div
       ref={projectPageRef}
-      className="relative flex h-[130vh] w-[130vw] items-center justify-center"
+      className="relative flex h-[160vh] w-[130vw] items-center justify-center"
     >
       <div className="absolute left-[20%] top-[40%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
         SELECT PROJECT
       </div>
-      <div className="flex h-[90%] min-w-[90%] flex-col justify-between">
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-s16">
-            <div
-              className="projectImageContainer cursor-pointer overflow-hidden"
-              tabIndex={0}
-              onClick={() => {
-                router.push('/project/rara-space');
-                setFromProjectsPage(true);
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/rara-space');
-                }
-              }}
-            >
-              <Image
-                alt="rara-space"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/rara_space.svg`}
-              />
-            </div>
-            <div className="relative overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                RARA SPACE
+      <div className="flex h-[95%] min-w-[95%] flex-col items-end justify-between">
+        <div className="flex w-full justify-end">
+          <div className="flex w-full max-w-[75%] justify-between">
+            {projects.slice(0, 2).map((project, index) => (
+              <div className="flex flex-col gap-s16" key={project.name}>
+                <div
+                  className="cursor-pointer overflow-hidden"
+                  tabIndex={0}
+                  onClick={() => handleProjectClick(project.name)}
+                  ref={(ref) => setProjectRef(ref, index)}
+                  role="button"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleProjectClick(project.name);
+                    }
+                  }}
+                >
+                  <Image
+                    alt={project.name}
+                    width={500}
+                    height={500}
+                    priority
+                    style={{ width: 'auto', height: 'auto' }}
+                    src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                  />
+                </div>
+                <div className="relative h-fit overflow-y-hidden">
+                  <div className="project-name font-trial text-h2 font-heavy leading-medium text-text-default">
+                    {project.name.toUpperCase().replace('-', ' ')}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-s16">
-            <div
-              tabIndex={0}
-              onClick={() => {
-                setFromProjectsPage(true);
-                router.push('/project/tigg');
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/tigg');
-                }
-              }}
-              className="projectImageContainer cursor-pointer"
-            >
-              <Image
-                alt="tigg"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/tigg.svg`}
-              />
-            </div>
-
-            <div className="relative h-full overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                TIGG
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-        <div className="flex justify-center">
-          <div className="flex flex-col gap-s16">
-            <div
-              tabIndex={0}
-              onClick={() => {
-                setFromProjectsPage(true);
-                router.push('/project/r2px');
-              }}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  setFromProjectsPage(true);
-                  router.push('/project/r2px');
-                }
-              }}
-              className="projectImageContainer cursor-pointer"
-            >
-              <Image
-                alt="r2px"
-                width={500}
-                height={500}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/r2px.svg`}
-              />
-            </div>
-            <div className="relative h-full overflow-y-hidden">
-              <div className="word invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                R2PX
+
+        <div className="flex w-full">
+          <div className="flex w-[90%] justify-around">
+            {projects.slice(2).map((project, index) => (
+              <div className="flex flex-col gap-s16" key={project.name}>
+                <div
+                  tabIndex={0}
+                  onClick={() => handleProjectClick(project.name)}
+                  role="button"
+                  ref={(ref) => setProjectRef(ref, index + 2)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleProjectClick(project.name);
+                    }
+                  }}
+                  className="cursor-pointer overflow-hidden"
+                >
+                  <Image
+                    alt={project.name}
+                    width={500}
+                    height={500}
+                    priority
+                    style={{ width: 'auto', height: 'auto' }}
+                    src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                  />
+                </div>
+                <div className="relative h-fit overflow-y-hidden">
+                  <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
+                    {project.name.toUpperCase().replace('-', ' ')}
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

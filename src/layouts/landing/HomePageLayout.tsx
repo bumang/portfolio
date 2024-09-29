@@ -54,7 +54,7 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
 
       {generateRandomStars(0.01)}
       <div className="relative h-screen justify-center overflow-x-hidden md:pt-s88">
-        <div className="fixed top-0 z-[70] h-s88 w-full">
+        <div className="fixed top-0 z-[40] h-s88 w-full">
           <TopHeader />
         </div>
         {children}

@@ -4,6 +4,8 @@ import { ProjectPageLayout } from '@/layouts/project/ProjectPageLayout';
 const RaraSpacePage = () => <FeatureRara />;
 
 RaraSpacePage.getLayout = (page: React.ReactElement) => (
-  <ProjectPageLayout page="Rara Space">{page}</ProjectPageLayout>
+  <ProjectPageLayout bgColor="bg-secondary-yellow" page="Rara Space">
+    {page}
+  </ProjectPageLayout>
 );
 export default RaraSpacePage;

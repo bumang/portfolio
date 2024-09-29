@@ -38,7 +38,7 @@ export const ProjectsPageLayout = ({ children }: ProjectPageLayoutProps) => {
         <meta property="og:url" content="https://bumang.github.io/portfolio/project" />
       </Head>
       <div className="relative h-full w-full justify-center pt-s88">
-        <div className="fixed top-0 z-[70] h-s88 w-full">
+        <div className="fixed top-0 z-[40] h-s88 w-full">
           <TopHeader />
         </div>
         {children}

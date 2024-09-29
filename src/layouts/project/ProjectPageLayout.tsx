@@ -4,17 +4,24 @@ import Head from 'next/head';
 
 import { MenuDrawer, TopHeader } from '@/components';
 import { useMyContext } from '@/context';
+import { cn } from '@/utils/cn';
 
 interface ProjectPageLayoutProps {
   children: React.ReactNode;
   page?: string;
+  bgColor?: string;
 }
 
-export const ProjectPageLayout = ({ children, page }: ProjectPageLayoutProps) => {
+export const ProjectPageLayout = ({ children, page, bgColor }: ProjectPageLayoutProps) => {
   const { menuIsOpen } = useMyContext();
 
   return (
-    <div className="no-scrollbar relative h-screen w-screen bg-project-background">
+    <div
+      className={cn(
+        'no-scrollbar relative h-screen w-screen',
+        bgColor ? `${bgColor}` : 'bg-project-background'
+      )}
+    >
       <Head>
         <title>{page ?? 'Projects'} | My Portfolio</title>
         <meta
@@ -39,7 +46,7 @@ export const ProjectPageLayout = ({ children, page }: ProjectPageLayoutProps) =>
         <meta property="og:url" content="https://bumang.github.io/portfolio/project" />
       </Head>
       <div className="relative h-full w-full justify-center pt-s88">
-        <div className="fixed top-0 z-[70] h-s88 w-full">
+        <div className="fixed top-0 z-[40] h-s88 w-full">
           <TopHeader />
         </div>
         {children}

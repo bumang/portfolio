@@ -7,6 +7,7 @@ import InfiniteVerticalSlider from '@/components/ui/InfiniteVerticalSlider';
 import { useMyContext } from '@/context';
 
 import { MenuList } from './component';
+import { TopHeader } from '../TopHeader';
 
 interface MenuDrawerProps {
   menu?: boolean;
@@ -115,6 +116,9 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
 
   return (
     <div className="menu-container invisible fixed inset-0 z-[60] bg-black">
+      <div className="fixed top-0 z-[70] h-s88 w-full">
+        <TopHeader />
+      </div>
       <section className="absolute left-0 top-[0] h-full w-full">
         <article className="relative flex h-full">
           <InfiniteVerticalSlider

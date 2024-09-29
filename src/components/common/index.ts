@@ -1,3 +1,4 @@
+export * from './AnimatedCrossBtn';
 export * from './CustomCursor';
 export * from './MenuDrawer';
 export * from './NavLink';
