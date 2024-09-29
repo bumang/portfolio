@@ -12,9 +12,10 @@ if (typeof window !== 'undefined') {
 }
 
 const projects = [
-  { name: 'rara-space', src: 'rara_space.svg' },
+  { name: 'skyleap', src: 'skyleap.svg' },
+  { name: 'space', src: 'space.svg' },
   { name: 'tigg', src: 'tigg.svg' },
-  { name: 'r2px', src: 'r2px.svg' },
+  { name: 'xuno', src: 'xuno.svg' },
 ];
 
 export const FeatureProject = () => {
@@ -30,8 +31,6 @@ export const FeatureProject = () => {
   const setProjectRef = (ref: HTMLDivElement | null, index: number) => {
     if (ref) projectRefs.current[index] = ref;
   };
-
-  // const [clickedProject, setClickedProject] = useState<string | null>(null);
 
   // Initial animations on load
   useGSAP(() => {
@@ -142,48 +141,51 @@ export const FeatureProject = () => {
   return (
     <div
       ref={projectPageRef}
-      className="relative flex h-[130vh] w-[130vw] items-center justify-center"
+      className="relative flex h-[160vh] w-[130vw] items-center justify-center"
     >
       <div className="absolute left-[20%] top-[40%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
         SELECT PROJECT
       </div>
-      <div className="flex h-[90%] min-w-[90%] flex-col justify-between">
-        <div className="flex justify-between">
-          {projects.slice(0, 2).map((project, index) => (
-            <div className="flex flex-col gap-s16" key={project.name}>
-              <div
-                className="cursor-pointer overflow-hidden"
-                tabIndex={0}
-                onClick={() => handleProjectClick(project.name)}
-                ref={(ref) => setProjectRef(ref, index)}
-                role="button"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleProjectClick(project.name);
-                  }
-                }}
-              >
-                <Image
-                  alt={project.name}
-                  width={500}
-                  height={500}
-                  priority
-                  style={{ width: 'auto', height: 'auto' }}
-                  src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
-                />
-              </div>
-              <div className="relative h-fit overflow-y-hidden">
-                <div className="project-name font-trial text-h2 font-heavy leading-medium text-text-default">
-                  {project.name.toUpperCase().replace('-', ' ')}
+      <div className="flex h-[95%] min-w-[95%] flex-col items-end justify-between">
+        <div className="flex w-full justify-end">
+          <div className="flex w-full max-w-[75%] justify-between">
+            {projects.slice(0, 2).map((project, index) => (
+              <div className="flex flex-col gap-s16" key={project.name}>
+                <div
+                  className="cursor-pointer overflow-hidden"
+                  tabIndex={0}
+                  onClick={() => handleProjectClick(project.name)}
+                  ref={(ref) => setProjectRef(ref, index)}
+                  role="button"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleProjectClick(project.name);
+                    }
+                  }}
+                >
+                  <Image
+                    alt={project.name}
+                    width={500}
+                    height={500}
+                    priority
+                    style={{ width: 'auto', height: 'auto' }}
+                    src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                  />
+                </div>
+                <div className="relative h-fit overflow-y-hidden">
+                  <div className="project-name font-trial text-h2 font-heavy leading-medium text-text-default">
+                    {project.name.toUpperCase().replace('-', ' ')}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        <div className="flex justify-center">
-          <div className="flex flex-col gap-s16">
+
+        <div className="flex w-full">
+          <div className="flex w-[90%] justify-around">
             {projects.slice(2).map((project, index) => (
-              <div className="flex flex-col" key={project.name}>
+              <div className="flex flex-col gap-s16" key={project.name}>
                 <div
                   tabIndex={0}
                   onClick={() => handleProjectClick(project.name)}
