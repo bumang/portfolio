@@ -36,7 +36,7 @@ export const TopHeader = () => {
 
             <div
               className={cn(
-                'absolute bottom-0 h-s2 border-b-2 bg-background-preLoader transition-all duration-300 ease-out',
+                'absolute bottom-0 h-s2 border-b-2 bg-white transition-all duration-300 ease-out',
                 isHome ? 'w-0 group-hover:w-full' : 'w-0 group-hover:w-[32%]'
               )}
             />

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
@@ -9,6 +10,7 @@ import { AnimatedCrossBtn } from '@/components';
 import { useTransitionContext } from '@/context';
 
 export const FeatureRara = () => {
+  const projectsList = ['Web Application'];
   const router = useRouter();
   const { timeline } = useTransitionContext();
   const raraContainer = useRef<HTMLDivElement>(null);
@@ -36,6 +38,23 @@ export const FeatureRara = () => {
         duration: 0.5,
       });
 
+      gsap.set('.rara-text', {
+        transform: 'translate(0px, 100%)',
+        visibility: 'hidden',
+      });
+
+      gsap.to('.rara-text', {
+        autoAlpha: 1,
+        visibility: 'visible',
+        transform: 'translate(0px, 0%)',
+        delay: 1.2,
+        stagger: {
+          each: 0.05,
+        },
+        ease: 'power2.out',
+        duration: 0.5,
+      });
+
       timeline.add(
         gsap.to('.rara-word', {
           autoAlpha: 1,
@@ -47,6 +66,16 @@ export const FeatureRara = () => {
           ease: 'power2.out',
           duration: 0.5,
         })
+      );
+      timeline.add(
+        gsap.to('.rara-text', {
+          autoAlpha: 1,
+          visibility: 'visible',
+          transform: 'translate(0px, -200%)',
+          ease: 'power2.out',
+          duration: 1,
+        }),
+        0.2
       );
     },
     { scope: raraContainer }
@@ -67,21 +96,46 @@ export const FeatureRara = () => {
           src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/rara_detail.png`}
         />
       </div>
-      <div ref={raraContainer} className="flex h-full w-[50%] flex-col justify-evenly px-[60px]">
-        <div className="relative h-fit overflow-y-hidden font-trial text-[240px] font-bold leading-[220px] text-secondary-lightGray">
+      <div ref={raraContainer} className="flex h-full w-[50%] flex-col justify-around px-[60px]">
+        <div className="relative h-fit overflow-y-hidden font-trial text-[220px] font-bold leading-[220px] text-white">
           <div className="rara-word">SPACE</div>
         </div>
-        <div className="relative h-fit overflow-y-hidden">
-          <div className="rara-word font-inter text-[24px] font-normal leading-[42px] text-primary-darkBlue">
-            Rara Space is a comprehensive software that provides a range of features designed to
-            streamline and optimize business operations.
+        <div className="relative flex h-fit flex-col gap-s20 overflow-y-hidden">
+          <div className="rara-word flex gap-s12">
+            {projectsList.map((d, i) => (
+              <div
+                key={`${i + 1}`}
+                className="rounded-[100px] border-[1px] border-black px-s20 py-s8 text-black"
+              >
+                {d}
+              </div>
+            ))}
+          </div>
+          <div className="relative flex h-fit flex-col gap-s16 overflow-y-hidden">
+            <div className="rara-word font-inter text-[20px] font-semibold leading-[28px] text-primary-darkBlue">
+              All-in-One Business Operations Platform for Efficient Management and Workflow
+              Optimization
+            </div>
+            <div className="rara-text font-inter text-[18px] font-medium leading-[28px] text-primary-darkBlue">
+              Rara Space is a software is designed to cater to the company’s needs by offering a
+              range of features that help with employee management, task management, meeting
+              booking, document management, project management, payroll log, log sheet, WFH
+              policy/member status, activity log, rooms, notification, project costing & analysis,
+              and inventory management.
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-s4 text-black hover:cursor-pointer hover:text-secondary-blueHover">
-          <div className="font-inter text-[28px] font-normal leading-[42px]">Visit Website</div>
-          <div>
-            <VisitSiteIcon />
-          </div>
+
+        <div className="group relative flex h-fit w-fit overflow-y-hidden hover:cursor-pointer">
+          <Link target="_blank" rel="noopener noreferrer" href="https://space.raralabs.live/login">
+            <div className="rara-word flex items-center text-black">
+              <div className="font-inter text-[16px] font-normal leading-[28px]">Visit Website</div>
+              <div>
+                <VisitSiteIcon />
+              </div>
+            </div>
+            <div className="absolute bottom-0 h-s2 w-0 border-b-2 bg-black transition-all duration-300 ease-out group-hover:w-[92%]" />
+          </Link>
         </div>
       </div>
     </div>

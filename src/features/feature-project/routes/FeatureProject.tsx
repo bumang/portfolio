@@ -13,9 +13,9 @@ if (typeof window !== 'undefined') {
 
 const projects = [
   { name: 'skyleap', src: 'skyleap.svg' },
-  { name: 'space', src: 'space.svg' },
   { name: 'tigg', src: 'tigg.svg' },
   { name: 'xuno', src: 'xuno.svg' },
+  { name: 'space', src: 'space.svg' },
 ];
 
 export const FeatureProject = () => {
