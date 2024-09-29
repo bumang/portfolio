@@ -1,7 +1,5 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 
 import { NavLink } from '@/components/common/NavLink';
 
@@ -15,27 +13,27 @@ export const MenuList = ({ handleOnClick }: MenuListProps) => {
   const router = useRouter();
   const menuInfiniteRef = useRef(null);
 
-  useGSAP(
-    () => {
-      gsap.to(menuInfiniteRef?.current, {
-        opacity: 1,
-        ease: 'power1.out',
-      });
-    },
-    { scope: menuInfiniteRef }
-  );
+  // useGSAP(
+  //   () => {
+  //     gsap.to(menuInfiniteRef?.current, {
+  //       opacity: 1,
+  //       ease: 'power1.out',
+  //     });
+  //   },
+  //   { scope: menuInfiniteRef }
+  // );
 
   return (
     <div className="z-10 mx-[5%] h-full w-full">
       <div
         ref={menuInfiniteRef}
-        className="no-scrollbar m-auto h-full w-[70%] overflow-y-auto pb-[20px] opacity-0"
+        className="no-scrollbar opacity-1 m-auto h-full w-[70%] overflow-y-auto pb-[20px]"
       >
         {MenuItems &&
           MenuItems.map((d) => {
             const isActive = router.pathname === d.routes;
             return (
-              <div className="group animate-loopT" key={d.index}>
+              <div className="group" key={d.index}>
                 <NavLink
                   href={isActive ? '#' : d?.routes}
                   onClick={() => !isActive && handleOnClick?.(d?.routes)}
@@ -74,7 +72,7 @@ export const MenuList = ({ handleOnClick }: MenuListProps) => {
               </div>
             );
           })}
-        {MenuItems &&
+        {/* {MenuItems &&
           MenuItems.map((d) => {
             const isActive = router.pathname === d.routes;
             return (
@@ -116,7 +114,7 @@ export const MenuList = ({ handleOnClick }: MenuListProps) => {
                 <div className="line h-full w-full bg-text-default p-s1 group-hover:bg-primary-lightGray" />
               </div>
             );
-          })}
+          })} */}
       </div>
     </div>
   );

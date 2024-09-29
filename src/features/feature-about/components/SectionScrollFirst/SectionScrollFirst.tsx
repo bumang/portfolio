@@ -168,7 +168,7 @@ export const SectionScrollFirst = () => {
                   -
                 </div>
                 <div className="aboutWord invisible font-trial text-h1 font-heavy leading-semi-bold text-text-default">
-                  24
+                  SE
                 </div>
               </div>
 

@@ -106,7 +106,7 @@ export const FeatureProject = () => {
         duration: 1.2,
         ease: 'power2.out',
       }),
-      0.5
+      0.6
     );
 
     router.push(`/project/${projectName}`);
