@@ -22,6 +22,7 @@ const projects = [
 
 export const FeatureProject = () => {
   const { timeline } = useTransitionContext();
+  const { fromHeader } = useMyContext();
   const { mousePosition, setFromProjectsPage } = useMyContext();
   const router = useRouter();
 
@@ -63,7 +64,31 @@ export const FeatureProject = () => {
       },
       duration: 0.5,
     });
-  }, []);
+
+    timeline.add(
+      gsap.to('.project-name', {
+        autoAlpha: 1,
+        visibility: 'visible',
+        transform: 'translate(0px, -100%)',
+        stagger: {
+          each: 0.05,
+        },
+        duration: 0.5,
+      }),
+      0
+    );
+    if (fromHeader) {
+      timeline.add(
+        gsap.to(projectRefs.current, {
+          clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.in',
+        }),
+        0
+      );
+    }
+  }, [fromHeader]);
 
   // Handle project click for animation and routing
   const handleProjectClick = (projectName: string) => {

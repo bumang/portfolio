@@ -18,7 +18,7 @@ const Transition = ({ children }: TransitionProps) => {
 
   const {
     routeFromMenu,
-    // fromHeader,
+    fromHeader,
     setFromHeader,
     setRouteFromMenu,
     fromProjectsPage,
@@ -50,12 +50,11 @@ const Transition = ({ children }: TransitionProps) => {
           });
         }
 
-        if (fromProjectsPage) {
+        if (fromProjectsPage && !fromHeader) {
           setFromProjectsPage(false);
           setDisplayChildren(children);
           secondPageTransTimeline.pause().clear();
           firstPageTransTimeline.pause().clear();
-
           return;
         }
 
@@ -134,13 +133,6 @@ const Transition = ({ children }: TransitionProps) => {
 
     executeAnimations();
   }, [children]);
-
-  // entry animation
-  // useGSAP(() => {
-  //   gsap.to(container.current, {
-  //     opacity: 1,
-  //   });
-  // });
 
   return (
     <div ref={container} className="relative">
