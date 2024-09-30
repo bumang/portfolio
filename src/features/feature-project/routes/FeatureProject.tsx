@@ -82,7 +82,7 @@ export const FeatureProject = () => {
         gsap.to(projectRefs.current, {
           clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
           opacity: 1,
-          duration: 0.8,
+          duration: 1,
           ease: 'power2.in',
         }),
         0
