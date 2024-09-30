@@ -3,17 +3,23 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { HamburgerMenuButton } from '@/components/ui';
+import { useMyContext } from '@/context';
 import { cn } from '@/utils/cn';
 
 import Logo from '../../../assests/icons/logo.svg';
 
 export const TopHeader = () => {
+  const { setFromHeader } = useMyContext();
   const router = useRouter();
   const isHome = router.pathname === '/';
 
+  const handleTopOnClick = () => {
+    setFromHeader(true);
+  };
+
   return (
     <div className="flex min-h-full w-full items-center justify-between px-s16 lg:px-s40">
-      <Link href="/" scroll={false}>
+      <Link replace onClick={handleTopOnClick} href="/" scroll={false}>
         <div className="group flex gap-s8 p-s4 lg:p-s12">
           <div className="hover:cursor-pointer">
             <Logo />

@@ -17,6 +17,8 @@ interface MyContextProps {
   setMousePosition: Dispatch<SetStateAction<{ x: number; y: number }>>;
   fromProjectsPage: boolean;
   setFromProjectsPage: Dispatch<SetStateAction<boolean>>;
+  fromHeader: boolean;
+  setFromHeader: Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
@@ -24,6 +26,7 @@ const MyContext = createContext<MyContextProps | undefined>(undefined);
 export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [routeFromMenu, setRouteFromMenu] = useState(false);
+  const [fromHeader, setFromHeader] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [fromProjectsPage, setFromProjectsPage] = useState(false);
 
@@ -37,6 +40,8 @@ export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children 
       setMousePosition,
       fromProjectsPage,
       setFromProjectsPage,
+      fromHeader,
+      setFromHeader,
     }),
     [
       menuIsOpen,
@@ -47,6 +52,8 @@ export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children 
       setMousePosition,
       fromProjectsPage,
       setFromProjectsPage,
+      fromHeader,
+      setFromHeader,
     ]
   );
 

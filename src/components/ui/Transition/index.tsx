@@ -15,12 +15,21 @@ const Transition = ({ children }: TransitionProps) => {
   const container = useRef<HTMLDivElement>(null);
   const slideOut = useRef(null);
   const slideOutSecond = useRef(null);
-  const { routeFromMenu, setRouteFromMenu, fromProjectsPage, setFromProjectsPage } = useMyContext();
+
+  const {
+    routeFromMenu,
+    // fromHeader,
+    setFromHeader,
+    setRouteFromMenu,
+    fromProjectsPage,
+    setFromProjectsPage,
+  } = useMyContext();
 
   const { timeline } = useTransitionContext();
   const firstPageTransTimeline = gsap.timeline({
     paused: true,
   });
+
   const secondPageTransTimeline = gsap.timeline({
     paused: true,
     smoothChildTiming: true,
@@ -46,6 +55,7 @@ const Transition = ({ children }: TransitionProps) => {
           setDisplayChildren(children);
           secondPageTransTimeline.pause().clear();
           firstPageTransTimeline.pause().clear();
+
           return;
         }
 
@@ -117,6 +127,7 @@ const Transition = ({ children }: TransitionProps) => {
         await secondPageTransTimeline.play().then(() => {
           secondPageTransTimeline.pause().clear();
           setRouteFromMenu(false);
+          setFromHeader(false);
         });
       }
     };
@@ -142,6 +153,7 @@ const Transition = ({ children }: TransitionProps) => {
         ref={slideOutSecond}
         className="invisible fixed left-0 top-[100vh] z-[70] hidden h-full w-full bg-background-preLoader"
       />
+
       {/* <div className="preloader z-[100] bg-transparent">
         <HomePreLoader onExitAnimation={() => setExitAnimation(true)} />
       </div> */}
