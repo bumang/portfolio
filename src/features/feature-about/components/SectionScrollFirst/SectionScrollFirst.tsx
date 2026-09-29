@@ -222,14 +222,14 @@ export const SectionScrollFirst = () => {
             </div>
             <div className="flex w-full max-w-[38.79%] items-end pb-s44">
               <div className="bg-background-black w-full max-w-[550px] border-t-[2px] border-text-default py-s40 font-inter text-[22px] font-medium leading-normal text-text-default">
-                My name is Umanga Bhattarai, a developer based in Kathmandu, Nepal, specializing in
-                React.js, Next.js, and Golang. I focus on creating seamless animations, intuitive
-                layouts, and engaging interactions for a delightful user experience. With a
-                dedication to robust application architecture and comprehensive testing, I build
-                scalable and maintainable solutions. Outside of work, I enjoy football, cycling, and
-                traveling, which inspire my creativity and drive for continuous improvement. My goal
-                is to blend technical excellence with user-centric design, crafting digital
-                experiences that stand the test of time.
+                My name is Umanga Bhattarai, a software engineer from Kathmandu, Nepal, specializing
+                in TypeScript and Golang, with a focus on React.js, Next.js, and scalable frontend
+                architecture. I enjoy building products end to end, from clean interfaces to
+                serverless backends and well-tested releases. I care about performance, thoughtful
+                details, and code that stays easy to maintain. Outside of work, I enjoy football,
+                cycling, and traveling, which inspire my creativity and drive for continuous
+                improvement. My goal is to blend technical excellence with user-centric design,
+                crafting digital experiences that stand the test of time.
               </div>
             </div>
           </div>

@@ -14,10 +14,22 @@ if (typeof window !== 'undefined') {
 }
 
 const projects = [
-  { name: 'skyleap', src: 'skyleap.svg', bgColor: '#167DCE' },
-  { name: 'tigg', src: 'tigg.svg', bgColor: '#8483CE' },
-  { name: 'xuno', src: 'xuno.svg', bgColor: '#00A6A6' },
-  { name: 'space', src: 'space.svg', bgColor: '#F4B21A' },
+  {
+    name: 'diversio',
+    src: 'diversio.svg',
+    bgColor: '#5B34E9',
+    position: 'left-[27%] top-[5%]',
+  },
+  {
+    name: 'optimo-teams',
+    src: 'optimo-teams.svg',
+    bgColor: '#7B61FF',
+    position: 'left-[65%] top-[5%]',
+  },
+  { name: 'skyleap', src: 'skyleap.svg', bgColor: '#167DCE', position: 'left-[8%] top-[37%]' },
+  { name: 'tigg', src: 'tigg.svg', bgColor: '#8483CE', position: 'left-[46%] top-[37%]' },
+  { name: 'xuno', src: 'xuno.svg', bgColor: '#00A6A6', position: 'left-[27%] top-[69%]' },
+  { name: 'space', src: 'space.svg', bgColor: '#F4B21A', position: 'left-[65%] top-[69%]' },
 ];
 
 export const FeatureProject = () => {
@@ -171,18 +183,22 @@ export const FeatureProject = () => {
   useEffect(() => {
     const handleMouseMove = () => {
       if (!projectPageRef.current) return;
-      const moveX = -mousePosition.x;
-      const moveY = -mousePosition.y;
 
       const projectPageRect = projectPageRef.current.getBoundingClientRect();
       const maxX = projectPageRect.width - window.innerWidth;
       const maxY = projectPageRect.height - window.innerHeight;
-
       const offsetY = 88;
+
+      // Normalize the pointer position so the whole canvas is reachable:
+      // pointer at top-left shows the canvas origin, pointer at bottom-right
+      // shows the canvas end (compensating for the fixed header padding).
+      const normX = Math.min(1, Math.max(0, mousePosition.x / window.innerWidth));
+      const normY = Math.min(1, Math.max(0, mousePosition.y / window.innerHeight));
+
       gsap.to(projectPageRef.current, {
         duration: 1,
-        x: Math.min(0, Math.max(-maxX, moveX)),
-        y: Math.min(offsetY, Math.max(-maxY - offsetY, moveY)),
+        x: -maxX * normX,
+        y: -(maxY + offsetY) * normY,
         ease: 'power2.out',
         force3D: true,
       });
@@ -196,84 +212,43 @@ export const FeatureProject = () => {
 
   return (
     <div className="relative h-full w-full">
-      <div
-        ref={projectPageRef}
-        className="relative flex h-[160vh] w-[130vw] items-center justify-center"
-      >
-        <div className="absolute left-[20%] top-[40%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
+      <div ref={projectPageRef} className="relative h-[210vh] w-[140vw]">
+        <div className="absolute left-[8%] top-[44%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
           SELECT PROJECT
         </div>
-        <div className="flex h-[95%] min-w-[95%] flex-col items-end justify-between">
-          <div className="flex w-full justify-end">
-            <div className="flex w-full max-w-[75%] justify-between">
-              {projects.slice(0, 2).map((project, index) => (
-                <div className="flex flex-col gap-s16" key={project.name}>
-                  <div
-                    className="w-[500px] cursor-pointer overflow-hidden"
-                    tabIndex={0}
-                    onClick={() => handleProjectClick(project.name)}
-                    ref={(ref) => setProjectRef(ref, index)}
-                    role="button"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        handleProjectClick(project.name);
-                      }
-                    }}
-                  >
-                    <Image
-                      alt={project.name}
-                      width={500}
-                      height={500}
-                      priority
-                      className="w-full object-contain"
-                      src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
-                    />
-                  </div>
-                  <div className="relative h-fit overflow-y-hidden">
-                    <div className="project-name font-trial text-h2 font-heavy leading-medium text-text-default">
-                      {project.name.toUpperCase().replace('-', ' ')}
-                    </div>
-                  </div>
-                </div>
-              ))}
+        {projects.map((project, index) => (
+          <div
+            className={cn('absolute flex w-[500px] flex-col gap-s16', project.position)}
+            key={project.name}
+          >
+            <div
+              className="cursor-pointer overflow-hidden"
+              tabIndex={0}
+              onClick={() => handleProjectClick(project.name)}
+              ref={(ref) => setProjectRef(ref, index)}
+              role="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleProjectClick(project.name);
+                }
+              }}
+            >
+              <Image
+                alt={project.name}
+                width={500}
+                height={500}
+                priority
+                className="w-full object-contain"
+                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+              />
+            </div>
+            <div className="relative h-fit overflow-y-hidden">
+              <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
+                {project.name.toUpperCase().replace('-', ' ')}
+              </div>
             </div>
           </div>
-
-          <div className="flex w-full">
-            <div className="flex w-[90%] justify-around">
-              {projects.slice(2).map((project, index) => (
-                <div className="flex flex-col gap-s16" key={project.name}>
-                  <div
-                    tabIndex={0}
-                    onClick={() => handleProjectClick(project.name)}
-                    role="button"
-                    ref={(ref) => setProjectRef(ref, index + 2)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        handleProjectClick(project.name);
-                      }
-                    }}
-                    className="w-[500px] cursor-pointer overflow-hidden"
-                  >
-                    <Image
-                      alt={project.name}
-                      width={500}
-                      height={500}
-                      className="w-full object-contain"
-                      priority
-                      src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
-                    />
-                  </div>
-                  <div className="relative h-fit overflow-y-hidden">
-                    <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                      {project.name.toUpperCase().replace('-', ' ')}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Dynamically set the background color using cn and project-specific class */}

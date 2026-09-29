@@ -7,6 +7,13 @@ export const SectionFourth = () => {
         </div>
         <div className="flex h-full w-full flex-1 flex-col items-end justify-end text-black">
           <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
+            <div className="flex items-center">Diversio</div>
+            <div>
+              <div className="text-[14px]">Full time</div>
+              <div>Software Dev.</div>
+            </div>
+          </div>
+          <div className="flex w-full justify-between border-t-[1px] border-black py-s18 font-inter text-s18">
             <div className="flex items-center">Skyleap Security</div>
             <div>
               <div className="text-[14px]">Full time</div>
