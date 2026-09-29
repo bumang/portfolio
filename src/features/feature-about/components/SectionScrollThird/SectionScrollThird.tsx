@@ -25,13 +25,13 @@ export const SectionScrollThird = () => {
         sectionRefThird.current,
         { translateX: 0 },
         {
-          translateX: '-150vw',
+          translateX: '-270vw',
           ease: 'none',
           duration: 1,
           scrollTrigger: {
             trigger: triggerRefThird.current,
             start: 'top top',
-            end: '+=350% bottom',
+            end: '+=600% bottom',
             scrub: true,
             pin: true,
             markers: false,
@@ -102,7 +102,7 @@ export const SectionScrollThird = () => {
       <div ref={triggerRefThird}>
         <div
           ref={sectionRefThird}
-          className="scroll-section-inner no-scrollbar relative flex h-screen w-[350vw] flex-row bg-text-default text-black"
+          className="scroll-section-inner no-scrollbar relative flex h-screen w-[460vw] flex-row bg-text-default text-black"
         >
           <div
             ref={heroContainerThird}
@@ -118,7 +118,7 @@ export const SectionScrollThird = () => {
                 bgColor="bg-secondary-green"
                 header="CSS"
                 headerIndex="01"
-                heroText="SCSS - Chakra UI - Tailwind - GSAP - "
+                heroText="SCSS - Chakra UI - Tailwind - Styled Components - Material UI - GSAP - "
                 txtColor="text-background-default"
               />
             </div>
@@ -132,7 +132,7 @@ export const SectionScrollThird = () => {
                 bgColor="bg-background-yellow"
                 header="JS"
                 headerIndex="02"
-                heroText="JavaScript - ReactJS - NextJS - "
+                heroText="JavaScript - TypeScript - ReactJS - NextJS - Vite - Astro - AlpineJS - "
                 txtColor="text-black"
               />
             </div>
@@ -147,7 +147,7 @@ export const SectionScrollThird = () => {
                 bgColor="bg-secondary-blueHover"
                 header="Backend"
                 headerIndex="03"
-                heroText="Golang - Golang - Golang - "
+                heroText="Golang - AWS Lambda - Python - REST API - PostgreSQL - MySQL - Redis - "
                 txtColor="text-background-default"
               />
             </div>
@@ -161,8 +161,36 @@ export const SectionScrollThird = () => {
                 bgColor="bg-background-pink"
                 header="Others"
                 headerIndex="04"
-                heroText="Astro - Sanity CMS - Shopify - "
+                heroText="Storybook - Chromatic - Mixpanel - Shopify - Sanity CMS - Git - GitHub - "
                 txtColor="text-text-default"
+              />
+            </div>
+            <div
+              ref={(el) => {
+                childRefs.current[4] = el;
+              }}
+              className="panel flex h-full w-[60vw] items-center justify-center"
+            >
+              <InfiniteCapsuleScroll
+                bgColor="bg-primary-darkBlue"
+                header="AI"
+                headerIndex="05"
+                heroText="Pi - Claude Code - Codex - DeepSeek - Claude Sonnet - AI Agents - AI Workflows - "
+                txtColor="text-background-default"
+              />
+            </div>
+            <div
+              ref={(el) => {
+                childRefs.current[5] = el;
+              }}
+              className="panel flex h-full w-[60vw] items-center justify-center"
+            >
+              <InfiniteCapsuleScroll
+                bgColor="bg-background-lightBlue"
+                header="Testing"
+                headerIndex="06"
+                heroText="Jest - Vitest - React Testing Library - Playwright - TDD - GitHub Actions - CircleCI - Crafting Sandbox - Cloudflare - Sentry - "
+                txtColor="text-black"
               />
             </div>
           </div>

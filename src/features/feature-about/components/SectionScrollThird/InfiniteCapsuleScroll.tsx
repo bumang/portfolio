@@ -21,6 +21,9 @@ export const InfiniteCapsuleScroll = ({
 }: InfiniteCapsuleScrollProps) => {
   const heroInfiniteRef = useRef(null);
 
+  // Keep the marquee at a readable pace no matter how long the skill list is.
+  const animationDuration = `${Math.max(25, Math.round(heroText.length * 0.5))}s`;
+
   useGSAP(
     () => {
       gsap.to(heroInfiniteRef?.current, {
@@ -54,10 +57,16 @@ export const InfiniteCapsuleScroll = ({
           txtColor
         )}
       >
-        <span className="group-hover:pause animate-loopL text-[260px] leading-[244px]">
+        <span
+          className="animate-loopL text-[260px] leading-[244px] group-hover:[animation-play-state:paused]"
+          style={{ animationDuration }}
+        >
           {heroText}
         </span>
-        <span className="group-hover:pause animate-loopL text-[260px] leading-[244px]">
+        <span
+          className="animate-loopL text-[260px] leading-[244px] group-hover:[animation-play-state:paused]"
+          style={{ animationDuration }}
+        >
           {heroText}
         </span>
       </div>
