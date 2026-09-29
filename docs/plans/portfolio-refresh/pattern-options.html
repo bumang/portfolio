@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Project grid pattern options</title>
+    <style>
+      :root {
+        --card-w: 24.8%;
+        --card-h: 24.5%;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+        background: #06060f;
+        color: #e8e7cb;
+        font-family:
+          Inter,
+          -apple-system,
+          sans-serif;
+      }
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 4px;
+      }
+      p.sub {
+        margin: 0 0 28px;
+        color: #9aa3ad;
+        font-size: 13px;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+      .option {
+        width: 640px;
+      }
+      .option h2 {
+        font-size: 15px;
+        margin: 0 0 2px;
+        color: #f4f5f8;
+      }
+      .option .desc {
+        font-size: 12px;
+        color: #9aa3ad;
+        margin: 0 0 10px;
+      }
+      .canvas {
+        position: relative;
+        width: 640px;
+        height: 600px;
+        border: 1px solid #2a2f45;
+        border-radius: 6px;
+        background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 29, 0.92) 0%, #00000e 100%);
+        overflow: hidden;
+      }
+      .label {
+        position: absolute;
+        left: 8%;
+        top: 44%;
+        font-size: 26px;
+        letter-spacing: 8px;
+        font-weight: 800;
+        color: rgba(166, 173, 160, 0.12);
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      .card {
+        position: absolute;
+        width: var(--card-w);
+        height: var(--card-h);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #fff;
+        text-align: center;
+        padding: 6px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+      .card small {
+        position: absolute;
+        bottom: -18px;
+        left: 0;
+        right: 0;
+        color: #9aa3ad;
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Projects canvas — pattern options</h1>
+    <p class="sub">
+      Same compact canvas (140vw × 210vh). Each box is one project card; percentages are the card's
+      top-left position on the canvas at a 1440×900 viewport.
+    </p>
+
+    <div class="grid">
+      <div class="option">
+        <h2>Option 1 — Brick</h2>
+        <p class="desc">Two per row; each row shifted half a card left/right. Calm and even.</p>
+        <div class="canvas">
+          <div class="label">SELECT PROJECT</div>
+          <div class="card" style="left: 8%; top: 5%; background: #5b34e9">DIVERSIO</div>
+          <div class="card" style="left: 46%; top: 5%; background: #7b61ff">OPTIMO TEAMS</div>
+          <div class="card" style="left: 27%; top: 37%; background: #167dce">SKYLEAP</div>
+          <div class="card" style="left: 65%; top: 37%; background: #8483ce">TIGG</div>
+          <div class="card" style="left: 8%; top: 69%; background: #00a6a6">XUNO</div>
+          <div class="card" style="left: 46%; top: 69%; background: #f4b21a">SPACE</div>
+        </div>
+      </div>
+
+      <div class="option">
+        <h2>Option 2 — Constellation</h2>
+        <p class="desc">
+          Irregular but balanced scatter — closest to “floating in space”, still no overlaps.
+        </p>
+        <div class="canvas">
+          <div class="label">SELECT PROJECT</div>
+          <div class="card" style="left: 26%; top: 5%; background: #5b34e9">DIVERSIO</div>
+          <div class="card" style="left: 68%; top: 5%; background: #167dce">SKYLEAP</div>
+          <div class="card" style="left: 47%; top: 32%; background: #7b61ff">OPTIMO TEAMS</div>
+          <div class="card" style="left: 6%; top: 38%; background: #8483ce">TIGG</div>
+          <div class="card" style="left: 33%; top: 62%; background: #00a6a6">XUNO</div>
+          <div class="card" style="left: 66%; top: 68%; background: #f4b21a">SPACE</div>
+        </div>
+      </div>
+
+      <div class="option">
+        <h2>Option 3 — Zipper</h2>
+        <p class="desc">Two staggered columns that interlock like a zipper — patterned but airy.</p>
+        <div class="canvas">
+          <div class="label">SELECT PROJECT</div>
+          <div class="card" style="left: 8%; top: 4%; background: #5b34e9">DIVERSIO</div>
+          <div class="card" style="left: 58%; top: 20%; background: #7b61ff">OPTIMO TEAMS</div>
+          <div class="card" style="left: 8%; top: 34%; background: #167dce">SKYLEAP</div>
+          <div class="card" style="left: 58%; top: 47%; background: #8483ce">TIGG</div>
+          <div class="card" style="left: 8%; top: 66%; background: #00a6a6">XUNO</div>
+          <div class="card" style="left: 58%; top: 74%; background: #f4b21a">SPACE</div>
+        </div>
+      </div>
+
+      <div class="option">
+        <h2>Option 4 — Twin bands</h2>
+        <p class="desc">
+          Three cards in a top band, three in a bottom band, each with a slight height jitter.
+        </p>
+        <div class="canvas">
+          <div class="label">SELECT PROJECT</div>
+          <div class="card" style="left: 4%; top: 6%; background: #5b34e9">DIVERSIO</div>
+          <div class="card" style="left: 36%; top: 3%; background: #167dce">SKYLEAP</div>
+          <div class="card" style="left: 68%; top: 9%; background: #00a6a6">XUNO</div>
+          <div class="card" style="left: 14%; top: 56%; background: #7b61ff">OPTIMO TEAMS</div>
+          <div class="card" style="left: 44%; top: 62%; background: #8483ce">TIGG</div>
+          <div class="card" style="left: 72%; top: 58%; background: #f4b21a">SPACE</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
