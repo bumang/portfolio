@@ -1,66 +1,82 @@
-# My Portfolio
+# Portfolio
 
-This is a Next.js, Tailwind CSS, and TypeScript project designed to create an e-commerce web application inspired by Apple Vision Pro concept design. The application showcases a variety of plant products, allowing users to browse, add items to their cart, and manage their shopping experience seamlessly.
+Personal portfolio website of **Umanga Bhattarai**, showcasing selected projects and an animated about page.
 
+Live site: **[https://bumang.github.io/portfolio/](https://bumang.github.io/portfolio/)**
 
+## Tech Stack
+
+- [Next.js 14](https://nextjs.org/) (Pages Router, static export)
+- [React 18](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [GSAP](https://gsap.com/) for scroll and page-transition animations
+
+## Pages
+
+- **Home** — landing page with falling stars and an infinite project slider
+- **About** — scroll-driven sections, skills capsules, and timeline
+- **Project pages** — dedicated pages for each project:
+  - Diversio
+  - Optimo Teams
+  - Skyleap
+  - Tigg
+  - Xuno
+  - Rara
+  - R2PX
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- [pnpm](https://pnpm.io/)
 
 ### Install Dependencies
 
-Navigate to the project directory and install the necessary dependencies:
+```bash
+pnpm install
+```
+
+### Run the Development Server
 
 ```bash
-    npm install -g pnpm
+pnpm dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+### Build
+
+The site is statically exported to `./out`:
 
 ```bash
-    pnpm install
+pnpm build
 ```
 
-### Environment Setup
+> When `NODE_ENV=production`, the app is built with a `/portfolio` base path and asset prefix so it works under the `bumang.github.io/portfolio/` URL.
 
-Before running the application, you need to set up the environment variables. Rename the `.example.env.local` file to `.env.local` and update it with your environment-specific variables.
+## Deployment
 
-```bash 
-mv .example.env.local .env.local
+Deployment is handled automatically by GitHub Actions (`.github/workflows/nextjs.yml`):
+
+- Triggered on pushes to `main` (and manually via `workflow_dispatch`)
+- Builds with `next build`, uploads `./out` as a Pages artifact, and publishes to GitHub Pages
+- The workflow sets `NEXT_PUBLIC_PATH_PREFIX=/portfolio` and `NEXT_PUBLIC_API_URL=https://bumang.github.io/portfolio/`
+
+## Project Structure
+
+```
+src/
+├── components/      # shared UI components
+├── context/         # app and page-transition context providers
+├── features/        # feature-based modules (home, about, project, each project page)
+├── layouts/         # page layouts
+├── pages/           # Next.js Pages Router routes
+├── styles/          # global styles
+└── utils/           # helpers
 ```
 
+## License
 
-
-### Running the Development Server
-
-Start the development server by running:
-
-```bash
-    pnpm dev
-```
-
-
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Features
-
-- **Product Listings**: Browse through a variety of plant products.
-- **Cart Management**: Add items to your cart and manage your shopping experience.
-- **Responsive Design**: Optimized for mobile and desktop devices.
-
-## Built With
-
-- [Next.js](https://nextjs.org/) - The React framework for building JavaScript applications.
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
-- [TypeScript](https://www.typescriptlang.org/) - A typed superset of JavaScript that compiles to plain JavaScript.
-
-## Contributing
-
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before getting started.
-
-
-
-## Acknowledgments
-
-- Inspired by Apple Vision Pro.
-- Thanks to the creators of Next.js, Tailwind CSS, and TypeScript.
-
-## Contact
-
-If you have any questions or suggestions, feel free to reach out.
+© 2026 Umanga Bhattarai. All rights reserved. This source code is provided for viewing purposes only and may not be copied, modified, or distributed without explicit permission.
