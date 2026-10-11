@@ -13,7 +13,7 @@ export const ProjectsPageLayout = ({ children }: ProjectPageLayoutProps) => {
   const { menuIsOpen } = useMyContext();
 
   return (
-    <div className="no-scrollbar relative h-screen w-screen overflow-y-scroll bg-project-background">
+    <div className="no-scrollbar relative h-dvh w-full overflow-y-scroll bg-project-background">
       <Head>
         <title>Projects | My Portfolio</title>
         <meta
@@ -31,10 +31,6 @@ export const ProjectsPageLayout = ({ children }: ProjectPageLayoutProps) => {
           content="Explore my portfolio projects showcasing my skills in web development, design, and programming. See the diverse range of projects I've worked on and learn about the technologies I use."
         />
         <meta property="og:type" content="website" />
-        <meta
-          name="description"
-          content="This is the home page of my portfolio. Explore my work and projects."
-        />
         <meta property="og:url" content="https://bumang.github.io/portfolio/project" />
       </Head>
       <div className="relative h-full w-full justify-center pt-s88">

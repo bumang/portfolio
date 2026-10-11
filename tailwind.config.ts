@@ -226,8 +226,8 @@ const config: Config = {
       },
     },
     fontFamily: {
-      inter: ['Inter'],
-      trial: ['var(--druk-trail)'],
+      inter: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+      trial: ['var(--druk-trail)', 'Inter', 'ui-sans-serif', 'sans-serif'],
     },
     fontWeight: {
       thin: '100',
@@ -344,7 +344,6 @@ const config: Config = {
           'radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 29, 0.92) 0%, #00000E 100%)',
 
         'landing-background': `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/stars-bg.png')`,
-        moon: `url('${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg')`,
       },
       '.no-scrollbar::-webkit-scrollbar': {
         display: 'none',
@@ -368,10 +367,8 @@ const config: Config = {
       },
       animation: {
         loopL: 'loopTextLeft 4s linear infinite',
-        loopT: 'loopMenuTop 4s linear infinite',
         'infinite-slider': 'infiniteSlider 20s linear infinite',
         'infinite-slider-mountain': 'infiniteSlider 100s linear infinite',
-        'infinite-vertical-slider': 'infiniteVerticalSlider 2s linear infinite',
         'shooting-star':
           'shootingStar var(--animation-duration, 5s) linear var(--animation-delay, 0s) var(--animation-count,infinite)',
         'underline-text': 'textUnderline 400ms',
@@ -381,10 +378,6 @@ const config: Config = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-102%)' },
         },
-        loopMenuTop: {
-          '0%': { transform: 'translateY(0)' },
-          '100%': { transform: 'translateY(-300%)' },
-        },
         textUnderline: {
           '100%': { opacity: '1', transform: 'translate3d(-100%, 0, 0)' },
         },
@@ -392,12 +385,6 @@ const config: Config = {
           '0%': { transform: 'translateX(0%)' },
           '100%': {
             transform: 'translateX(calc(-100%))',
-          },
-        },
-        infiniteVerticalSlider: {
-          '0%': { backgroundPositionY: '0' },
-          '100%': {
-            backgroundPositionY: '-105%',
           },
         },
         shootingStar: {
@@ -421,7 +408,6 @@ const config: Config = {
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
-    require('tailwindcss-border-gradients')(),
     plugin(function ({ addUtilities, theme }: any) {
       const textShadowUtilities = Object.entries(theme('textShadow')).reduce(
         (acc, [name, value]) => {

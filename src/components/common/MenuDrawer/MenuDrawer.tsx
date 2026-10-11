@@ -23,6 +23,36 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
     const menuDrawerOpenAnimation = gsap.timeline();
     const menuDrawerCloseAnimation = gsap.timeline();
 
+    // Moon "sphere rotation": the equirectangular texture track slides
+    // vertically behind the fixed circular mask — a full revolution reads
+    // as the surface travelling top to bottom, staying in place. The track
+    // starts one copy above (yPercent -50 → 0) so the window is always
+    // covered — the two tileable copies loop seamlessly, never running out.
+    const moonSpin = gsap.fromTo(
+      '.moon-track',
+      { yPercent: -50 },
+      {
+        yPercent: 0,
+        duration: 60,
+        ease: 'none',
+        repeat: -1,
+        paused: true,
+      }
+    );
+    // Pulsating light radiating from the moon's silhouette (opacity only).
+    const moonGlow = gsap.fromTo(
+      '.moon-glow',
+      { opacity: 0.45 },
+      {
+        opacity: 1,
+        duration: 3.2,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        paused: true,
+      }
+    );
+
     if (!isInitialLoad) {
       if (menu) {
         menuDrawerOpenAnimation.set('.menu-container', {
@@ -39,70 +69,86 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           transform: 'translate(100%, 0px)',
         });
 
+        // Everything moves with the same power4.out curve so the container and
+        // its contents finish together — no perceived lag.
         menuDrawerOpenAnimation.to('.menu-container', {
           transform: 'translateY(0%)',
           visibility: 'visible',
-          duration: 0.8,
+          duration: 0.55,
           ease: 'power4.out',
         });
         menuDrawerOpenAnimation.to(
           '.moon',
           {
             autoAlpha: 1,
-            duration: 0.5,
+            duration: 0.4,
           },
-          '-=0.05'
+          0
         );
         menuDrawerOpenAnimation.to(
           '.items',
           {
             autoAlpha: 1,
             transform: 'translate(0px, 0%)',
-            duration: 0.8,
+            duration: 0.5,
+            ease: 'power4.out',
           },
-          '-=0.1'
+          0.05
         );
         menuDrawerOpenAnimation.to(
           '.line',
           {
             transform: 'translate(0%, 0px)',
-            duration: 0.5,
+            duration: 0.4,
+            ease: 'power4.out',
           },
-          '-=0.5'
+          0.1
         );
+
+        moonSpin.play();
+        moonGlow.play();
       } else {
+        moonSpin.pause();
+        moonGlow.pause();
+
         menuDrawerCloseAnimation.to(
           '.moon',
           {
             autoAlpha: 0,
-            duration: 0.5,
+            duration: 0.35,
           },
-          '-=0.5'
+          0
         );
         menuDrawerCloseAnimation.to(
           '.items',
           {
             autoAlpha: 1,
             transform: 'translate(0px, 100%)',
-            duration: 0.8,
+            duration: 0.5,
+            ease: 'power4.in',
           },
-          '-=0.1'
+          0.05
         );
         menuDrawerCloseAnimation.to(
           '.line',
           {
             transform: 'translate(100%, 0px)',
-            duration: 0.5,
+            duration: 0.35,
+            ease: 'power4.in',
           },
-          '-=0.5'
+          0.1
         );
 
-        menuDrawerCloseAnimation.to('.menu-container', {
-          transform: 'translateY(-100%)',
-          visibility: 'visible',
-          duration: 0.5,
-          ease: 'power4.in',
-        });
+        menuDrawerCloseAnimation.to(
+          '.menu-container',
+          {
+            transform: 'translateY(-100%)',
+            visibility: 'visible',
+            duration: 0.45,
+            ease: 'power4.in',
+          },
+          0.05
+        );
       }
     }
     setIsInitialLoad(false);
@@ -122,11 +168,10 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
       <section className="absolute left-0 top-[0] h-full w-full">
         <article className="relative flex h-full">
           <InfiniteVerticalSlider
-            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg`}
+            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon-texture.avif`}
             alt="moon"
-            fill
           />
-          <MenuList handleOnClick={handleExitAnimation} />
+          <MenuList handleOnClick={handleExitAnimation} isOpen={menu} />
         </article>
       </section>
     </div>

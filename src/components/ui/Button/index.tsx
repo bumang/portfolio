@@ -47,8 +47,7 @@ const buttonVariants = cva(['inline-flex justify-center items-center rounded-[10
 });
 
 export interface IButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   isDisabled?: boolean;
   leadingIcon?: ReactNode;
   trailIcon?: ReactNode;

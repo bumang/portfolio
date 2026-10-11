@@ -165,7 +165,10 @@ export const SectionSixth = () => {
             rel="noopener noreferrer"
             className="cursor-pointer"
           >
-            <div ref={containerRef} className="relative flex h-[230.5px] flex-row">
+            <div
+              ref={containerRef}
+              className="relative flex h-[clamp(52px,15vw,230.5px)] w-full flex-row justify-center overflow-x-auto lg:h-[230.5px] lg:justify-start lg:overflow-x-visible"
+            >
               {email.split('').map((letter, index) => (
                 <div
                   key={`${index + 1}`}
@@ -174,7 +177,7 @@ export const SectionSixth = () => {
                       emailRef.current[index] = ref;
                     }
                   }}
-                  className="font-trial text-[175px] uppercase leading-[175.5px] text-primary-lightBlue"
+                  className="font-trial text-[clamp(40px,11vw,175px)] uppercase leading-[0.95] text-primary-lightBlue lg:text-[175px] lg:leading-[175.5px]"
                   style={{ transform: 'translate3d(0px, 0px, 0px)' }}
                 >
                   {letter}

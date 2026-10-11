@@ -9,7 +9,7 @@ import { SectionScrollThird } from '../components/SectionScrollThird';
 import { SectionSixth } from '../components/SectionSixth';
 
 export const FeatureAbout = () => (
-  <div className="flex h-screen w-full flex-col overflow-x-clip bg-background-about">
+  <div className="flex h-dvh w-full flex-col overflow-x-clip bg-background-about">
     <div className="fixed top-0 z-[40] h-s88 w-full">
       <TopHeader />
     </div>

@@ -46,48 +46,52 @@ export const FeatureProject = () => {
     if (ref) projectRefs.current[index] = ref;
   };
 
-  // Initial animations on load
+  // Initial animations on load (desktop experience only; mobile uses a
+  // simplified stacked list that needs no canvas choreography)
   useGSAP(() => {
-    gsap.set('.project-name', {
-      transform: 'translate(0px, 100%)',
-      visibility: 'hidden',
-    });
-    gsap.set(projectRefs.current, {
-      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-      opacity: 0,
-    });
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 976px)', () => {
+      gsap.set('.project-name', {
+        transform: 'translate(0px, 100%)',
+        visibility: 'hidden',
+      });
+      gsap.set(projectRefs.current, {
+        clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+        opacity: 0,
+      });
 
-    gsap.to(projectRefs.current, {
-      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      opacity: 1,
-      delay: 1.2,
-      duration: 1,
-      ease: 'power2.out',
-    });
+      gsap.to(projectRefs.current, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        opacity: 1,
+        delay: 1.2,
+        duration: 1,
+        ease: 'power2.out',
+      });
 
-    gsap.to('.project-name', {
-      autoAlpha: 1,
-      visibility: 'visible',
-      transform: 'translate(0px, 0%)',
-      delay: 1.2,
-      stagger: {
-        each: 0.05,
-      },
-      duration: 0.5,
-    });
-
-    timeline.add(
       gsap.to('.project-name', {
         autoAlpha: 1,
         visibility: 'visible',
-        transform: 'translate(0px, -100%)',
+        transform: 'translate(0px, 0%)',
+        delay: 1.2,
         stagger: {
           each: 0.05,
         },
         duration: 0.5,
-      }),
-      0
-    );
+      });
+
+      timeline.add(
+        gsap.to('.project-name', {
+          autoAlpha: 1,
+          visibility: 'visible',
+          transform: 'translate(0px, -100%)',
+          stagger: {
+            each: 0.05,
+          },
+          duration: 0.5,
+        }),
+        0
+      );
+    });
   }, []);
 
   // Handle project click for animation and routing
@@ -179,10 +183,11 @@ export const FeatureProject = () => {
     router.push(`/project/${projectName}`);
   };
 
-  // Handle mouse move effect for the project container
+  // Handle mouse move effect for the project container (desktop only)
   useEffect(() => {
     const handleMouseMove = () => {
       if (!projectPageRef.current) return;
+      if (!window.matchMedia('(min-width: 976px)').matches) return;
 
       const projectPageRect = projectPageRef.current.getBoundingClientRect();
       const maxX = projectPageRect.width - window.innerWidth;
@@ -212,43 +217,73 @@ export const FeatureProject = () => {
 
   return (
     <div className="relative h-full w-full">
-      <div ref={projectPageRef} className="relative h-[210vh] w-[140vw]">
-        <div className="absolute left-[8%] top-[44%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
-          SELECT PROJECT
-        </div>
-        {projects.map((project, index) => (
-          <div
-            className={cn('absolute flex w-[500px] flex-col gap-s16', project.position)}
-            key={project.name}
-          >
+      <div className="hidden lg:block">
+        <div ref={projectPageRef} className="relative h-[210vh] w-[140vw]">
+          <div className="absolute left-[8%] top-[44%] flex-nowrap font-trial text-h1 font-heavy leading-bold tracking-[1rem] text-text-off-white/10">
+            SELECT PROJECT
+          </div>
+          {projects.map((project, index) => (
             <div
-              className="cursor-pointer overflow-hidden"
-              tabIndex={0}
-              onClick={() => handleProjectClick(project.name)}
-              ref={(ref) => setProjectRef(ref, index)}
-              role="button"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleProjectClick(project.name);
-                }
-              }}
+              className={cn('absolute flex w-[500px] flex-col gap-s16', project.position)}
+              key={project.name}
             >
-              <Image
-                alt={project.name}
-                width={500}
-                height={500}
-                priority
-                className="w-full object-contain"
-                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
-              />
-            </div>
-            <div className="relative h-fit overflow-y-hidden">
-              <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
-                {project.name.toUpperCase().replace('-', ' ')}
+              <div
+                className="cursor-pointer overflow-hidden"
+                tabIndex={0}
+                onClick={() => handleProjectClick(project.name)}
+                ref={(ref) => setProjectRef(ref, index)}
+                role="button"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleProjectClick(project.name);
+                  }
+                }}
+              >
+                <Image
+                  alt={project.name}
+                  width={500}
+                  height={500}
+                  priority
+                  className="w-full object-contain"
+                  src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+                />
+              </div>
+              <div className="relative h-fit overflow-y-hidden">
+                <div className="project-name invisible font-trial text-h2 font-heavy leading-medium text-text-default">
+                  {project.name.toUpperCase().replace('-', ' ')}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: stacked list, tap navigates with the standard page transition */}
+      <div className="flex h-full flex-col px-s24 pb-s40 lg:hidden">
+        <div className="pt-s24 font-trial text-[clamp(40px,10vw,72px)] font-heavy leading-[0.95] tracking-[0.4rem] text-text-off-white/10">
+          SELECT PROJECT
+        </div>
+        <div className="mt-s24 flex flex-1 flex-col gap-s16 overflow-y-auto">
+          {projects.map((project) => (
+            <button
+              type="button"
+              key={project.name}
+              className="group flex items-center justify-between border-b border-whiteAlpha-400 py-s16 text-left"
+              onClick={() => router.push(`/project/${project.name}`)}
+            >
+              <span className="font-trial text-[clamp(40px,10vw,64px)] font-heavy leading-[0.95] text-text-default">
+                {project.name.toUpperCase().replace('-', ' ')}
+              </span>
+              <Image
+                alt={project.name}
+                width={64}
+                height={64}
+                className="h-s64 w-s64 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100"
+                src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/${project.src}`}
+              />
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Dynamically set the background color using cn and project-specific class */}

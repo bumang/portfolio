@@ -40,8 +40,8 @@ const Transition = ({ children }: TransitionProps) => {
     const executeAnimations = async () => {
       // Check if children have changed
       if (
-        (children as ReactElement)?.props?.children?.key !==
-        (displayChildren as ReactElement)?.props?.children?.key
+        (children as ReactElement<{ children?: { key?: React.Key } }>)?.props?.children?.key !==
+        (displayChildren as ReactElement<{ children?: { key?: React.Key } }>)?.props?.children?.key
       ) {
         // Play the initial timeline and wait for it to complete
         if (!routeFromMenu) {
@@ -58,28 +58,26 @@ const Transition = ({ children }: TransitionProps) => {
           return;
         }
 
-        // Define the firstPageTransTimeline animation
-        firstPageTransTimeline.to(
-          slideOut.current,
-          {
-            transform: 'translateY(-100%)',
-            visibility: 'visible',
-            display: 'block',
-            duration: 1,
-            ease: 'power4.inOut',
-          },
-          '-=0.5'
-        );
+        // Phase 1 — two curtains rise from below. The dark one leads, the
+        // gray one follows slightly delayed; both smoothly decelerate as they
+        // reach the top of the viewport (ease-out).
+        firstPageTransTimeline.to(slideOut.current, {
+          transform: 'translateY(-100%)',
+          visibility: 'visible',
+          display: 'block',
+          duration: 0.75,
+          ease: 'power4.out',
+        });
         firstPageTransTimeline.to(
           slideOutSecond.current,
           {
             transform: 'translateY(-100%)',
             visibility: 'visible',
             display: 'block',
-            duration: 0.8,
-            ease: 'power4.inOut',
+            duration: 0.65,
+            ease: 'power4.out',
           },
-          '-=0.7'
+          0.18
         );
 
         // Play the firstPageTransTimeline and wait for it to complete
@@ -88,28 +86,25 @@ const Transition = ({ children }: TransitionProps) => {
           firstPageTransTimeline.pause().clear();
         });
 
-        // Define the secondPageTransTimeline animation
-        secondPageTransTimeline.to(
-          slideOutSecond.current,
-          {
-            transform: 'translateY(-200%)',
-            visibility: 'visible',
-            duration: 1,
-            delay: 0.5,
-            ease: 'power4.inOut',
-          },
-          '-=0.3'
-        );
+        // Phase 2 — scene change: the curtain that arrived last leaves first
+        // and the one that arrived first leaves second (crossover), zipping
+        // upward off-screen to reveal the next page.
+        secondPageTransTimeline.to(slideOutSecond.current, {
+          transform: 'translateY(-200%)',
+          visibility: 'visible',
+          duration: 0.7,
+          delay: 0.15,
+          ease: 'power3.inOut',
+        });
         secondPageTransTimeline.to(
           slideOut.current,
           {
             transform: 'translateY(-200%)',
             visibility: 'visible',
-            duration: 0.8,
-            delay: 0.1,
-            ease: 'power4.inOut',
+            duration: 0.6,
+            ease: 'power3.inOut',
           },
-          '-=0.7'
+          0.3
         );
         secondPageTransTimeline.set(slideOut.current, {
           transform: 'translateY(200%)',

@@ -1,8 +1,8 @@
 export const SectionFourth = () => {
   return (
     <div className="min-h-screen w-screen bg-text-default">
-      <div className="mx-auto my-0 flex h-full w-[90%] justify-between pb-20">
-        <div className="flex h-full flex-1 items-center justify-center font-trial text-[150px] leading-[150px] text-primary-lightBlue">
+      <div className="mx-auto my-0 flex h-full w-[90%] flex-col gap-s40 pb-20 pt-s40 lg:flex-row lg:justify-between lg:gap-0 lg:pt-0">
+        <div className="flex h-full flex-1 items-start justify-start font-trial text-[clamp(64px,18vw,150px)] leading-[0.95] text-primary-lightBlue lg:leading-[150px]">
           EXPERIENCES
         </div>
         <div className="flex h-full w-full flex-1 flex-col items-end justify-end text-black">

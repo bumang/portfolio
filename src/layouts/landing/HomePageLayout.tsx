@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import { MenuDrawer, TopHeader } from '@/components';
@@ -24,9 +25,18 @@ const generateRandomStars = (numStars: number) => {
 
 export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
   const { menuIsOpen, setMenuIsOpen } = useMyContext();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Client-only: star styles are random, so rendering them during
+    // prerender would diverge from the HTML on hydration. Once mounted,
+    // every mousemove (context mousePosition update) re-randomizes the
+    // stars — the rapid shooting-star effect on mouse move.
+    setMounted(true);
+  }, []);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-landing-background">
+    <div className="relative h-dvh w-screen overflow-hidden bg-landing-background">
       <Head>
         <title>Home | My Portfolio</title>
         <meta
@@ -52,8 +62,8 @@ export const HomePageLayout = ({ children }: HomePageLayoutProps) => {
         fill
       />
 
-      {generateRandomStars(0.01)}
-      <div className="relative h-screen justify-center overflow-x-hidden md:pt-s88">
+      {mounted && generateRandomStars(3)}
+      <div className="relative h-dvh justify-center overflow-x-hidden md:pt-s88">
         <div className="fixed top-0 z-[40] h-s88 w-full">
           <TopHeader />
         </div>
