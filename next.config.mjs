@@ -1,6 +1,4 @@
 import path from 'path';
-import nextTranspileModules from 'next-transpile-modules';
-
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -19,6 +17,7 @@ const nextConfig = {
     unoptimized: true,
   },
   reactStrictMode: true,
+  transpilePackages: ['gsap'],
   webpack(config) {
     config.module.rules.push(
       {
@@ -26,29 +25,32 @@ const nextConfig = {
         resourceQuery: /url/, // *.svg?url
       },
       {
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: [{
-        loader: '@svgr/webpack',
-        options: {
-          svgo: true,
-          svgoConfig: {
-            plugins:[
-              {
-                name: 'preset-default',
-                params: {
-                  overrides: {
-                    cleanupIds: false,
-                    removeViewBox: false,
-                    convertShapeToPath: false
-                  }
-                }
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgo: true,
+              svgoConfig: {
+                plugins: [
+                  {
+                    name: 'preset-default',
+                    params: {
+                      overrides: {
+                        cleanupIds: false,
+                        removeViewBox: false,
+                        convertShapeToPath: false,
+                      },
+                    },
+                  },
+                ],
               },
-            ]
-          }
-        },
-      }],
-    });
+            },
+          },
+        ],
+      }
+    );
 
     config.resolve.modules.push(path.resolve('./'));
 
@@ -56,5 +58,4 @@ const nextConfig = {
   },
 };
 
-export default nextTranspileModules(["gsap"])(nextConfig);
-
+export default nextConfig;

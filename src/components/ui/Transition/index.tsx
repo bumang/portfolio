@@ -40,8 +40,8 @@ const Transition = ({ children }: TransitionProps) => {
     const executeAnimations = async () => {
       // Check if children have changed
       if (
-        (children as ReactElement)?.props?.children?.key !==
-        (displayChildren as ReactElement)?.props?.children?.key
+        (children as ReactElement<{ children?: { key?: React.Key } }>)?.props?.children?.key !==
+        (displayChildren as ReactElement<{ children?: { key?: React.Key } }>)?.props?.children?.key
       ) {
         // Play the initial timeline and wait for it to complete
         if (!routeFromMenu) {

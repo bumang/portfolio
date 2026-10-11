@@ -409,7 +409,6 @@ const config: Config = {
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
-    require('tailwindcss-border-gradients')(),
     plugin(function ({ addUtilities, theme }: any) {
       const textShadowUtilities = Object.entries(theme('textShadow')).reduce(
         (acc, [name, value]) => {
