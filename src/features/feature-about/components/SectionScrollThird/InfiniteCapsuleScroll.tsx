@@ -38,7 +38,7 @@ export const InfiniteCapsuleScroll = ({
     <div
       ref={heroInfiniteRef}
       className={cn(
-        'flex h-[35vw] w-[60vw] flex-col justify-between overflow-hidden rounded-[50vw] border text-xs font-normal opacity-0',
+        'flex h-[38vh] w-[90%] flex-col justify-between overflow-hidden rounded-[20vw] border text-xs font-normal opacity-0 lg:h-[35vw] lg:w-[60vw] lg:rounded-[50vw]',
         bgColor
       )}
     >
@@ -58,13 +58,13 @@ export const InfiniteCapsuleScroll = ({
         )}
       >
         <span
-          className="animate-loopL text-[260px] leading-[244px] group-hover:[animation-play-state:paused]"
+          className="animate-loopL text-[clamp(100px,34vw,260px)] leading-[0.95] group-hover:[animation-play-state:paused] lg:leading-[244px]"
           style={{ animationDuration }}
         >
           {heroText}
         </span>
         <span
-          className="animate-loopL text-[260px] leading-[244px] group-hover:[animation-play-state:paused]"
+          className="animate-loopL text-[clamp(100px,34vw,260px)] leading-[0.95] group-hover:[animation-play-state:paused] lg:leading-[244px]"
           style={{ animationDuration }}
         >
           {heroText}

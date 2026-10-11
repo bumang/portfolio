@@ -18,81 +18,87 @@ export const SectionScrollThird = () => {
 
   useGSAP(
     () => {
-      const panels = gsap.utils.toArray('.panel') as HTMLDivElement[];
+      const mm = gsap.matchMedia();
 
-      // Horizontal scroll animation for the entire section
-      const pin = gsap.fromTo(
-        sectionRefThird.current,
-        { translateX: 0 },
-        {
-          translateX: '-270vw',
-          ease: 'none',
-          duration: 1,
-          scrollTrigger: {
-            trigger: triggerRefThird.current,
-            start: 'top top',
-            end: '+=600% bottom',
-            scrub: true,
-            pin: true,
-            markers: false,
-            invalidateOnRefresh: true,
-            anticipatePin: 1,
-            scrollbars: {
-              visible: false,
-            },
-          },
-        }
-      );
+      // Horizontal pinned scroll is a desktop experience; on mobile the
+      // skill panels stack and scroll natively.
+      mm.add('(min-width: 976px)', () => {
+        const panels = gsap.utils.toArray('.panel') as HTMLDivElement[];
 
-      gsap.set(panels, { scale: 0.8 });
-
-      panels.forEach((panel, i) => {
-        let startValue = '';
-        let endValue = '';
-
-        if (i === 0) {
-          startValue = 'left 20%';
-          endValue = 'left left';
-        } else if (i === panels.length - 1) {
-          startValue = 'right right';
-          endValue = 'right center';
-        } else {
-          startValue = 'right right';
-          endValue = 'left left';
-        }
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: pin,
-            start: startValue,
-            end: endValue,
-            scrub: true,
-            markers: false,
-          },
-        });
-
-        timeline
-          .to(panel, {
-            scale: 1,
-            ease: 'power1.out',
-            duration: 1,
-          })
-          .to(panel, {
-            scale: 1,
+        // Horizontal scroll animation for the entire section
+        const pin = gsap.fromTo(
+          sectionRefThird.current,
+          { translateX: 0 },
+          {
+            translateX: '-270vw',
             ease: 'none',
             duration: 1,
-          })
-          .to(panel, {
-            scale: 0.8,
-            ease: 'power1.out',
-            duration: 1,
-          });
-      });
+            scrollTrigger: {
+              trigger: triggerRefThird.current,
+              start: 'top top',
+              end: '+=600% bottom',
+              scrub: true,
+              pin: true,
+              markers: false,
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+              scrollbars: {
+                visible: false,
+              },
+            },
+          }
+        );
 
-      return () => {
-        pin.kill();
-      };
+        gsap.set(panels, { scale: 0.8 });
+
+        panels.forEach((panel, i) => {
+          let startValue = '';
+          let endValue = '';
+
+          if (i === 0) {
+            startValue = 'left 20%';
+            endValue = 'left left';
+          } else if (i === panels.length - 1) {
+            startValue = 'right right';
+            endValue = 'right center';
+          } else {
+            startValue = 'right right';
+            endValue = 'left left';
+          }
+
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: pin,
+              start: startValue,
+              end: endValue,
+              scrub: true,
+              markers: false,
+            },
+          });
+
+          timeline
+            .to(panel, {
+              scale: 1,
+              ease: 'power1.out',
+              duration: 1,
+            })
+            .to(panel, {
+              scale: 1,
+              ease: 'none',
+              duration: 1,
+            })
+            .to(panel, {
+              scale: 0.8,
+              ease: 'power1.out',
+              duration: 1,
+            });
+        });
+
+        return () => {
+          pin.kill();
+        };
+      });
     },
     { scope: sectionRefThird }
   );
@@ -102,17 +108,17 @@ export const SectionScrollThird = () => {
       <div ref={triggerRefThird}>
         <div
           ref={sectionRefThird}
-          className="scroll-section-inner no-scrollbar relative flex h-screen w-[460vw] flex-row bg-text-default text-black"
+          className="scroll-section-inner no-scrollbar relative flex w-full flex-col gap-s16 bg-text-default py-s24 text-black lg:h-screen lg:w-[460vw] lg:flex-row lg:gap-0 lg:py-0"
         >
           <div
             ref={heroContainerThird}
-            className="scroll-section ml-20 flex h-full w-full items-center"
+            className="scroll-section flex w-full flex-col gap-s16 lg:ml-20 lg:h-full lg:w-full lg:flex-row lg:items-center lg:gap-0"
           >
             <div
               ref={(el) => {
                 childRefs.current[0] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-secondary-green"
@@ -126,7 +132,7 @@ export const SectionScrollThird = () => {
               ref={(el) => {
                 childRefs.current[1] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-background-yellow"
@@ -141,7 +147,7 @@ export const SectionScrollThird = () => {
               ref={(el) => {
                 childRefs.current[2] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-secondary-blueHover"
@@ -155,7 +161,7 @@ export const SectionScrollThird = () => {
               ref={(el) => {
                 childRefs.current[3] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-background-pink"
@@ -169,7 +175,7 @@ export const SectionScrollThird = () => {
               ref={(el) => {
                 childRefs.current[4] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-primary-darkBlue"
@@ -183,7 +189,7 @@ export const SectionScrollThird = () => {
               ref={(el) => {
                 childRefs.current[5] = el;
               }}
-              className="panel flex h-full w-[60vw] items-center justify-center"
+              className="panel flex w-full items-center justify-center lg:h-full lg:w-[60vw]"
             >
               <InfiniteCapsuleScroll
                 bgColor="bg-background-lightBlue"

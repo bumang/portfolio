@@ -23,6 +23,38 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
     const menuDrawerOpenAnimation = gsap.timeline();
     const menuDrawerCloseAnimation = gsap.timeline();
 
+    // Moon "flyover": the full disc spins in place about its own center
+    // (surface texture drifting along the rim = flying over a rotating moon),
+    // drifting slowly inward toward the viewer. Transform-only.
+    const moonFloat = gsap.to('.moon-roll', {
+      rotate: 360,
+      transformOrigin: '50% 50%',
+      duration: 90,
+      ease: 'none',
+      repeat: -1,
+      paused: true,
+    });
+    const moonDrift = gsap.to('.moon-roll', {
+      scale: 1.25,
+      transformOrigin: '50% 50%',
+      duration: 45,
+      ease: 'none',
+      paused: true,
+    });
+    // Pulsating light radiating from the moon's silhouette (opacity only).
+    const moonGlow = gsap.fromTo(
+      '.moon-glow',
+      { opacity: 0.35 },
+      {
+        opacity: 0.85,
+        duration: 3.2,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        paused: true,
+      }
+    );
+
     if (!isInitialLoad) {
       if (menu) {
         menuDrawerOpenAnimation.set('.menu-container', {
@@ -39,70 +71,88 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           transform: 'translate(100%, 0px)',
         });
 
+        // Everything moves with the same power4.out curve so the container and
+        // its contents finish together — no perceived lag.
         menuDrawerOpenAnimation.to('.menu-container', {
           transform: 'translateY(0%)',
           visibility: 'visible',
-          duration: 0.8,
+          duration: 0.55,
           ease: 'power4.out',
         });
         menuDrawerOpenAnimation.to(
           '.moon',
           {
             autoAlpha: 1,
-            duration: 0.5,
+            duration: 0.4,
           },
-          '-=0.05'
+          0
         );
         menuDrawerOpenAnimation.to(
           '.items',
           {
             autoAlpha: 1,
             transform: 'translate(0px, 0%)',
-            duration: 0.8,
+            duration: 0.5,
+            ease: 'power4.out',
           },
-          '-=0.1'
+          0.05
         );
         menuDrawerOpenAnimation.to(
           '.line',
           {
             transform: 'translate(0%, 0px)',
-            duration: 0.5,
+            duration: 0.4,
+            ease: 'power4.out',
           },
-          '-=0.5'
+          0.1
         );
+
+        moonFloat.play();
+        moonDrift.play();
+        moonGlow.play();
       } else {
+        moonFloat.pause();
+        moonDrift.pause();
+        moonGlow.pause();
+
         menuDrawerCloseAnimation.to(
           '.moon',
           {
             autoAlpha: 0,
-            duration: 0.5,
+            duration: 0.35,
           },
-          '-=0.5'
+          0
         );
         menuDrawerCloseAnimation.to(
           '.items',
           {
             autoAlpha: 1,
             transform: 'translate(0px, 100%)',
-            duration: 0.8,
+            duration: 0.5,
+            ease: 'power4.in',
           },
-          '-=0.1'
+          0.05
         );
         menuDrawerCloseAnimation.to(
           '.line',
           {
             transform: 'translate(100%, 0px)',
-            duration: 0.5,
+            duration: 0.35,
+            ease: 'power4.in',
           },
-          '-=0.5'
+          0.1
         );
 
-        menuDrawerCloseAnimation.to('.menu-container', {
-          transform: 'translateY(-100%)',
-          visibility: 'visible',
-          duration: 0.5,
-          ease: 'power4.in',
-        });
+        menuDrawerCloseAnimation.to(
+          '.menu-container',
+          {
+            transform: 'translateY(-100%)',
+            visibility: 'visible',
+            duration: 0.45,
+            ease: 'power4.in',
+          },
+          0.05
+        );
       }
     }
     setIsInitialLoad(false);
@@ -126,7 +176,7 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
             alt="moon"
             fill
           />
-          <MenuList handleOnClick={handleExitAnimation} />
+          <MenuList handleOnClick={handleExitAnimation} isOpen={menu} />
         </article>
       </section>
     </div>

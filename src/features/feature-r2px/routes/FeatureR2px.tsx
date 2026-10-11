@@ -30,12 +30,12 @@ export const FeatureR2px = () => {
         autoAlpha: 1,
         visibility: 'visible',
         transform: 'translate(0px, 0%)',
-        delay: 1.2,
+        delay: 0.7,
         stagger: {
-          each: 0.05,
+          each: 0.04,
         },
         ease: 'power2.out',
-        duration: 0.5,
+        duration: 0.55,
       });
 
       gsap.set('.rara-text', {
@@ -47,12 +47,12 @@ export const FeatureR2px = () => {
         autoAlpha: 1,
         visibility: 'visible',
         transform: 'translate(0px, 0%)',
-        delay: 1.2,
+        delay: 0.7,
         stagger: {
-          each: 0.05,
+          each: 0.04,
         },
         ease: 'power2.out',
-        duration: 0.5,
+        duration: 0.55,
       });
 
       timeline.add(
@@ -61,10 +61,10 @@ export const FeatureR2px = () => {
           visibility: 'visible',
           transform: 'translate(0px, -100%)',
           stagger: {
-            each: 0.05,
+            each: 0.03,
           },
           ease: 'power2.out',
-          duration: 0.5,
+          duration: 0.4,
         })
       );
       timeline.add(
@@ -73,7 +73,7 @@ export const FeatureR2px = () => {
           visibility: 'visible',
           transform: 'translate(0px, -200%)',
           ease: 'power2.out',
-          duration: 1,
+          duration: 0.6,
         }),
         0.2
       );
@@ -82,22 +82,26 @@ export const FeatureR2px = () => {
   );
 
   return (
-    <div className="relative flex h-full w-full">
-      <div className="absolute left-[calc(50%-32px)] top-[-62px] z-[55] transform transition-transform duration-300 ease-in-out">
+    <div className="relative flex h-full w-full flex-col lg:flex-row">
+      <div className="absolute left-1/2 top-s16 z-[55] -translate-x-1/2 transform transition-transform duration-300 ease-in-out lg:left-[calc(50%-32px)] lg:top-[-62px] lg:translate-x-0">
         <AnimatedCrossBtn handleClick={handleNavigation} />
       </div>
-      <div className="my-auto flex h-[370px] w-[50%] px-[60px]">
+      <div className="my-auto flex w-full items-center justify-center px-s24 py-s32 lg:h-[370px] lg:w-[50%] lg:px-[60px] lg:py-0">
         <Image
           alt="rara"
           width={500}
           height={500}
           priority
+          className="max-w-full object-contain"
           style={{ width: 'auto', height: 'auto' }}
           src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/xuno_detail.png`}
         />
       </div>
-      <div ref={raraContainer} className="flex h-full w-[50%] flex-col justify-around px-[60px]">
-        <div className="relative h-fit overflow-y-hidden font-trial text-[220px] font-bold leading-[220px] text-white">
+      <div
+        ref={raraContainer}
+        className="flex h-full w-full flex-col justify-around gap-s24 px-s24 py-s40 lg:w-[50%] lg:gap-0 lg:px-[60px] lg:py-0"
+      >
+        <div className="relative h-fit overflow-y-hidden font-trial text-[clamp(88px,24vw,220px)] font-bold leading-[0.95] text-white lg:leading-[220px]">
           <div className="rara-word">XUNO</div>
         </div>
         <div className="relative flex h-fit flex-col gap-s20 overflow-y-hidden">

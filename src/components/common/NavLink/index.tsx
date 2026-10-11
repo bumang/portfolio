@@ -8,6 +8,7 @@ interface NavLinkProps {
   onClick?: () => void;
   exact?: boolean;
   className?: string;
+  tabIndex?: number;
 }
 
 export const NavLink = ({ href, exact, onClick, children, ...props }: NavLinkProps) => {
