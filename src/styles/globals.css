@@ -69,3 +69,37 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Moon (menu drawer): pre-baked sphere lighting and rim glow — static layers
+   so only transform/opacity ever animate. */
+.moon-shading {
+  background:
+    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 42%),
+    radial-gradient(
+      circle closest-side,
+      rgba(0, 0, 0, 0) 34%,
+      rgba(0, 0, 0, 0.3) 60%,
+      rgba(0, 0, 0, 0.6) 84%,
+      rgba(0, 0, 0, 0.82) 96%,
+      rgba(0, 0, 0, 0.88) 100%
+    );
+}
+
+/* Radiating rim glow: bright ring just outside the disc edge, blooming out
+   with a faint wide halo. */
+.moon-glow {
+  background:
+    radial-gradient(
+      circle closest-side,
+      transparent 70%,
+      rgba(232, 231, 203, 0.55) 87%,
+      rgba(232, 231, 203, 0.2) 94%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle closest-side,
+      transparent 60%,
+      rgba(141, 174, 182, 0.22) 90%,
+      transparent 100%
+    );
+}

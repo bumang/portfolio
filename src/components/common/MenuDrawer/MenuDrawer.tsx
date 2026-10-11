@@ -23,30 +23,28 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
     const menuDrawerOpenAnimation = gsap.timeline();
     const menuDrawerCloseAnimation = gsap.timeline();
 
-    // Moon "flyover": the full disc spins in place about its own center
-    // (surface texture drifting along the rim = flying over a rotating moon),
-    // drifting slowly inward toward the viewer. Transform-only.
-    const moonFloat = gsap.to('.moon-roll', {
-      rotate: 360,
-      transformOrigin: '50% 50%',
-      duration: 90,
-      ease: 'none',
-      repeat: -1,
-      paused: true,
-    });
-    const moonDrift = gsap.to('.moon-roll', {
-      scale: 1.25,
-      transformOrigin: '50% 50%',
-      duration: 45,
-      ease: 'none',
-      paused: true,
-    });
+    // Moon "sphere rotation": the equirectangular texture track slides
+    // vertically behind the fixed circular mask — a full revolution reads
+    // as the surface travelling top to bottom, staying in place. The track
+    // starts one copy above (yPercent -50 → 0) so the window is always
+    // covered — the two tileable copies loop seamlessly, never running out.
+    const moonSpin = gsap.fromTo(
+      '.moon-track',
+      { yPercent: -50 },
+      {
+        yPercent: 0,
+        duration: 60,
+        ease: 'none',
+        repeat: -1,
+        paused: true,
+      }
+    );
     // Pulsating light radiating from the moon's silhouette (opacity only).
     const moonGlow = gsap.fromTo(
       '.moon-glow',
-      { opacity: 0.35 },
+      { opacity: 0.45 },
       {
-        opacity: 0.85,
+        opacity: 1,
         duration: 3.2,
         ease: 'sine.inOut',
         yoyo: true,
@@ -107,12 +105,10 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
           0.1
         );
 
-        moonFloat.play();
-        moonDrift.play();
+        moonSpin.play();
         moonGlow.play();
       } else {
-        moonFloat.pause();
-        moonDrift.pause();
+        moonSpin.pause();
         moonGlow.pause();
 
         menuDrawerCloseAnimation.to(
@@ -172,9 +168,8 @@ export const MenuDrawer = ({ menu, setMenu }: MenuDrawerProps) => {
       <section className="absolute left-0 top-[0] h-full w-full">
         <article className="relative flex h-full">
           <InfiniteVerticalSlider
-            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon.svg`}
+            src={`${process.env.NEXT_PUBLIC_PATH_PREFIX ?? ''}/moon-texture.avif`}
             alt="moon"
-            fill
           />
           <MenuList handleOnClick={handleExitAnimation} isOpen={menu} />
         </article>
