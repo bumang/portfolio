@@ -3,5 +3,9 @@ overrides:
   svelte: ^5.57.2
   postcss-selector-parser: ^7.1.6
 
-onlyBuiltDependencies:
-  - unrs-resolver
+# pnpm 11+ build-script policy: allow these packages to run their install
+# scripts (replaces the legacy onlyBuiltDependencies key, which pnpm 11/12
+# ignores — that is why a fresh `pnpm install` failed with
+# ERR_PNPM_IGNORED_BUILDS).
+allowBuilds:
+  unrs-resolver: true
