@@ -114,11 +114,12 @@ export const SectionScrollFirst = () => {
           autoAlpha: 1,
           visibility: 'visible',
           transform: 'translate(0px, 0%)',
-          delay: 1.2,
+          delay: 0.7,
           stagger: {
-            each: 0.05,
+            each: 0.04,
           },
-          duration: 0.5,
+          ease: 'power2.out',
+          duration: 0.55,
         })
         .then(() => {
           gsap.to(avatarImage.current, {
@@ -137,9 +138,10 @@ export const SectionScrollFirst = () => {
           visibility: 'visible',
           transform: 'translate(0px, -100%)',
           stagger: {
-            each: 0.05,
+            each: 0.03,
           },
-          duration: 0.5,
+          ease: 'power2.out',
+          duration: 0.4,
         }),
         0
       );
