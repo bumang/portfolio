@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 
 import { NavLink } from '@/components/common/NavLink';
 
+import { GuitarString } from './GuitarString';
 import { MenuItems } from '../../constants';
 
 interface MenuListProps {
@@ -23,6 +24,9 @@ export const MenuList = ({ handleOnClick, isOpen = false }: MenuListProps) => {
   const router = useRouter();
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  // Freeze the drift while the user holds a guitar-string divider so the
+  // pull can actually be held under the cursor.
+  const stringHoverRef = useRef(false);
 
   const renderCopy = (isClone: boolean) => (
     <div aria-hidden={isClone || undefined} className="flex flex-col">
@@ -65,7 +69,16 @@ export const MenuList = ({ handleOnClick, isOpen = false }: MenuListProps) => {
                 </div>
               </div>
             </NavLink>
-            <div className="line h-full w-full bg-text-default p-s1 group-hover:bg-primary-lightGray" />
+            <GuitarString
+              interactive={!isClone}
+              onHoverChange={
+                isClone
+                  ? undefined
+                  : (hovering) => {
+                      stringHoverRef.current = hovering;
+                    }
+              }
+            />
           </div>
         );
       })}
@@ -85,8 +98,10 @@ export const MenuList = ({ handleOnClick, isOpen = false }: MenuListProps) => {
       const tick = (_time: number, deltaTime: number) => {
         const dt = Math.min(deltaTime, 64) / 1000;
         // Decay any user velocity toward the persistent drift in the user's
-        // last scroll direction.
-        state.velocity += (state.direction * AUTO_SPEED - state.velocity) * Math.min(1, dt * 2.5);
+        // last scroll direction — unless a string is held, then stand still.
+        const hovered = stringHoverRef.current;
+        const target = hovered ? 0 : state.direction * AUTO_SPEED;
+        state.velocity += (target - state.velocity) * Math.min(1, dt * (hovered ? 12 : 2.5));
         state.y += state.velocity * dt;
         const height = halfHeight();
         // Wrap so the two-copy loop is seamless in both directions.
